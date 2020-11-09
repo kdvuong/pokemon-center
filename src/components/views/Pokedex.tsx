@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { Fragment, FunctionComponent } from "react";
+import { IRoute } from "../../router/config";
 
-const Pokedex = () => {
-    return <div>pokedex</div>
+interface IProps {
+  routes: IRoute[];
 }
+
+const Pokedex: FunctionComponent<IProps> = () => {
+  return (
+    <Fragment>
+      <div>pokedex</div>
+    </Fragment>
+  );
+};
 
 export default Pokedex;

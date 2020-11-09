@@ -8,13 +8,13 @@ class AuthService {
     let res = await fetch(this.SIGNIN_URL, {
       method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({accessToken: googleAccessToken}),
+      body: JSON.stringify({ accessToken: googleAccessToken }),
       credentials: "include",
     });
-  
+
     const json: any = await res.json();
     if (json.ok) {
       this.setAccessToken(json.accessToken);
@@ -22,20 +22,18 @@ class AuthService {
     }
 
     return false;
-  }
+  };
 
-  signout = () => {
-
-  }
+  signout = () => {};
 
   renewToken = async (): Promise<boolean> => {
     let res = await fetch(this.RENEW_URL, {
       method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      credentials: "include"
+      credentials: "include",
     });
     const json: any = await res.json();
     if (json.ok) {
@@ -43,14 +41,14 @@ class AuthService {
       return true;
     }
     return false;
-  }
+  };
 
   getAccessToken = (): string => {
-    return this.accessToken
-  }
+    return this.accessToken;
+  };
 
   setAccessToken = (s: string) => {
     this.accessToken = s;
-  }
+  };
 }
 export default new AuthService();
