@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <defs>
+    <linearGradient x1="0.472747773" y1="0.392971069" x2="0.472665966" y2="0.3938496" id="gradient_1">
+      <stop offset="0" stop-color="#D7F5F4" />
+      <stop offset="1" stop-color="#63CBC2" />
+    </linearGradient>
+  </defs>
+  <g id="Rotom" transform="translate(0.5 0.5)">
+    <path d="M0 21.5C0 9.62588 9.62588 0 21.5 0C33.3741 0 43 9.62588 43 21.5C43 33.3741 33.3741 43 21.5 43C9.62588 43 0 33.3741 0 21.5Z" transform="translate(3.811356 7.000015)" id="Face" fill="#DD2020" stroke="none" />
+    <g id="Eye-6" transform="matrix(-0.9612617 -0.2756374 -0.2756374 0.9612617 50.35358 3.596428)">
+      <path d="M0 15C0 6.71573 2.91015 0 6.5 0C10.0899 0 13 6.71573 13 15C13 23.2843 10.0899 30 6.5 30C2.91015 30 0 23.2843 0 15Z" transform="matrix(1 0 0 -1 0.009361267 30)" id="Oval-2" fill="#FFFFFF" stroke="none" />
+      <path d="M13 0L0 2.00001" transform="matrix(0.9612617 0.2756374 -0.2756374 0.9612617 0.5512772 13.05301)" id="Line" fill="none" stroke="#808080" stroke-width="1" />
+      <path d="M0 11.8966C0 5.32627 1.85191 0 4.13636 0C6.42081 0 8.27273 5.32627 8.27273 11.8966C8.27273 18.4668 6.42081 23.7931 4.13636 23.7931C1.85191 23.7931 0 18.4668 0 11.8966Z" transform="matrix(1 0 0 -1 2.372978 26.89663)" id="Oval" fill="url(#gradient_1)" stroke="none" />
+    </g>
+    <g id="Eye-4" transform="matrix(0.9612617 -0.2756374 0.2756374 0.9612617 0 3.758583)">
+      <path d="M0 15C0 6.71573 2.91015 0 6.5 0C10.0899 0 13 6.71573 13 15C13 23.2843 10.0899 30 6.5 30C2.91015 30 0 23.2843 0 15Z" transform="matrix(1 0 0 -1 0.009368896 30)" id="Oval-2" fill="#FFFFFF" stroke="none" />
+      <path d="M13 0L0 2.00001" transform="matrix(0.9612617 0.2756374 -0.2756374 0.9612617 0.5512781 13.05298)" id="Line" fill="none" stroke="#808080" stroke-width="1" />
+      <path d="M0 11.8966C0 5.32627 1.85191 0 4.13636 0C6.42081 0 8.27273 5.32627 8.27273 11.8966C8.27273 18.4668 6.42081 23.7931 4.13636 23.7931C1.85191 23.7931 0 18.4668 0 11.8966Z" transform="matrix(1 0 0 -1 2.372974 26.89659)" id="Oval" fill="url(#gradient_1)" stroke="none" />
+    </g>
+    <g id="Mouth" transform="translate(16.11413 30.00001)">
+      <path d="M2.91936 1.8196C2.91936 1.8196 8.17822 3.55923 12.6972 0C17.2163 -3.55923 16.4764 4.71897 11.7175 7.01847C6.95849 9.31797 -0.499891 5.87872 0 3.23929C0.499891 0.599868 2.91936 1.8196 2.91936 1.8196" transform="translate(0 7.629395E-06)" id="New-shape" fill="#FFFFFF" stroke="none" />
+      <path d="M1 0L1 9" transform="translate(4.697235 1)" id="Line-2" fill="none" stroke="#DD2020" stroke-width="1" />
+      <path d="M0 0L3 8" transform="translate(9.697235 0)" id="Line" fill="none" stroke="#DD2020" stroke-width="1" />
+    </g>
+  </g>
+</svg>

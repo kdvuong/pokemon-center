@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="64px" height="64px" viewBox="0 0 64 64" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <g id="Group" transform="translate(2 2)">
+    <path d="M0 30C0 13.4315 13.4315 0 30 0C46.5685 0 60 13.4315 60 30C60 46.5685 46.5685 60 30 60C13.4315 60 0 46.5685 0 30Z" id="Oval" fill="none" stroke="#FFFFFF" stroke-width="4" />
+    <path d="M12.7946 5.52396Q5.34072 0.851297 0.725585 7.03335e-06L0 3.93365Q3.76575 4.62826 10.2718 8.66386C10.7349 7.73516 11.3783 6.84674 12.1949 6.05815C12.3897 5.87001 12.5899 5.69193 12.7946 5.52396L12.7946 5.52396ZM23.0647 12.9678C22.609 13.837 21.9939 14.6675 21.2255 15.4096C20.9927 15.6344 20.7523 15.8448 20.5056 16.0408Q32.6989 26.0865 45.5573 42.5659L48.7109 40.1052Q35.5981 23.2998 23.0647 12.9678L23.0647 12.9678Z" transform="translate(5.909332 9.508331)" id="New-shape-Difference" fill="#FFFFFF" fill-rule="evenodd" stroke="none" />
+    <path d="M0 8.5C0 3.80558 2.91015 0 6.5 0C10.0898 0 13 3.80558 13 8.5C13 13.1944 10.0898 17 6.5 17C2.91015 17 0 13.1944 0 8.5Z" transform="matrix(0.656059 0.7547096 -0.7547096 0.656059 25.47122 9.035797)" id="Oval-3" fill="none" stroke="#FFFFFF" stroke-width="4" />
+  </g>
+</svg>

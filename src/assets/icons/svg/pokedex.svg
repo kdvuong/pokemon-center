@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="50px" height="45px" viewBox="0 0 50 45" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <g id="pokedex" transform="translate(1 1)">
+    <path d="M30 16L0 16L2.10028e-08 0L30 0L30 16Z" transform="translate(8 0)" id="New-shape" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0 0.0681103L0 4L26 4L26.0137 0" transform="translate(10 16)" id="New-shape-2" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0 1L41 1" transform="translate(1 41)" id="New-shape-4" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0.999996 6L0.999996 0" transform="translate(40.00002 37)" id="New-shape-5" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0 0L5 0L4.99999 5" transform="translate(36 20)" id="New-shape-6" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0 3C0 1.34315 1.34315 0 3 0C4.65685 0 6 1.34315 6 3C6 4.65685 4.65685 6 3 6C1.34315 6 0 4.65685 0 3Z" transform="translate(38 27.99999)" id="Oval" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M0 0C3.866 0 7 3.13401 7 7C7 10.866 3.866 14 0 14" transform="translate(41 24.00001)" id="Oval-2" fill="none" stroke="#000000" stroke-width="2" />
+    <path d="M4 0L8 0L8 4L12 4L12 8L8 8L8 12L4.01796 11.9656L4 8L0 8L0 4L4 4L4 0Z" transform="translate(5 25)" id="New-shape-7" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
+    <path d="M9 1L0 1" transform="translate(1 19)" id="New-shape" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" />
+    <path d="M1 0L1 24" transform="translate(0 19)" id="Line" fill="none" stroke="#000000" stroke-width="2" />
+  </g>
+</svg>

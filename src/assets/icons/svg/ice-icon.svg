@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <desc>Created with Lunacy</desc>
+  <g id="Group-2" transform="translate(0.2833252 0.2833328)">
+    <path d="M2.30118 8.43359e-16L4.70355 3.89699L2.26829 7.5963L1.0444e-15 3.91681L2.30118 8.43359e-16Z" transform="matrix(0.8571673 0.5150381 -0.5150381 0.8571673 10.57779 0.1066208)" id="Polygon" fill="#FFFFFF" stroke="none" />
+    <path d="M2.14858 -9.09495e-13L4.34005 3.99137L2.007 7.9061L-2.2638e-13 3.91766L2.14858 -9.09495e-13Z" transform="matrix(0.01745238 0.9998477 -0.9998477 0.01745238 16.51529 6.356857)" id="Polygon" fill="#FFFFFF" stroke="none" />
+    <path d="M2.14858 -9.09495e-13L4.34005 3.99137L2.007 7.9061L-2.2641e-13 3.91766L2.14858 -9.09495e-13Z" transform="matrix(0.01745238 0.9998477 -0.9998477 0.01745238 7.904907 6.356857)" id="Polygon-Copy" fill="#FFFFFF" stroke="none" />
+    <path d="M2.30118 2.47924e-16L4.70355 3.89699L2.26829 7.5963L6.52749e-17 3.91681L2.30118 2.47924e-16Z" transform="matrix(0.8480481 -0.5299193 0.5299193 0.8480481 1.993958 2.4925)" id="Polygon" fill="#FFFFFF" stroke="none" />
+    <path d="M2.30118 2.47924e-16L4.70355 3.89699L2.26829 7.5963L2.0888e-15 3.91681L2.30118 2.47924e-16Z" transform="matrix(-0.848048 0.5299193 -0.5299193 -0.848048 14.61346 14.44843)" id="Polygon" fill="#FFFFFF" stroke="none" />
+    <path d="M2.30118 0L4.70355 3.89699L2.26829 7.5963L2.0888e-15 3.91681L2.30118 0Z" transform="matrix(-0.8571674 -0.515038 0.515038 -0.8571674 6.059662 16.89427)" id="Polygon" fill="#FFFFFF" stroke="none" />
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+[
+  {
+    "id": 0,
+    "name": "All Generations",
+    "shorten_name": "All Gens",
+    "default": true
+  },
+  {
+    "id": 1,
+    "name": "Generation I",
+    "shorten_name": "Gen I"
+  },
+  {
+    "id": 2,
+    "name": "Generation II",
+    "shorten_name": "Gen II"
+  },
+  {
+    "id": 3,
+    "name": "Generation III",
+    "shorten_name": "Gen III"
+  },
+  {
+    "id": 4,
+    "name": "Generation IV",
+    "shorten_name": "Gen IV"
+  },
+  {
+    "id": 5,
+    "name": "Generation V",
+    "shorten_name": "Gen V"
+  },
+  {
+    "id": 6,
+    "name": "Generation VI",
+    "shorten_name": "Gen VI"
+  },
+  {
+    "id": 7,
+    "name": "Generation VII",
+    "shorten_name": "Gen VII"
+  }
+]

@@ -3,23 +3,50 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.4.0",
+    "@material-ui/icons": "^4.4.3",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "axios": "^0.20.0",
+    "bootstrap": "^4.3.1",
+    "color": "^3.1.2",
+    "color-thief-node": "^1.0.3",
+    "colorthief": "^2.3.0",
+    "dotenv": "^8.2.0",
+    "file-system": "^2.2.2",
+    "font-awesome": "^4.7.0",
+    "framer-motion": "^1.8.4",
+    "gh-pages": "^2.1.1",
+    "jwt-decode": "^3.0.0-beta.2",
+    "lodash-es": "^4.17.15",
+    "pouchdb": "^7.2.1",
+    "pouchdb-load": "^1.4.6",
+    "pouchdb-upsert": "^2.2.0",
+    "prop-types": "^15.7.2",
+    "rc-queue-anim": "^1.8.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "react-google-login": "^5.1.21",
+    "react-infinite-scroller": "^1.2.4",
+    "react-perfect-scrollbar": "^1.5.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.1",
+    "react-sticky": "^6.0.3",
+    "react-swipeable-views": "^0.13.3",
+    "react-virtualized-auto-sizer": "^1.0.2",
+    "react-window": "^1.8.5",
+    "styled-components": "^5.0.1",
+    "typescript": "~3.7.2",
+    "worker-pouch": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start react-scripts",
+    "build": "react-app-rewired build react-scripts",
+    "test": "react-app-rewired test --env=jsdom react-scripts",
+    "eject": "react-scripts eject",
+    "pre-deploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,6 +61,26 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
+    "@types/axios": "^0.14.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/jest": "^24.0.0",
+    "@types/jwt-decode": "^2.2.1",
+    "@types/lodash-es": "^4.17.3",
+    "@types/node": "^14.6.2",
+    "@types/pouchdb": "^6.4.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-router-dom": "^5.1.5",
+    "react-app-rewired": "^2.1.3",
+    "worker-loader": "^2.0.0"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-nullish-coalescing-operator"
     ]
   }
 }
