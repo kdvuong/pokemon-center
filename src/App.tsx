@@ -3,7 +3,6 @@ import usePokemonDataApi from "./hooks/PokemonDataApi";
 import { GoogleLogin } from "react-google-login";
 import authService from "./services/AuthService";
 import { IRoute } from "./router/config";
-import Router from "./router/Router";
 import ResponsiveDrawer from "./components/navs/ResponsiveDrawer";
 
 interface IProps {

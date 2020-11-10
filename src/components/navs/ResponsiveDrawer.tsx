@@ -22,6 +22,7 @@ import {
 } from "@material-ui/core/styles";
 import { IRoute } from "../../router/config";
 import Router from "../../router/Router";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -79,8 +80,8 @@ export default function ResponsiveDrawer(props: IProps) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
+        {["pokemons", "abilities", "moves", "natures"].map((text, index) => (
+          <ListItem button key={text} component={Link} to={`/${text}`}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
