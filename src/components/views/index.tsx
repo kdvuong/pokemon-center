@@ -1,28 +1,28 @@
 import { lazy } from "react";
 
 // list views
-const Pokedex = lazy(() => import("./Pokedex"));
-const Movedex = lazy(() => import("./Movedex"));
-const Abilitydex = lazy(() => import("./Abilitydex"));
-const Typedex = lazy(() => import("./Typedex"));
-const Naturedex = lazy(() => import("./Naturedex"));
+const PokemonList = lazy(() => import("./PokemonList"));
+const MoveList = lazy(() => import("./MoveList"));
+const AbilityList = lazy(() => import("./AbilityList"));
+const TypeList = lazy(() => import("./TypeList"));
+const NatureList = lazy(() => import("./NatureList"));
 
 // detail views
-const Pokemon = lazy(() => import("./Pokemon"));
-const Move = lazy(() => import("./Move"));
-const Ability = lazy(() => import("./Ability"));
-const Type = lazy(() => import("./Type"));
-const Nature = lazy(() => import("./Nature"));
+const PokemonDetail = lazy(() => import("./PokemonDetail"));
+const MoveDetail = lazy(() => import("./MoveDetail"));
+const AbilityDetail = lazy(() => import("./AbilityDetail"));
+const TypeDetail = lazy(() => import("./TypeDetail"));
+const NatureDetail = lazy(() => import("./NatureDetail"));
 
 export default {
-  Pokedex,
-  Movedex,
-  Abilitydex,
-  Typedex,
-  Naturedex,
-  Pokemon,
-  Move,
-  Ability,
-  Type,
-  Nature,
+  PokemonList,
+  MoveList,
+  AbilityList,
+  TypeList,
+  NatureList,
+  PokemonDetail,
+  MoveDetail,
+  AbilityDetail,
+  TypeDetail,
+  NatureDetail,
 };
