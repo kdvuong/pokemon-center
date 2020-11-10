@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const Typedex = () => {
-    return <div>Typedex</div>
-}
+const TypeList = () => {
+  return <div>Typedex</div>;
+};
 
-export default Typedex;
+export default TypeList;
