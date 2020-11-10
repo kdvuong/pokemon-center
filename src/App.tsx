@@ -1,11 +1,10 @@
-import React, { useEffect, useState, FunctionComponent } from "react";
+import React, { useEffect, useState, FunctionComponent, Fragment } from "react";
 import usePokemonDataApi from "./hooks/PokemonDataApi";
-import * as dotenv from "dotenv";
 import { GoogleLogin } from "react-google-login";
 import authService from "./services/AuthService";
 import { IRoute } from "./router/config";
 import Router from "./router/Router";
-dotenv.config();
+import ResponsiveDrawer from "./components/navs/ResponsiveDrawer";
 
 interface IProps {
   routes: IRoute[];
@@ -35,7 +34,11 @@ const App: FunctionComponent<IProps> = (props: IProps) => {
     setAuthenticated(isSuccess);
   };
 
-  return <Router routes={routes} />;
+  return (
+    <Fragment>
+      <ResponsiveDrawer routes={routes} />
+    </Fragment>
+  );
 };
 
 export default App;
