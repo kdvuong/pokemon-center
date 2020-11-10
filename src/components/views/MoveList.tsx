@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const Movedex = () => {
-    return <div>Movedex</div>
-}
+const MoveList = () => {
+  return <div>Movedex</div>;
+};
 
-export default Movedex;
+export default MoveList;

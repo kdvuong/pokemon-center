@@ -5,7 +5,7 @@ interface IProps {
   routes: IRoute[];
 }
 
-const Pokedex: FunctionComponent<IProps> = () => {
+const PokemonList: FunctionComponent<IProps> = () => {
   return (
     <Fragment>
       <div>pokedex</div>
@@ -13,4 +13,4 @@ const Pokedex: FunctionComponent<IProps> = () => {
   );
 };
 
-export default Pokedex;
+export default PokemonList;
