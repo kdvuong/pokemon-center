@@ -4,8 +4,8 @@ import React, {
   useContext,
   useEffect,
 } from "react";
-import { IRoute } from "../../../router/config";
-import { drawerContext } from "../../../contexts/Drawer.context";
+import { IRoute } from "router/config";
+import { drawerContext } from "contexts/Drawer.context";
 
 interface IProps {
   routes: IRoute[];

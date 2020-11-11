@@ -1,11 +1,11 @@
 import React, { useEffect, useState, FunctionComponent, Fragment } from "react";
-import usePokemonDataApi from "./hooks/PokemonDataApi";
+import usePokemonDataApi from "hooks/PokemonDataApi";
 import { GoogleLogin } from "react-google-login";
-import authService from "./services/AuthService";
-import { IRoute } from "./router/config";
-import ResponsiveDrawer from "./components/navs/ResponsiveDrawer";
-import { drawerContext } from "./contexts/Drawer.context";
-import { useDrawer } from "./hooks/Drawer.hook";
+import authService from "services/AuthService";
+import { IRoute } from "router/config";
+import ResponsiveDrawer from "components/navs/ResponsiveDrawer";
+import { drawerContext } from "contexts/Drawer.context";
+import { useDrawer } from "hooks/Drawer.hook";
 
 interface IProps {
   routes: IRoute[];
@@ -14,16 +14,8 @@ interface IProps {
 const App: FunctionComponent<IProps> = (props: IProps) => {
   const { routes } = props;
   const drawer = useDrawer();
-  const { getMovesetById } = usePokemonDataApi();
+  const { getAllPokemonSummaries } = usePokemonDataApi();
   const [authenticated, setAuthenticated] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function moveset() {
-      const res = await getMovesetById(1);
-      console.log(res);
-    }
-    moveset();
-  }, [getMovesetById]);
 
   // useEffect(() => {
   //   authService.renewToken().then((isSuccess) => {
