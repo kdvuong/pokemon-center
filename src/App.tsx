@@ -4,6 +4,8 @@ import { GoogleLogin } from "react-google-login";
 import authService from "./services/AuthService";
 import { IRoute } from "./router/config";
 import ResponsiveDrawer from "./components/navs/ResponsiveDrawer";
+import { drawerContext } from "./contexts/Drawer.context";
+import { useDrawer } from "./hooks/Drawer.hook";
 
 interface IProps {
   routes: IRoute[];
@@ -11,6 +13,7 @@ interface IProps {
 
 const App: FunctionComponent<IProps> = (props: IProps) => {
   const { routes } = props;
+  const drawer = useDrawer();
   const { getMovesetById } = usePokemonDataApi();
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
@@ -34,9 +37,9 @@ const App: FunctionComponent<IProps> = (props: IProps) => {
   };
 
   return (
-    <Fragment>
+    <drawerContext.Provider value={drawer}>
       <ResponsiveDrawer routes={routes} />
-    </Fragment>
+    </drawerContext.Provider>
   );
 };
 

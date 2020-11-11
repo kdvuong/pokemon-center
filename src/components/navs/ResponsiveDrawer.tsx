@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -21,8 +21,10 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 import { IRoute } from "../../router/config";
+import { DEX_LIST } from "../../router/drawerNav";
 import Router from "../../router/Router";
 import { Link } from "react-router-dom";
+import { drawerContext } from "../../contexts/Drawer.context";
 
 const drawerWidth = 240;
 
@@ -67,6 +69,7 @@ interface IProps {
 
 export default function ResponsiveDrawer(props: IProps) {
   const { routes } = props;
+  const { isToolbarVisible } = useContext(drawerContext);
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -80,12 +83,12 @@ export default function ResponsiveDrawer(props: IProps) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {["pokemons", "abilities", "moves", "natures"].map((text, index) => (
-          <ListItem button key={text} component={Link} to={`/${text}`}>
+        {DEX_LIST.map((dex, index) => (
+          <ListItem button key={dex.name} component={Link} to={dex.path}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={dex.name} />
           </ListItem>
         ))}
       </List>
@@ -106,22 +109,24 @@ export default function ResponsiveDrawer(props: IProps) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      {isToolbarVisible && (
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Responsive drawer
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      )}
       <nav className={classes.drawer} aria-label="mailbox folders">
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Hidden smUp implementation="css">
@@ -153,7 +158,7 @@ export default function ResponsiveDrawer(props: IProps) {
         </Hidden>
       </nav>
       <main>
-        <div className={classes.toolbar} />
+        {isToolbarVisible && <div className={classes.toolbar} />}
         <Router routes={routes} />
       </main>
     </div>
