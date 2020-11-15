@@ -8,3 +8,9 @@ export interface PokemonSummary {
   generation: string;
   types: string[];
 }
+
+export interface Filter<T> {
+  name: string;
+  items: T[];
+  currentItem: T;
+}
