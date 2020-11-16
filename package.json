@@ -40,6 +40,7 @@
     "react-virtualized-auto-sizer": "^1.0.2",
     "react-window": "^1.8.5",
     "styled-components": "^5.2.1",
+    "ts-enum-util": "^4.0.2",
     "typescript": "~3.7.2",
     "worker-pouch": "^2.1.0"
   },

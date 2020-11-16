@@ -1,0 +1,33 @@
+export enum TypeFilter {
+  DEFAULT,
+  NORMAL,
+  FIRE,
+  FIGHTING,
+  WATER,
+  FLYING,
+  GRASS,
+  POISON,
+  ELECTRIC,
+  GROUND,
+  PSYCHIC,
+  ROCK,
+  ICE,
+  BUG,
+  DRAGON,
+  GHOST,
+  DARK,
+  STEEL,
+  FAIRY,
+}
+
+export enum GenerationFilter {
+  DEFAULT,
+  GEN_1,
+  GEN_2,
+  GEN_3,
+  GEN_4,
+  GEN_5,
+  GEN_6,
+  GEN_7,
+  GEN_8,
+}

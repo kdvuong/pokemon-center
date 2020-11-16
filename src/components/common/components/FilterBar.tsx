@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
-import { StyledToolbar } from "components/common/styled";
+import { StyledToolbar } from "components/common/styled/index.d";
 import { Filter } from "types";
 import ResponsiveSelect from "./ResponsiveSelect";
 
@@ -10,16 +10,11 @@ const StyledDiv = styled.div`
 `;
 
 interface IProps {
-  filters: Filter<string>[];
-  onChange: (value: string) => void;
+  filters: Filter[];
   filteredCount: number;
 }
 
-const FilterBar: FunctionComponent<IProps> = ({
-  filters,
-  onChange,
-  filteredCount,
-}) => {
+const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
   return (
     <StyledToolbar>
       {/* result bar */}
@@ -32,13 +27,7 @@ const FilterBar: FunctionComponent<IProps> = ({
       </div>
       <StyledDiv>
         {filters.map((filter) => (
-          <ResponsiveSelect
-            name={filter.name}
-            currentItem={filter.currentItem}
-            allItems={filter.items}
-            onChange={onChange}
-            key={filter.name}
-          />
+          <ResponsiveSelect {...filter} />
         ))}
         {/* <FilterCount>
           <span>{filteredCount} Pokemons</span>

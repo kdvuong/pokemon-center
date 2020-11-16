@@ -9,8 +9,14 @@ export interface PokemonSummary {
   types: string[];
 }
 
-export interface Filter<T> {
+export interface Filter {
   name: string;
-  items: T[];
-  currentItem: T;
+  items: string[];
+  currentItem: string;
+  onChange: (newValue: string) => void;
+}
+
+export interface Color {
+  text: string;
+  background: string;
 }

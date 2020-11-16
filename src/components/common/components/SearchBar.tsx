@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ChangeEvent } from "react";
 import styled from "styled-components";
-import { StyledToolbar } from "components/common/styled";
+import { StyledToolbar } from "components/common/styled/index.d";
 
 const StyledDiv = styled.div`
   display: flex;
