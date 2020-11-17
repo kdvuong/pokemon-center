@@ -1,6 +1,6 @@
 import React, {
   useState,
-  useEffect,
+  useRef,
   useCallback,
   FunctionComponent,
   MouseEvent,
@@ -10,8 +10,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import { useMediaQuery } from "react-responsive";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
-import { Typography } from "@material-ui/core";
-import { filter } from "lodash-es";
+import Drawer from "./TemporaryDrawer";
 
 const StyledButton = styled(ButtonBase)`
   border-radius: 10px;
@@ -55,20 +54,18 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
   onChange,
 }) => {
   const [showItems, setShowItems] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const anchorEl = useRef<HTMLButtonElement | null>(null);
 
-  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 659px)" });
 
   const handleClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       setShowItems(!showItems);
-      setAnchorEl(event.currentTarget);
     },
     [showItems]
   );
 
-  const handleClosePopover = useCallback(() => {
-    setAnchorEl(null);
+  const handleClose = useCallback(() => {
     setShowItems(false);
   }, []);
 
@@ -76,16 +73,17 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
     (event: MouseEvent<HTMLButtonElement>) => {
       const newItem = event.currentTarget.textContent ?? "";
       onChange(newItem);
-      handleClosePopover();
+      handleClose();
     },
-    [handleClosePopover, onChange]
+    [handleClose, onChange]
   );
 
-  const openPopover = Boolean(anchorEl) && !isSmallScreen;
+  const openPopover = showItems && !isSmallScreen;
+  const openDrawer = showItems && isSmallScreen;
 
   return (
     <div>
-      <StyledButton onClick={handleClick}>
+      <StyledButton onClick={handleClick} ref={anchorEl}>
         <ButtonContent>
           <span>{currentItem}</span>
           <Arrow active={showItems} />
@@ -94,8 +92,8 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
       <Popover
         id={openPopover ? "simple-popover" : undefined}
         open={openPopover}
-        anchorEl={anchorEl}
-        onClose={handleClosePopover}
+        anchorEl={anchorEl ? anchorEl.current : null}
+        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "center",
@@ -111,6 +109,11 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
           })}
         </PopoverContainer>
       </Popover>
+      <Drawer side="bottom" open={openDrawer} onClose={handleClose}>
+        {items.map((item) => {
+          return <button onClick={handleItemChange}>{item}</button>;
+        })}
+      </Drawer>
     </div>
   );
 };
