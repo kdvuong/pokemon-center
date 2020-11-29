@@ -1,109 +1,139 @@
 import { $enum } from "ts-enum-util";
-import { TypeFilter } from "enums";
-import { Color } from "types";
+import { Type } from "enums";
+import { Color, Filter } from "types";
 
-export function getTypeName(type: TypeFilter): string {
+const DEFAULT_TYPE_FILTER = "All Types";
+
+function getTypeName(type: Type): string {
   return $enum.mapValue(type).with({
-    [TypeFilter.DEFAULT]: "All Types",
-    [TypeFilter.NORMAL]: "Normal",
-    [TypeFilter.FIRE]: "Fire",
-    [TypeFilter.FIGHTING]: "Fighting",
-    [TypeFilter.WATER]: "Water",
-    [TypeFilter.FLYING]: "Flying",
-    [TypeFilter.GRASS]: "Grass",
-    [TypeFilter.POISON]: "Poison",
-    [TypeFilter.ELECTRIC]: "Electric",
-    [TypeFilter.GROUND]: "Ground",
-    [TypeFilter.PSYCHIC]: "Psychic",
-    [TypeFilter.ROCK]: "Rock",
-    [TypeFilter.ICE]: "Ice",
-    [TypeFilter.BUG]: "Bug",
-    [TypeFilter.DRAGON]: "Dragon",
-    [TypeFilter.GHOST]: "Ghost",
-    [TypeFilter.DARK]: "Dark",
-    [TypeFilter.STEEL]: "Steel",
-    [TypeFilter.FAIRY]: "Fairy",
+    [Type.NORMAL]: "Normal",
+    [Type.FIRE]: "Fire",
+    [Type.FIGHTING]: "Fighting",
+    [Type.WATER]: "Water",
+    [Type.FLYING]: "Flying",
+    [Type.GRASS]: "Grass",
+    [Type.POISON]: "Poison",
+    [Type.ELECTRIC]: "Electric",
+    [Type.GROUND]: "Ground",
+    [Type.PSYCHIC]: "Psychic",
+    [Type.ROCK]: "Rock",
+    [Type.ICE]: "Ice",
+    [Type.BUG]: "Bug",
+    [Type.DRAGON]: "Dragon",
+    [Type.GHOST]: "Ghost",
+    [Type.DARK]: "Dark",
+    [Type.STEEL]: "Steel",
+    [Type.FAIRY]: "Fairy",
   });
 }
 
-export function getTypeColor(type: TypeFilter): Color {
+function getTypeColor(type: Type): Color {
   const DEFAULT_TEXT_COLOR = "#f5f5f5";
   return $enum.mapValue(type).with({
-    [TypeFilter.DEFAULT]: {
-      text: "#6e7a8a",
-      background: "#ccd4db",
-    },
-    [TypeFilter.NORMAL]: {
+    // [Type.DEFAULT]: {
+    //   text: "#6e7a8a",
+    //   background: "#ccd4db",
+    // },
+    [Type.NORMAL]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#aa9",
     },
-    [TypeFilter.FIRE]: {
+    [Type.FIRE]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#f42",
     },
-    [TypeFilter.FIGHTING]: {
+    [Type.FIGHTING]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#b54",
     },
-    [TypeFilter.WATER]: {
+    [Type.WATER]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#39f",
     },
-    [TypeFilter.FLYING]: {
+    [Type.FLYING]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#89f",
     },
-    [TypeFilter.GRASS]: {
+    [Type.GRASS]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#7c5",
     },
-    [TypeFilter.POISON]: {
+    [Type.POISON]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#a59",
     },
-    [TypeFilter.ELECTRIC]: {
+    [Type.ELECTRIC]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#fc3",
     },
-    [TypeFilter.GROUND]: {
+    [Type.GROUND]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#db5",
     },
-    [TypeFilter.PSYCHIC]: {
+    [Type.PSYCHIC]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#f59",
     },
-    [TypeFilter.ROCK]: {
+    [Type.ROCK]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#ba6",
     },
-    [TypeFilter.ICE]: {
+    [Type.ICE]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#6cf",
     },
-    [TypeFilter.BUG]: {
+    [Type.BUG]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#ab2",
     },
-    [TypeFilter.DRAGON]: {
+    [Type.DRAGON]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#76e",
     },
-    [TypeFilter.GHOST]: {
+    [Type.GHOST]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#66b",
     },
-    [TypeFilter.DARK]: {
+    [Type.DARK]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#754",
     },
-    [TypeFilter.STEEL]: {
+    [Type.STEEL]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#aab",
     },
-    [TypeFilter.FAIRY]: {
+    [Type.FAIRY]: {
       text: DEFAULT_TEXT_COLOR,
       background: "#e9e",
     },
   });
 }
+
+const typeNameMap: Map<string, Type> = new Map<string, Type>();
+(function populateTypeNameMap() {
+  $enum(Type).forEach((type) => {
+    typeNameMap.set(getTypeName(type), type);
+  });
+})();
+
+export const TypeFilter: Filter<Type> = class {
+  public static getName(): string {
+    return "Types";
+  }
+
+  public static getValueName(type: Type): string {
+    return getTypeName(type);
+  }
+
+  public static getValues(): string[] {
+    return [DEFAULT_TYPE_FILTER, ...$enum(Type).getValues().map(getTypeName)];
+  }
+
+  public static getDefaultValue(): string {
+    return DEFAULT_TYPE_FILTER;
+  }
+
+  public static getTypeFromValue(value: string): Type | undefined {
+    return typeNameMap.get(value);
+  }
+};

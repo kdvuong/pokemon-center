@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { StyledToolbar } from "components/common/styled/index.d";
-import { Filter } from "types";
+import { FilterProps } from "types";
 import ResponsiveSelect from "./ResponsiveSelect";
 
 const StyledDiv = styled.div`
@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
 `;
 
 interface IProps {
-  filters: Filter[];
+  filters: FilterProps[];
   filteredCount: number;
 }
 
@@ -18,10 +18,10 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
   return (
     <StyledToolbar>
       {/* result bar */}
-      <div className="filter-icon">
+      <div>
         <img
           src={require("assets/icons/svg/pokeball.svg")}
-          style={{ width: 18, height: 18 }}
+          style={{ width: 20, height: 20 }}
           alt="filter-icon"
         />
       </div>

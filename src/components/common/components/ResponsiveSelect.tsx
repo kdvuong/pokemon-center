@@ -11,6 +11,7 @@ import { useMediaQuery } from "react-responsive";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
 import Drawer from "./TemporaryDrawer";
+import { FilterProps } from "types";
 
 const StyledButton = styled(ButtonBase)`
   border-radius: 10px;
@@ -41,15 +42,8 @@ const PopoverContainer = styled.div`
   padding: 12px;
 `;
 
-interface IProps {
-  name: string;
-  currentItem: string;
-  items: string[];
-  onChange: (value: string) => void;
-}
-
-const ResponsiveSelect: FunctionComponent<IProps> = ({
-  items,
+const ResponsiveSelect: FunctionComponent<FilterProps> = ({
+  filter,
   currentItem,
   onChange,
 }) => {
@@ -85,7 +79,11 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
     <div>
       <StyledButton onClick={handleClick} ref={anchorEl}>
         <ButtonContent>
-          <span>{currentItem}</span>
+          <span>
+            {currentItem
+              ? filter.getValueName(currentItem)
+              : filter.getDefaultValue()}
+          </span>
           <Arrow active={showItems} />
         </ButtonContent>
       </StyledButton>
@@ -104,13 +102,13 @@ const ResponsiveSelect: FunctionComponent<IProps> = ({
         }}
       >
         <PopoverContainer>
-          {items.map((item) => {
+          {filter.getValues().map((item) => {
             return <button onClick={handleItemChange}>{item}</button>;
           })}
         </PopoverContainer>
       </Popover>
       <Drawer side="bottom" open={openDrawer} onClose={handleClose}>
-        {items.map((item) => {
+        {filter.getValues().map((item) => {
           return <button onClick={handleItemChange}>{item}</button>;
         })}
       </Drawer>

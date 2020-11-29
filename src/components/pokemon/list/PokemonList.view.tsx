@@ -9,32 +9,23 @@ import React, {
 } from "react";
 import { IRoute } from "router/config";
 import { drawerContext } from "contexts/Drawer.context";
-import usePokemonDataApi from "hooks/PokemonDataApi";
+import usePokemonApi from "hooks/PokemonApi.hook";
 import FilterBar from "components/common/components/FilterBar";
-import { GenerationFilter, TypeFilter } from "enums";
-import { getGenerationName } from "utils/GenerationFilterMap";
-import { getTypeName } from "utils/TypeFilterMap";
-import { $enum } from "ts-enum-util";
-import { Filter } from "types";
+import { Generation, Type } from "enums";
+import { FilterProps } from "types";
+import { GenerationFilter } from "utils/GenerationFilterMap";
+import { TypeFilter } from "utils/TypeFilterMap";
 
 interface IProps {
   routes: IRoute[];
 }
 
-const typeFilter = {
-  name: "type",
-  items: ["normal", "fire"],
-  currentItem: "normal",
-};
-
 const PokemonList: FunctionComponent<IProps> = () => {
   const { showToolbar } = useContext(drawerContext);
-  const { getAllPokemonSummaries } = usePokemonDataApi();
-  const [currentTypeFilter, setCurrentTypeFilter] = useState<TypeFilter>(
-    TypeFilter.DEFAULT
-  );
-  const [currentGenFilter, setCurrentGenFilter] = useState<GenerationFilter>(
-    GenerationFilter.DEFAULT
+  const { getAllPokemonSummaries } = usePokemonApi();
+  const [currentTypeFilter, setCurrentTypeFilter] = useState<Type | null>(null);
+  const [currentGenFilter, setCurrentGenFilter] = useState<Generation | null>(
+    null
   );
 
   useEffect(() => {
@@ -46,29 +37,39 @@ const PokemonList: FunctionComponent<IProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onGenerationChange = useCallback((newGen: string) => {
-    console.log(newGen);
+  const onGenerationChange = useCallback((newGenName: string) => {
+    const newGen: Generation | undefined = GenerationFilter.getTypeFromValue(
+      newGenName
+    );
+    if (newGen) {
+      setCurrentGenFilter(newGen);
+    } else {
+      setCurrentGenFilter(null);
+    }
   }, []);
 
-  const onTypeChange = useCallback((newType: string) => {
-    console.log(newType);
+  const onTypeChange = useCallback((newTypeName: string) => {
+    const newType: Type | undefined = TypeFilter.getTypeFromValue(newTypeName);
+    if (newType) {
+      setCurrentTypeFilter(newType);
+    } else {
+      setCurrentTypeFilter(null);
+    }
   }, []);
 
-  const generationFilter: Filter = useMemo(
-    (): Filter => ({
-      name: "Generations",
-      items: $enum(GenerationFilter).getValues().map(getGenerationName),
-      currentItem: getGenerationName(currentGenFilter),
+  const generationFilter: FilterProps = useMemo(
+    (): FilterProps => ({
+      filter: GenerationFilter,
+      currentItem: currentGenFilter,
       onChange: onGenerationChange,
     }),
     [currentGenFilter, onGenerationChange]
   );
 
-  const typeFilter: Filter = useMemo(
-    (): Filter => ({
-      name: "Types",
-      items: $enum(TypeFilter).getValues().map(getTypeName),
-      currentItem: getTypeName(currentTypeFilter),
+  const typeFilter: FilterProps = useMemo(
+    (): FilterProps => ({
+      filter: TypeFilter,
+      currentItem: currentTypeFilter,
       onChange: onTypeChange,
     }),
     [currentTypeFilter, onTypeChange]

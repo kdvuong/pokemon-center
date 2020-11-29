@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FunctionComponent, Fragment } from "react";
-import usePokemonDataApi from "hooks/PokemonDataApi";
+import useSyncPokemonData from "hooks/SyncPokemonData.hook";
 import { GoogleLogin } from "react-google-login";
 import authService from "services/AuthService";
 import { IRoute } from "router/config";
@@ -14,14 +14,15 @@ interface IProps {
 const App: FunctionComponent<IProps> = (props: IProps) => {
   const { routes } = props;
   const drawer = useDrawer();
-  const { getAllPokemonSummaries } = usePokemonDataApi();
+  const { sync } = useSyncPokemonData();
   const [authenticated, setAuthenticated] = useState<boolean>(false);
 
-  // useEffect(() => {
-  //   authService.renewToken().then((isSuccess) => {
-  //     setAuthenticated(isSuccess);
-  //   });
-  // }, []);
+  useEffect(() => {
+    sync();
+    // authService.renewToken().then((isSuccess) => {
+    //   setAuthenticated(isSuccess);
+    // });
+  }, [sync]);
 
   const handleSigninSuccess = async (res: any) => {
     const isSuccess = await authService.signin(res.accessToken);
