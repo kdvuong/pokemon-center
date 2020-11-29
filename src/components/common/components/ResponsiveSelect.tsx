@@ -42,6 +42,12 @@ const PopoverContainer = styled.div`
   padding: 12px;
 `;
 
+const DrawerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+`;
+
 const ResponsiveSelect: FunctionComponent<FilterProps> = ({
   filter,
   currentItem,
@@ -108,9 +114,11 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({
         </PopoverContainer>
       </Popover>
       <Drawer side="bottom" open={openDrawer} onClose={handleClose}>
-        {filter.getValues().map((item) => {
-          return <button onClick={handleItemChange}>{item}</button>;
-        })}
+        <DrawerContainer>
+          {filter.getValues().map((item) => {
+            return <button onClick={handleItemChange}>{item}</button>;
+          })}
+        </DrawerContainer>
       </Drawer>
     </div>
   );
