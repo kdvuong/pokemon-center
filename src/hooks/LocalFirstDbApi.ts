@@ -1,16 +1,16 @@
-import DbService, { IPouchDB } from "../services/PokemonDbService";
+import DbService, { IPouchDB, Document } from "../services/PokemonDbService";
 
-interface ILocalFirstDbApi {
+interface ILocalFirstDbApi<T extends Document> {
   replicateToLocal: (fileCount?: number) => Promise<void>;
-  getById: (id: number) => Promise<any>;
-  getManyByIds: (ids: number[]) => Promise<any>;
-  getAll: () => Promise<any>;
+  getById: (id: number) => Promise<T>;
+  getManyByIds: (ids: number[]) => Promise<T[]>;
+  getAll: () => Promise<T[]>;
 }
 
 //execute database function on local db first
-async function doLocalFirst(
-  dbFun: (db: IPouchDB) => Promise<any>,
-  dbService: DbService
+async function doLocalFirst<T extends Document>(
+  dbFun: (db: IPouchDB<T>) => Promise<any>,
+  dbService: DbService<T>
 ) {
   // hit the local DB first; if it 404s, then hit the remote
   try {
@@ -20,7 +20,9 @@ async function doLocalFirst(
   }
 }
 
-const useLocalFirstDbApi = (dbService: DbService): ILocalFirstDbApi => {
+const useLocalFirstDbApi = <T extends Document>(
+  dbService: DbService<T>
+): ILocalFirstDbApi<T> => {
   const replicateToLocal = async (fileCount?: number) => {
     return dbService.replicate(fileCount);
   };
@@ -28,7 +30,7 @@ const useLocalFirstDbApi = (dbService: DbService): ILocalFirstDbApi => {
   const getById = async (id: number) => {
     if (dbService)
       return await doLocalFirst(
-        (db: IPouchDB) => dbService.getById(db, id),
+        (db: IPouchDB<T>) => dbService.getById(db, id),
         dbService
       );
     throw new Error("database does not exist");
@@ -37,7 +39,7 @@ const useLocalFirstDbApi = (dbService: DbService): ILocalFirstDbApi => {
   const getManyByIds = async (ids: number[]) => {
     if (dbService)
       return await doLocalFirst(
-        (db: IPouchDB) => dbService.getManyByIds(db, ids),
+        (db: IPouchDB<T>) => dbService.getManyByIds(db, ids),
         dbService
       );
     throw new Error("database does not exist");
@@ -46,7 +48,7 @@ const useLocalFirstDbApi = (dbService: DbService): ILocalFirstDbApi => {
   const getAll = async (): Promise<any> => {
     if (dbService) {
       return await doLocalFirst(
-        (db: IPouchDB) => dbService.getAll(db),
+        (db: IPouchDB<T>) => dbService.getAll(db),
         dbService
       );
     }

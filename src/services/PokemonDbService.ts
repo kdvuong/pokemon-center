@@ -2,26 +2,29 @@ import PouchDB from "pouchdb";
 import orderBy from "lodash-es/orderBy";
 import PouchLoad from "pouchdb-load";
 import auth from "../constants/cloudant.config";
+import { DbName } from "enums";
 
 PouchDB.plugin(PouchLoad);
 PouchDB.plugin(require("pouchdb-upsert"));
 
-interface Document {
-  doc: {
-    _id: string;
-    _rev: string;
-    title: string;
-    _attachments: any;
-  };
+export interface Document {
+  _id: string;
+  _rev: string;
+  title: string;
+  _attachments: any;
+}
+
+interface DocumentRow<T> {
+  doc: T;
   id: string;
   key: string;
   value: any;
 }
 
-interface AllDocsResponse {
+interface AllDocsResponse<T> {
   offset: number;
   total_rows: number;
-  rows: Document[];
+  rows: DocumentRow<T>[];
 }
 
 interface DBInfo {
@@ -30,19 +33,19 @@ interface DBInfo {
   update_seq: number;
 }
 
-export interface IPouchDB {
-  get: (id: string) => Promise<any>;
+export interface IPouchDB<T> {
+  get: (id: string) => Promise<T>;
   putIfNotExists: (doc: any) => Promise<void>;
-  allDocs: (options: any) => Promise<AllDocsResponse>;
+  allDocs: (options: any) => Promise<AllDocsResponse<T>>;
   info: () => Promise<DBInfo>;
   load: (path: string) => Promise<void>;
 }
 
-class PokemonDbService {
+class PokemonDbService<T extends Document> {
   private url: string;
   private name: string;
-  private local: IPouchDB;
-  private remote: IPouchDB;
+  private local: IPouchDB<T>;
+  private remote: IPouchDB<T>;
   constructor(dbName: string) {
     this.url = `https://${auth.username}.cloudantnosqldb.appdomain.cloud/${dbName}`;
     this.name = dbName;
@@ -50,11 +53,11 @@ class PokemonDbService {
     this.remote = new PouchDB(this.url, { auth: auth });
   }
 
-  getLocal(): IPouchDB {
+  getLocal(): IPouchDB<T> {
     return this.local;
   }
 
-  getRemote(): IPouchDB {
+  getRemote(): IPouchDB<T> {
     return this.remote;
   }
 
@@ -109,11 +112,11 @@ class PokemonDbService {
     }
   }
 
-  async getById(db: IPouchDB, docId: number): Promise<any> {
+  async getById(db: IPouchDB<T>, docId: number): Promise<T> {
     return await db.get(docId.toString());
   }
 
-  async getManyByIds(db: IPouchDB, docIds: number[]): Promise<any> {
+  async getManyByIds(db: IPouchDB<T>, docIds: number[]): Promise<T[]> {
     var res = await db.allDocs({
       include_docs: true,
       keys: docIds.map((id) => id.toString()),
@@ -124,7 +127,7 @@ class PokemonDbService {
     return res.rows.map((row) => row.doc);
   }
 
-  async getAll(db: IPouchDB): Promise<any> {
+  async getAll(db: IPouchDB<T>): Promise<any> {
     const info = await db.info();
     if (info.doc_count === 0) {
       //check if db (assuming local) is empty
@@ -143,3 +146,7 @@ class PokemonDbService {
 }
 
 export default PokemonDbService;
+
+export const moveService = new PokemonDbService(DbName.POKEMON_MOVES);
+export const movesetService = new PokemonDbService(DbName.POKEMON_MOVESET);
+export const typeService = new PokemonDbService(DbName.POKEMON_TYPES);
