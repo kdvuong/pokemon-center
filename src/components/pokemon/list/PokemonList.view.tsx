@@ -13,8 +13,8 @@ import usePokemonApi from "hooks/PokemonApi.hook";
 import FilterBar from "components/common/components/FilterBar";
 import { Generation, Type } from "enums";
 import { FilterProps } from "types";
-import { GenerationFilter } from "utils/GenerationFilterMap";
-import { TypeFilter } from "utils/TypeFilterMap";
+import { GenerationFilter } from "utils/GenerationFilter";
+import { TypeFilter } from "utils/TypeFilter";
 
 interface IProps {
   routes: IRoute[];
