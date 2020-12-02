@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { drawerContext } from "contexts/Drawer.context";
 
-const PokemonDetail = () => {
+const PokemonDetailView = () => {
   const { hideToolbar } = useContext(drawerContext);
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const PokemonDetail = () => {
   return <div>Pokemon</div>;
 };
 
-export default PokemonDetail;
+export default PokemonDetailView;

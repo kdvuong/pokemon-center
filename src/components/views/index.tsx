@@ -1,32 +1,28 @@
 import { lazy } from "react";
 
 // list views
-const PokemonList = lazy(() => import("../pokemon/list/PokemonList.view"));
-const MoveList = lazy(() => import("../move/list/MoveList.view"));
-const AbilityList = lazy(() => import("../ability/list/AbilityList.view"));
-const TypeList = lazy(() => import("../type/list/TypeList.view"));
-const NatureList = lazy(() => import("../nature/list/NatureList.view"));
+const PokemonListView = lazy(() => import("../pokemon/list/PokemonListView"));
+const MoveListView = lazy(() => import("../move/list/MoveListView"));
+const AbilityListView = lazy(() => import("../ability/list/AbilityListView"));
+const TypeListView = lazy(() => import("../type/list/TypeListView"));
+const NatureListView = lazy(() => import("../nature/list/NatureListView"));
 
 // detail views
-const PokemonDetail = lazy(
-  () => import("../pokemon/detail/PokemonDetail.view")
-);
-const MoveDetail = lazy(() => import("../move/detail/MoveDetail.view"));
-const AbilityDetail = lazy(
-  () => import("../ability/detail/AbilityDetail.view")
-);
-const TypeDetail = lazy(() => import("../type/detail/TypeDetail.view"));
-const NatureDetail = lazy(() => import("../nature/detail/NatureDetail.view"));
+const PokemonDetailView = lazy(() => import("../pokemon/detail/PokemonDetailView"));
+const MoveDetailView = lazy(() => import("../move/detail/MoveDetailView"));
+const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailView"));
+const TypeDetailView = lazy(() => import("../type/detail/TypeDetailView"));
+const NatureDetailView = lazy(() => import("../nature/detail/NatureDetailView"));
 
 export default {
-  PokemonList,
-  MoveList,
-  AbilityList,
-  TypeList,
-  NatureList,
-  PokemonDetail,
-  MoveDetail,
-  AbilityDetail,
-  TypeDetail,
-  NatureDetail,
+  PokemonListView,
+  MoveListView,
+  AbilityListView,
+  TypeListView,
+  NatureListView,
+  PokemonDetailView,
+  MoveDetailView,
+  AbilityDetailView,
+  TypeDetailView,
+  NatureDetailView,
 };

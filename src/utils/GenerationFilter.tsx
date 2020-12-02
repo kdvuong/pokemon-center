@@ -2,9 +2,7 @@ import { $enum } from "ts-enum-util";
 import { Generation } from "enums";
 import { Color, Filter } from "types";
 
-export const DEFAULT_GENERATION_FILTER = "All Generations";
-
-export function getGenerationName(generation: Generation): string {
+function getGenerationName(generation: Generation): string {
   return $enum.mapValue(generation).with({
     [Generation.GEN_1]: "Generation I",
     [Generation.GEN_2]: "Generation II",
@@ -17,7 +15,7 @@ export function getGenerationName(generation: Generation): string {
   });
 }
 
-export function getGenerationShortenedName(generation: Generation): string {
+function getGenerationShortenedName(generation: Generation): string {
   return $enum.mapValue(generation).with({
     [Generation.GEN_1]: "Gen I",
     [Generation.GEN_2]: "Gen II",
@@ -30,7 +28,7 @@ export function getGenerationShortenedName(generation: Generation): string {
   });
 }
 
-export function getGenerationColor(): Color {
+function getGenerationColor(): Color {
   return {
     text: "#6e7a8a",
     background: "#ccd4db",
@@ -50,13 +48,11 @@ const generationNameMap: Map<string, Generation> = new Map<
   });
 })();
 
-export function getGeneration(generationName: string): Generation | undefined {
-  return generationNameMap.get(generationName);
-}
-
 export const GenerationFilter: Filter<Generation> = class {
+  private static DEFAULT_VALUE = "All Generations";
+
   public static getName(): string {
-    return "Generations";
+    return "Generation";
   }
 
   public static getValueName(generation: Generation): string {
@@ -65,13 +61,13 @@ export const GenerationFilter: Filter<Generation> = class {
 
   public static getValues(): string[] {
     return [
-      DEFAULT_GENERATION_FILTER,
+      this.DEFAULT_VALUE,
       ...$enum(Generation).getValues().map(getGenerationName),
     ];
   }
 
   public static getDefaultValue(): string {
-    return DEFAULT_GENERATION_FILTER;
+    return this.DEFAULT_VALUE;
   }
 
   public static getTypeFromValue(value: string): Generation | undefined {

@@ -1,7 +1,7 @@
 import React from "react";
 
-const AbilityList = () => {
+const AbilityListView = () => {
   return <div>Abilitydex</div>;
 };
 
-export default AbilityList;
+export default AbilityListView;

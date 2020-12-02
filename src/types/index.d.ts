@@ -37,3 +37,10 @@ export interface Color {
   text: string;
   background: string;
 }
+
+export interface PokemonSummary {
+  name: string;
+  id: number;
+  generation: Generation;
+  types: Type[];
+}

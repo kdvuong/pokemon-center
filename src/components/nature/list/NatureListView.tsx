@@ -1,7 +1,7 @@
 import React from "react";
 
-const NatureList = () => {
+const NatureListView = () => {
   return <div>Naturedex</div>;
 };
 
-export default NatureList;
+export default NatureListView;

@@ -1,5 +1,5 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName, Type } from "enums";
+import { DbName, Generation, Type } from "enums";
 
 export interface PokemonDocument extends Document {
   id: number;
@@ -12,7 +12,7 @@ export interface PokemonDocument extends Document {
   description: string;
   evolution_chain_id: number;
   gender_rate: number;
-  generation: string;
+  generation: Generation;
   height: number;
   moveset_id: number;
   name: string;

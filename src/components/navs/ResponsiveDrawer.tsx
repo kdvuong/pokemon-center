@@ -25,8 +25,13 @@ import { DEX_LIST } from "../../router/drawerNav";
 import Router from "../../router/Router";
 import { Link } from "react-router-dom";
 import { drawerContext } from "../../contexts/Drawer.context";
+import styled from "styled-components";
 
 const drawerWidth = 240;
+
+const Main = styled.main`
+  width: 100%;
+`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -110,7 +115,7 @@ export default function ResponsiveDrawer(props: IProps) {
     <div className={classes.root}>
       <CssBaseline />
       {isToolbarVisible && (
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar} elevation={0}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -157,10 +162,10 @@ export default function ResponsiveDrawer(props: IProps) {
           </Drawer>
         </Hidden>
       </nav>
-      <main>
+      <Main>
         {isToolbarVisible && <div className={classes.toolbar} />}
         <Router routes={routes} />
-      </main>
+      </Main>
     </div>
   );
 }

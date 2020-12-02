@@ -31,7 +31,7 @@ const ButtonContent = styled.div`
   }
 `;
 
-const Arrow = styled(ArrowDropDown)<{ active: boolean }>`
+const Arrow = styled(({ active, ...props }) => <ArrowDropDown {...props} />)`
   transform: ${(props) => (props.active ? "rotate(-180deg)" : "rotate(0)")};
   transition: all 200ms ease-in-out;
 `;
@@ -109,14 +109,23 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({
       >
         <PopoverContainer>
           {filter.getValues().map((item) => {
-            return <button onClick={handleItemChange}>{item}</button>;
+            return (
+              <button onClick={handleItemChange} key={item}>
+                {item}
+              </button>
+            );
           })}
         </PopoverContainer>
       </Popover>
       <Drawer side="bottom" open={openDrawer} onClose={handleClose}>
         <DrawerContainer>
+          <h2>Select a {filter.getName().toLowerCase()}</h2>
           {filter.getValues().map((item) => {
-            return <button onClick={handleItemChange}>{item}</button>;
+            return (
+              <button onClick={handleItemChange} key={item}>
+                {item}
+              </button>
+            );
           })}
         </DrawerContainer>
       </Drawer>

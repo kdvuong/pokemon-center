@@ -2,8 +2,6 @@ import { $enum } from "ts-enum-util";
 import { Type } from "enums";
 import { Color, Filter } from "types";
 
-const DEFAULT_TYPE_FILTER = "All Types";
-
 function getTypeName(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: "Normal",
@@ -117,8 +115,10 @@ const typeNameMap: Map<string, Type> = new Map<string, Type>();
 })();
 
 export const TypeFilter: Filter<Type> = class {
+  private static DEFAULT_VALUE: string = "All Types";
+
   public static getName(): string {
-    return "Types";
+    return "Type";
   }
 
   public static getValueName(type: Type): string {
@@ -126,11 +126,11 @@ export const TypeFilter: Filter<Type> = class {
   }
 
   public static getValues(): string[] {
-    return [DEFAULT_TYPE_FILTER, ...$enum(Type).getValues().map(getTypeName)];
+    return [this.DEFAULT_VALUE, ...$enum(Type).getValues().map(getTypeName)];
   }
 
   public static getDefaultValue(): string {
-    return DEFAULT_TYPE_FILTER;
+    return this.DEFAULT_VALUE;
   }
 
   public static getTypeFromValue(value: string): Type | undefined {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, FunctionComponent, Fragment } from "react";
-import useSyncPokemonData from "hooks/SyncPokemonData.hook";
+import useSyncPokemonData from "hooks/SyncPokemonDataHook";
 import { GoogleLogin } from "react-google-login";
 import authService from "services/AuthService";
 import { IRoute } from "router/config";
 import ResponsiveDrawer from "components/navs/ResponsiveDrawer";
 import { drawerContext } from "contexts/Drawer.context";
-import { useDrawer } from "hooks/Drawer.hook";
+import { useDrawer } from "hooks/DrawerHook";
 
 interface IProps {
   routes: IRoute[];

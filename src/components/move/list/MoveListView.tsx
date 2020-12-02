@@ -1,7 +1,7 @@
 import React from "react";
 
-const MoveList = () => {
+const MoveListView = () => {
   return <div>Movedex</div>;
 };
 
-export default MoveList;
+export default MoveListView;

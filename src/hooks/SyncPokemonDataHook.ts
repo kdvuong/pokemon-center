@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import useDbApi from "./LocalFirstDbApi";
+import useDbApi from "./LocalFirstDbApiHook";
 import {
   moveService,
   movesetService,

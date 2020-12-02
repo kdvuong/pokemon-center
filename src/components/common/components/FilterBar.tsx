@@ -27,7 +27,7 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
       </div>
       <StyledDiv>
         {filters.map((filter) => (
-          <ResponsiveSelect {...filter} />
+          <ResponsiveSelect {...filter} key={filter.filter.getName()} />
         ))}
         {/* <FilterCount>
           <span>{filteredCount} Pokemons</span>
