@@ -14,12 +14,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import {
-  makeStyles,
-  useTheme,
-  Theme,
-  createStyles,
-} from "@material-ui/core/styles";
+import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
 import { IRoute } from "../../router/config";
 import { DEX_LIST } from "../../router/drawerNav";
 import Router from "../../router/Router";
@@ -31,12 +26,16 @@ const drawerWidth = 240;
 
 const Main = styled.main`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
 `;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: "flex",
+      height: "100%",
     },
     drawer: {
       [theme.breakpoints.up("sm")]: {
@@ -90,9 +89,7 @@ export default function ResponsiveDrawer(props: IProps) {
       <List>
         {DEX_LIST.map((dex, index) => (
           <ListItem button key={dex.name} component={Link} to={dex.path}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={dex.name} />
           </ListItem>
         ))}
@@ -101,9 +98,7 @@ export default function ResponsiveDrawer(props: IProps) {
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}

@@ -9,6 +9,11 @@ const StyledDiv = styled.div`
   width: 100%;
 `;
 
+const IconContainer = styled.div`
+  height: 20px;
+  margin-right: 16px;
+`;
+
 interface IProps {
   filters: FilterProps[];
   filteredCount: number;
@@ -18,13 +23,13 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
   return (
     <StyledToolbar>
       {/* result bar */}
-      <div>
+      <IconContainer>
         <img
           src={require("assets/icons/svg/pokeball.svg")}
           style={{ width: 20, height: 20 }}
-          alt="filter-icon"
+          alt="pokeball-icon"
         />
-      </div>
+      </IconContainer>
       <StyledDiv>
         {filters.map((filter) => (
           <ResponsiveSelect {...filter} key={filter.filter.getName()} />

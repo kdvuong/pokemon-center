@@ -29,11 +29,13 @@ const PokemonListView: FunctionComponent<IProps> = () => {
   const [currentGenFilter, setCurrentGenFilter] = useState<Generation | null>(null);
   const [pokemons, setPokemons] = useState<PokemonSummary[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<PokemonSummary[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     showToolbar();
     getAllPokemonSummaries().then((res) => {
       setPokemons(res);
+      setIsLoading(false);
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +103,7 @@ const PokemonListView: FunctionComponent<IProps> = () => {
   return (
     <Fragment>
       <FilterBar filters={[typeFilter, generationFilter]} filteredCount={10} />
-      <PokemonList pokemons={filteredPokemons} />
+      {isLoading ? <div>Loading...</div> : <PokemonList pokemons={filteredPokemons} />}
     </Fragment>
   );
 };
