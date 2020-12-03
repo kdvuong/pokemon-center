@@ -14,6 +14,14 @@ const IconContainer = styled.div`
   margin-right: 16px;
 `;
 
+const FilterCount = styled.div`
+  display: flex;
+  flex-grow: 10;
+  justify-content: flex-end;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.3);
+`;
+
 interface IProps {
   filters: FilterProps[];
   filteredCount: number;
@@ -22,7 +30,6 @@ interface IProps {
 const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
   return (
     <StyledToolbar>
-      {/* result bar */}
       <IconContainer>
         <img
           src={require("assets/icons/svg/pokeball.svg")}
@@ -34,9 +41,9 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
         {filters.map((filter) => (
           <ResponsiveSelect {...filter} key={filter.filter.getName()} />
         ))}
-        {/* <FilterCount>
+        <FilterCount>
           <span>{filteredCount} Pokemons</span>
-        </FilterCount> */}
+        </FilterCount>
       </StyledDiv>
     </StyledToolbar>
   );

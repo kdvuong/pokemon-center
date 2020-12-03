@@ -1,17 +1,11 @@
-import React, {
-  useState,
-  useRef,
-  useCallback,
-  FunctionComponent,
-  MouseEvent,
-} from "react";
+import React, { useState, useRef, useCallback, FunctionComponent, MouseEvent } from "react";
 import styled from "styled-components";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { useMediaQuery } from "react-responsive";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
 import Drawer from "./TemporaryDrawer";
-import { FilterProps } from "types";
+import { FilterProps, FilterHasShortendName } from "types";
 
 const StyledButton = styled(ButtonBase)`
   border-radius: 10px;
@@ -48,11 +42,11 @@ const DrawerContainer = styled.div`
   padding: 12px;
 `;
 
-const ResponsiveSelect: FunctionComponent<FilterProps> = ({
-  filter,
-  currentItem,
-  onChange,
-}) => {
+function instanceOfFilterHasShortendName(object: any): object is FilterHasShortendName<any> {
+  return "getShortenedValueName" in object;
+}
+
+const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem, onChange }) => {
   const [showItems, setShowItems] = useState(false);
   const anchorEl = useRef<HTMLButtonElement | null>(null);
 
@@ -78,6 +72,14 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({
     [handleClose, onChange]
   );
 
+  const getCurrentItemName = useCallback(() => {
+    let name = filter.getValueName(currentItem);
+    if (isSmallScreen && instanceOfFilterHasShortendName(filter)) {
+      name = filter.getShortenedValueName(currentItem);
+    }
+    return name;
+  }, [currentItem, filter, isSmallScreen]);
+
   const openPopover = showItems && !isSmallScreen;
   const openDrawer = showItems && isSmallScreen;
 
@@ -85,11 +87,7 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({
     <div>
       <StyledButton onClick={handleClick} ref={anchorEl}>
         <ButtonContent>
-          <span>
-            {currentItem
-              ? filter.getValueName(currentItem)
-              : filter.getDefaultValue()}
-          </span>
+          <span>{getCurrentItemName()}</span>
           <Arrow active={showItems} />
         </ButtonContent>
       </StyledButton>

@@ -3,6 +3,7 @@ import { DrawerContext } from "../contexts/Drawer.context";
 
 export const useDrawer = (): DrawerContext => {
   const [isToolbarVisible, setIsToolbarVisible] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>("");
   const showToolbar = useCallback(() => {
     setIsToolbarVisible(true);
   }, []);
@@ -11,9 +12,15 @@ export const useDrawer = (): DrawerContext => {
     setIsToolbarVisible(false);
   }, []);
 
+  const setDrawerTitle = useCallback((name: string) => {
+    setTitle(name);
+  }, []);
+
   return {
     isToolbarVisible,
+    title,
     showToolbar,
     hideToolbar,
+    setDrawerTitle,
   };
 };

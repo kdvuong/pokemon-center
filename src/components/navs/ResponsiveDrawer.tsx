@@ -73,7 +73,7 @@ interface IProps {
 
 export default function ResponsiveDrawer(props: IProps) {
   const { routes } = props;
-  const { isToolbarVisible } = useContext(drawerContext);
+  const { isToolbarVisible, title } = useContext(drawerContext);
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -122,7 +122,7 @@ export default function ResponsiveDrawer(props: IProps) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              Responsive drawer
+              {title}
             </Typography>
           </Toolbar>
         </AppBar>

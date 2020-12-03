@@ -4,13 +4,6 @@ export interface IPouchDB {
   load: (path: string) => void;
 }
 
-export interface PokemonSummary {
-  name: string;
-  id: number;
-  generation: string;
-  types: string[];
-}
-
 // export interface Filter {
 //   name: string;
 //   items: string[];
@@ -27,10 +20,13 @@ export interface FilterProps {
 
 export interface Filter<T> {
   getName: () => string;
-  getValueName: (type: T) => string;
+  getValueName: (type: T | null) => string;
   getValues: () => string[];
-  getDefaultValue: () => string;
   getTypeFromValue: (value: string) => T | undefined;
+}
+
+export interface FilterHasShortendName<T> extends Filter<T> {
+  getShortenedValueName: (type: T | null) => string;
 }
 
 export interface Color {

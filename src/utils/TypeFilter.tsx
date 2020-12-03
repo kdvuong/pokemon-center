@@ -107,6 +107,29 @@ function getTypeColor(type: Type): Color {
   });
 }
 
+export function getTypeIconColor(type: Type): string {
+  return $enum.mapValue(type).with({
+    [Type.NORMAL]: "linear-gradient(180deg, #9298a4, #a3a49e)",
+    [Type.FIRE]: "linear-gradient(180deg, #fb9b51, #fbae46)",
+    [Type.FIGHTING]: "linear-gradient(180deg, #ce4265, #e74347)",
+    [Type.WATER]: "linear-gradient(180deg, #4a90dd, #6cbde4)",
+    [Type.FLYING]: "linear-gradient(180deg, #90a7da, #a6c2f2)",
+    [Type.GRASS]: "linear-gradient(180deg, #5fbc51, #5ac178)",
+    [Type.POISON]: "linear-gradient(180deg, #a864c7, #c261d4)",
+    [Type.ELECTRIC]: "linear-gradient(180deg, #edd53e, #fbe273)",
+    [Type.GROUND]: "linear-gradient(180deg, #dc7545, #d29463)",
+    [Type.PSYCHIC]: "linear-gradient(180deg, #f66f71, #fe9f92)",
+    [Type.ROCK]: "linear-gradient(180deg, #c5b489, #d7cd90)",
+    [Type.ICE]: "linear-gradient(180deg, #70ccbd, #8cddd4)",
+    [Type.BUG]: "linear-gradient(180deg, #92bc2c, #afc836)  ",
+    [Type.DRAGON]: "linear-gradient(180deg, #0c69c8, #0180c7)",
+    [Type.GHOST]: "linear-gradient(180deg, #516aac, #7773d4)",
+    [Type.DARK]: "linear-gradient(180deg, #595761, #6e7587)",
+    [Type.STEEL]: "linear-gradient(180deg, #52869d, #58a6aa)",
+    [Type.FAIRY]: "linear-gradient(180deg, #ec8ce5, #f3a7e7)",
+  });
+}
+
 const typeNameMap: Map<string, Type> = new Map<string, Type>();
 (function populateTypeNameMap() {
   $enum(Type).forEach((type) => {
@@ -121,16 +144,15 @@ export const TypeFilter: Filter<Type> = class {
     return "Type";
   }
 
-  public static getValueName(type: Type): string {
+  public static getValueName(type: Type | null): string {
+    if (type === null) {
+      return this.DEFAULT_VALUE;
+    }
     return getTypeName(type);
   }
 
   public static getValues(): string[] {
     return [this.DEFAULT_VALUE, ...$enum(Type).getValues().map(getTypeName)];
-  }
-
-  public static getDefaultValue(): string {
-    return this.DEFAULT_VALUE;
   }
 
   public static getTypeFromValue(value: string): Type | undefined {

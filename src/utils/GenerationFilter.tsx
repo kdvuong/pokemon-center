@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
 import { Generation } from "enums";
-import { Color, Filter } from "types";
+import { Color, Filter, FilterHasShortendName } from "types";
 
 function getGenerationName(generation: Generation): string {
   return $enum.mapValue(generation).with({
@@ -35,10 +35,7 @@ function getGenerationColor(): Color {
   };
 }
 
-const generationNameMap: Map<string, Generation> = new Map<
-  string,
-  Generation
->();
+const generationNameMap: Map<string, Generation> = new Map<string, Generation>();
 (function populateGenerationNameMap() {
   $enum(Generation).forEach((generation) => {
     const name = getGenerationName(generation);
@@ -48,26 +45,30 @@ const generationNameMap: Map<string, Generation> = new Map<
   });
 })();
 
-export const GenerationFilter: Filter<Generation> = class {
+export const GenerationFilter: FilterHasShortendName<Generation> = class GenerationFilter {
   private static DEFAULT_VALUE = "All Generations";
+  private static SHORTENED_DEFAULT_VALUE = "All Gens";
 
   public static getName(): string {
     return "Generation";
   }
 
-  public static getValueName(generation: Generation): string {
+  public static getValueName(generation: Generation | null): string {
+    if (generation === null) {
+      return this.DEFAULT_VALUE;
+    }
     return getGenerationName(generation);
   }
 
-  public static getValues(): string[] {
-    return [
-      this.DEFAULT_VALUE,
-      ...$enum(Generation).getValues().map(getGenerationName),
-    ];
+  public static getShortenedValueName(generation: Generation | null): string {
+    if (generation === null) {
+      return this.SHORTENED_DEFAULT_VALUE;
+    }
+    return getGenerationShortenedName(generation);
   }
 
-  public static getDefaultValue(): string {
-    return this.DEFAULT_VALUE;
+  public static getValues(): string[] {
+    return [this.DEFAULT_VALUE, ...$enum(Generation).getValues().map(getGenerationName)];
   }
 
   public static getTypeFromValue(value: string): Generation | undefined {
