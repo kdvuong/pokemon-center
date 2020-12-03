@@ -5,25 +5,35 @@ export interface ILink {
   name: string;
 }
 
+export const POKEDEX_LINK: ILink = {
+  path: paths.POKEMON_LIST,
+  name: "Pokedex",
+};
+
+export const MOVEDEX_LINK: ILink = {
+  path: paths.MOVE_LIST,
+  name: "Move Dex",
+};
+
+export const ABILITYDEX_LINK: ILink = {
+  path: paths.ABILITY_LIST,
+  name: "Ability Dex",
+};
+
+export const TYPEDEX_LINK: ILink = {
+  path: paths.TYPE_LIST,
+  name: "Type Dex",
+};
+
+export const NATUREDEX_LINK: ILink = {
+  path: paths.NATURE_LIST,
+  name: "Nature Dex",
+};
+
 export const DEX_LIST: ILink[] = [
-  {
-    path: paths.POKEMON_LIST,
-    name: "Pokedex",
-  },
-  {
-    path: paths.MOVE_LIST,
-    name: "Move Dex",
-  },
-  {
-    path: paths.ABILITY_LIST,
-    name: "Ability Dex",
-  },
-  {
-    path: paths.TYPE_LIST,
-    name: "Type Dex",
-  },
-  {
-    path: paths.NATURE_LIST,
-    name: "Nature Dex",
-  },
+  POKEDEX_LINK,
+  MOVEDEX_LINK,
+  ABILITYDEX_LINK,
+  TYPEDEX_LINK,
+  NATUREDEX_LINK,
 ];

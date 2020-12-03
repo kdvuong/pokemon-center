@@ -28,7 +28,6 @@ const PokemonGrid: FunctionComponent<IProps> = ({ pokemons }) => {
     }
   }, [isLargeScreen, isMediumScreen, isSmallScreen, isXSmallScreen]);
 
-  console.log(pokemons);
   return <Grid items={pokemons} itemsPerRow={itemsPerRow} GridItem={PokemonGridItem} />;
 };
 

@@ -1,9 +1,11 @@
 import { useState, useCallback } from "react";
+import { ILink } from "router/drawerNav";
 import { DrawerContext } from "../contexts/Drawer.context";
 
 export const useDrawer = (): DrawerContext => {
   const [isToolbarVisible, setIsToolbarVisible] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
+  const [currentLink, setCurrentLink] = useState<ILink | null>(null);
+
   const showToolbar = useCallback(() => {
     setIsToolbarVisible(true);
   }, []);
@@ -12,15 +14,11 @@ export const useDrawer = (): DrawerContext => {
     setIsToolbarVisible(false);
   }, []);
 
-  const setDrawerTitle = useCallback((name: string) => {
-    setTitle(name);
-  }, []);
-
   return {
     isToolbarVisible,
-    title,
+    currentLink,
     showToolbar,
     hideToolbar,
-    setDrawerTitle,
+    setCurrentLink,
   };
 };

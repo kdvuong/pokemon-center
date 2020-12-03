@@ -1,14 +1,5 @@
-import React, {
-  Fragment,
-  FunctionComponent,
-  useContext,
-  useEffect,
-  useCallback,
-  useState,
-  useMemo,
-} from "react";
-import { IRoute } from "router/config";
-import { drawerContext } from "contexts/Drawer.context";
+import React, { Fragment, FunctionComponent, useEffect, useState, useMemo } from "react";
+import { withDrawerContext } from "contexts/Drawer.context";
 import usePokemonApi from "hooks/PokemonApiHook";
 import useFilter from "hooks/FilterHook";
 import FilterBar from "components/common/components/FilterBar";
@@ -17,13 +8,9 @@ import { FilterProps, PokemonSummary } from "types";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";
 import PokemonGrid from "./components/PokemonGrid";
+import { POKEDEX_LINK } from "router/drawerNav";
 
-interface IProps {
-  routes: IRoute[];
-}
-
-const PokemonListView: FunctionComponent<IProps> = () => {
-  const { showToolbar, setDrawerTitle } = useContext(drawerContext);
+const PokemonListView: FunctionComponent = () => {
   const { getAllPokemonSummaries } = usePokemonApi();
   const [searchValue, setSearchValue] = useState<string>("");
   const { filter: currentTypeFilter, onChange: onTypeChange } = useFilter<Type>(TypeFilter);
@@ -34,8 +21,6 @@ const PokemonListView: FunctionComponent<IProps> = () => {
   const [filteredPokemons, setFilteredPokemons] = useState<PokemonSummary[]>([]);
 
   useEffect(() => {
-    showToolbar();
-    setDrawerTitle("Pokedex");
     setPokemons(getAllPokemonSummaries());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -80,4 +65,4 @@ const PokemonListView: FunctionComponent<IProps> = () => {
   );
 };
 
-export default PokemonListView;
+export default withDrawerContext(PokemonListView, { link: POKEDEX_LINK, toolbarVisible: true });

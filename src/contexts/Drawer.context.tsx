@@ -1,19 +1,45 @@
-import { createContext } from "react";
+import React, { createContext, FunctionComponent, useContext, useEffect } from "react";
+import { ILink, POKEDEX_LINK } from "router/drawerNav";
 
 export interface DrawerContext {
   isToolbarVisible: boolean;
-  title: string;
+  currentLink: ILink | null;
   showToolbar: () => void;
   hideToolbar: () => void;
-  setDrawerTitle: (name: string) => void;
+  setCurrentLink: (link: ILink | null) => void;
 }
 
 const DRAWER_DEFAULT_VALUE: DrawerContext = {
   isToolbarVisible: false,
-  title: "",
+  currentLink: POKEDEX_LINK,
   showToolbar: () => {},
   hideToolbar: () => {},
-  setDrawerTitle: (name: string) => {},
+  setCurrentLink: (link: ILink | null) => {},
 };
 
 export const drawerContext = createContext<DrawerContext>(DRAWER_DEFAULT_VALUE);
+
+interface WithDrawerContextProps {
+  toolbarVisible?: boolean;
+  link?: ILink;
+}
+
+export function withDrawerContext(Component: FunctionComponent, options: WithDrawerContextProps) {
+  const DecoratedComponent = () => {
+    const { showToolbar, hideToolbar, setCurrentLink } = useContext(drawerContext);
+    const { link, toolbarVisible } = options;
+    useEffect(() => {
+      if (toolbarVisible) {
+        showToolbar();
+      } else {
+        hideToolbar();
+      }
+      setCurrentLink(link ?? null);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    return <Component />;
+  };
+
+  return DecoratedComponent;
+}

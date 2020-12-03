@@ -73,7 +73,7 @@ interface IProps {
 
 export default function ResponsiveDrawer(props: IProps) {
   const { routes } = props;
-  const { isToolbarVisible, title } = useContext(drawerContext);
+  const { isToolbarVisible, currentLink } = useContext(drawerContext);
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -88,7 +88,13 @@ export default function ResponsiveDrawer(props: IProps) {
       <Divider />
       <List>
         {DEX_LIST.map((dex, index) => (
-          <ListItem button key={dex.name} component={Link} to={dex.path}>
+          <ListItem
+            button
+            key={dex.name}
+            component={Link}
+            to={dex.path}
+            selected={dex === currentLink}
+          >
             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={dex.name} />
           </ListItem>
@@ -122,7 +128,7 @@ export default function ResponsiveDrawer(props: IProps) {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap>
-              {title}
+              {currentLink?.name}
             </Typography>
           </Toolbar>
         </AppBar>
