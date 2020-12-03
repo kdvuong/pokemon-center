@@ -10,7 +10,7 @@ export interface IRoute {
   // Preloader for lazy loading
   fallback: NonNullable<ReactNode> | null;
   // Lazy Loaded component
-  component?: LazyExoticComponent<ComponentType<any>>;
+  component?: ComponentType<any>;
   // Sub routes
   routes?: IRoute[];
   // Redirect path

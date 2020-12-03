@@ -1,5 +1,4 @@
 import React, { Fragment, FunctionComponent, useEffect, useState, useMemo } from "react";
-import { withDrawerContext } from "contexts/Drawer.context";
 import usePokemonApi from "hooks/PokemonApiHook";
 import useFilter from "hooks/FilterHook";
 import FilterBar from "components/common/components/FilterBar";
@@ -8,7 +7,6 @@ import { FilterProps, PokemonSummary } from "types";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";
 import PokemonGrid from "./components/PokemonGrid";
-import { POKEDEX_LINK } from "router/drawerNav";
 
 const PokemonListView: FunctionComponent = () => {
   const { getAllPokemonSummaries } = usePokemonApi();
@@ -65,4 +63,4 @@ const PokemonListView: FunctionComponent = () => {
   );
 };
 
-export default withDrawerContext(PokemonListView, { link: POKEDEX_LINK, toolbarVisible: true });
+export default PokemonListView;

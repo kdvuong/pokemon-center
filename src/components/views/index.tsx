@@ -1,11 +1,9 @@
 import { lazy } from "react";
-
-// list views
-const PokemonListView = lazy(() => import("../pokemon/list/PokemonListView"));
-const MoveListView = lazy(() => import("../move/list/MoveListView"));
-const AbilityListView = lazy(() => import("../ability/list/AbilityListView"));
-const TypeListView = lazy(() => import("../type/list/TypeListView"));
-const NatureListView = lazy(() => import("../nature/list/NatureListView"));
+import PokemonListView from "../pokemon/list/PokemonListViewWrapper";
+import MoveListView from "../move/list/MoveListViewWrapper";
+import AbilityListView from "../ability/list/AbilityListViewWrapper";
+import TypeListView from "../type/list/TypeListViewWrapper";
+import NatureListView from "../nature/list/NatureListViewWrapper";
 
 // detail views
 const PokemonDetailView = lazy(() => import("../pokemon/detail/PokemonDetailView"));

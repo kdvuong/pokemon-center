@@ -35,6 +35,11 @@ export function withDrawerContext(Component: FunctionComponent, options: WithDra
         hideToolbar();
       }
       setCurrentLink(link ?? null);
+
+      return () => {
+        hideToolbar();
+        setCurrentLink(null);
+      };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
