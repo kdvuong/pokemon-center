@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
 import { Generation } from "enums";
-import { Color, Filter, FilterHasShortendName } from "types";
+import { Color, FilterHasShortendName } from "types";
 
 function getGenerationName(generation: Generation): string {
   return $enum.mapValue(generation).with({
