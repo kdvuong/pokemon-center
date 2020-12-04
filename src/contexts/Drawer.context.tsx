@@ -24,8 +24,11 @@ interface WithDrawerContextProps {
   link?: ILink;
 }
 
-export function withDrawerContext(Component: FunctionComponent, options: WithDrawerContextProps) {
-  const DecoratedComponent = () => {
+export function withDrawerContext<P extends object = {}>(
+  Component: FunctionComponent<P>,
+  options: WithDrawerContextProps = {}
+) {
+  const DecoratedComponent = (props: P) => {
     const { showToolbar, hideToolbar, setCurrentLink } = useContext(drawerContext);
     const { link, toolbarVisible } = options;
     useEffect(() => {
@@ -43,7 +46,7 @@ export function withDrawerContext(Component: FunctionComponent, options: WithDra
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return <Component />;
+    return <Component {...props} />;
   };
 
   return DecoratedComponent;
