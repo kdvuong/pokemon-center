@@ -1,5 +1,5 @@
 import React, { createContext, FunctionComponent, useContext, useEffect } from "react";
-import { ILink, POKEDEX_LINK } from "router/drawerNav";
+import { ILink, POKEDEX_LINK } from "router/links";
 
 export interface DrawerContext {
   isToolbarVisible: boolean;

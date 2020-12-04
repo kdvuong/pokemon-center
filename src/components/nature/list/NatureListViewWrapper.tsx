@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { withDrawerContext } from "contexts/Drawer.context";
-import { NATUREDEX_LINK } from "router/drawerNav";
+import { NATUREDEX_LINK } from "router/links";
 
 export default withDrawerContext(
   lazy(() => import("./NatureListView")),

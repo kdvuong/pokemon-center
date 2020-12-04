@@ -16,7 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
 import { IRoute } from "../../router/config";
-import { DEX_LIST } from "../../router/drawerNav";
+import { DEX_LIST } from "../../router/links";
 import Router from "../../router/Router";
 import { Link } from "react-router-dom";
 import { drawerContext } from "../../contexts/Drawer.context";
