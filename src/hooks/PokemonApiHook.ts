@@ -6,6 +6,7 @@ import pokemonSummaries from "data/pokemonSummaries";
 
 interface IPokemonApi {
   getAllPokemonSummaries: () => PokemonSummary[];
+  getPokemonById: (id: number) => Promise<PokemonDocument>;
 }
 
 export default function usePokemonApi(): IPokemonApi {
@@ -25,7 +26,15 @@ export default function usePokemonApi(): IPokemonApi {
     return pokemonSummaries;
   }, []);
 
+  const getPokemonById = useCallback(
+    (id: number): Promise<PokemonDocument> => {
+      return pokemonDbApi.getById(id);
+    },
+    [pokemonDbApi]
+  );
+
   return {
     getAllPokemonSummaries,
+    getPokemonById,
   };
 }
