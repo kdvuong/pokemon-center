@@ -4,9 +4,9 @@ import MoveListView from "../move/list/MoveListViewWrapper";
 import AbilityListView from "../ability/list/AbilityListViewWrapper";
 import TypeListView from "../type/list/TypeListViewWrapper";
 import NatureListView from "../nature/list/NatureListViewWrapper";
+import PokemonDetailView from "../pokemon/detail/PokemonDetailViewWrapper";
 
 // detail views
-const PokemonDetailView = lazy(() => import("../pokemon/detail/PokemonDetailView"));
 const MoveDetailView = lazy(() => import("../move/detail/MoveDetailView"));
 const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailView"));
 const TypeDetailView = lazy(() => import("../type/detail/TypeDetailView"));
