@@ -6,8 +6,7 @@ const PokemonDetailViewWrapper = <P extends RouteComponentProps>(props: P) => {
   const PokemonDetailView = lazy(() => import("./PokemonDetailView"));
   let DecoratedPokemonDetailView = withDrawerContext(PokemonDetailView);
 
-  let params: any = props.match.params;
-  let id: number = params.id ? parseInt(params.id) : -1;
+  let id: number = parseInt((props.match.params as any).id);
 
   return <DecoratedPokemonDetailView id={id} />;
 };

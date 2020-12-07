@@ -1,13 +1,14 @@
 import DbService, { Document } from "./PokemonDbService";
 import { DbName } from "enums";
 
-interface AbilityDocument extends Document {
+export interface Ability {
+  id: number;
   name: string;
   description: string;
   effect: string;
   in_depth_effect: string;
 }
 
-export const abilityService = new DbService<AbilityDocument>(
-  DbName.POKEMON_ABILITIES
-);
+export interface AbilityDocument extends Document, Ability {}
+
+export const abilityService = new DbService<AbilityDocument>(DbName.POKEMON_ABILITIES);

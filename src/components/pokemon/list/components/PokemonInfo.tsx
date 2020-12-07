@@ -1,6 +1,6 @@
 import { Type } from "enums";
 import React, { FunctionComponent } from "react";
-import TypeIcon from "./TypeIcon";
+import TypeIcon from "../../../common/components/TypeIcon";
 import styled from "styled-components";
 
 const InfoContainer = styled.div`
@@ -20,6 +20,7 @@ const Id = styled.p`
     background: #ebeaeb;
     padding: 0 8px;
     border-radius: 10px;
+    font-family: "Titillium Web", sans-serif;
   }
 `;
 
@@ -36,7 +37,7 @@ const Name = styled.h5`
 const Icons = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0.25rem 0;
+  margin: 0.75rem 0;
 `;
 
 const IconContainer = styled.div`
@@ -63,7 +64,7 @@ const PokemonInfo: FunctionComponent<IProps> = ({ id, name, types }) => {
       <Icons>
         {types.map((type) => (
           <IconContainer key={`${id}-${type}`}>
-            <TypeIcon type={type} size={15} />
+            <TypeIcon type={type} size={14} />
           </IconContainer>
         ))}
       </Icons>

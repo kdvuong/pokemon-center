@@ -7,6 +7,7 @@ import pokemonSummaries from "data/pokemonSummaries";
 interface IPokemonApi {
   getAllPokemonSummaries: () => PokemonSummary[];
   getPokemonById: (id: number) => Promise<PokemonDocument>;
+  getPokemonSummaryById: (id: number) => PokemonSummary | null;
 }
 
 export default function usePokemonApi(): IPokemonApi {
@@ -33,8 +34,13 @@ export default function usePokemonApi(): IPokemonApi {
     [pokemonDbApi]
   );
 
+  const getPokemonSummaryById = useCallback((id: number): PokemonSummary | null => {
+    return pokemonSummaries.find((pokemon) => pokemon.id === id) ?? null;
+  }, []);
+
   return {
     getAllPokemonSummaries,
     getPokemonById,
+    getPokemonSummaryById,
   };
 }

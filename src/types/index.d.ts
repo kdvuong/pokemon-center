@@ -40,3 +40,10 @@ export interface PokemonSummary {
   generation: Generation;
   types: Type[];
 }
+
+export type StatName = "hp" | "attack" | "defense" | "special-attack" | "special-defense" | "speed";
+
+export interface Stat {
+  name: StatName;
+  value: number;
+}

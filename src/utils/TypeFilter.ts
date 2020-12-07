@@ -2,11 +2,11 @@ import { $enum } from "ts-enum-util";
 import { Type } from "enums";
 import { Color, Filter } from "types";
 
-function getTypeName(type: Type): string {
+export function getTypeName(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: "Normal",
     [Type.FIRE]: "Fire",
-    [Type.FIGHTING]: "Fighting",
+    [Type.FIGHTING]: "Fight",
     [Type.WATER]: "Water",
     [Type.FLYING]: "Flying",
     [Type.GRASS]: "Grass",
@@ -127,6 +127,52 @@ export function getTypeIconColor(type: Type): string {
     [Type.DARK]: "linear-gradient(180deg, #595761, #6e7587)",
     [Type.STEEL]: "linear-gradient(180deg, #52869d, #58a6aa)",
     [Type.FAIRY]: "linear-gradient(180deg, #ec8ce5, #f3a7e7)",
+  });
+}
+
+export function getTypePillColor(type: Type): string {
+  return $enum.mapValue(type).with({
+    [Type.NORMAL]: "#9A9DA1",
+    [Type.FIRE]: "#F8A54F",
+    [Type.FIGHTING]: "#D94256",
+    [Type.WATER]: "#559EDF",
+    [Type.FLYING]: "#9BB4E8",
+    [Type.GRASS]: "#5DBE62",
+    [Type.POISON]: "#B563CE",
+    [Type.ELECTRIC]: "#EDD53F",
+    [Type.GROUND]: "#D78555",
+    [Type.PSYCHIC]: "#F87C7A",
+    [Type.ROCK]: "#CEC18C",
+    [Type.ICE]: "#7ED4C9",
+    [Type.BUG]: "#9DC130",
+    [Type.DRAGON]: "#0773C7",
+    [Type.GHOST]: "#6970C5",
+    [Type.DARK]: "#5F606D",
+    [Type.STEEL]: "#5596A4",
+    [Type.FAIRY]: "#EF97E6",
+  });
+}
+
+export function getTypeIconBoxShadow(type: Type): string {
+  return $enum.mapValue(type).with({
+    [Type.NORMAL]: "rgba(93, 89, 106, 0.7)",
+    [Type.FIRE]: "rgba(254, 158, 84, 0.7)",
+    [Type.FIGHTING]: "rgba(212, 68, 93, 0.7)",
+    [Type.WATER]: "rgba(85, 159, 223, 0.7)",
+    [Type.FLYING]: "rgba(157, 181, 228, 0.7)",
+    [Type.GRASS]: "rgba(100, 185, 84, 0.7)",
+    [Type.POISON]: "rgba(163, 107, 203, 0.7)",
+    [Type.ELECTRIC]: "rgba(244, 213, 86, 0.7)",
+    [Type.GROUND]: "rgba(216, 130, 85, 0.7)",
+    [Type.PSYCHIC]: "rgba(248, 124, 122, 0.7)",
+    [Type.ROCK]: "rgba(203, 193, 148, 0.7)",
+    [Type.ICE]: "rgba(126, 212, 201, 0.7)",
+    [Type.BUG]: "rgba(152, 195, 47, 0.7)",
+    [Type.DRAGON]: "rgba(7, 109, 192  , 0.7)",
+    [Type.GHOST]: "rgba(101, 108, 198, 0.7)",
+    [Type.DARK]: "rgba(93, 89, 106, 0.7)",
+    [Type.STEEL]: "rgba(80, 148, 161, 0.7)",
+    [Type.FAIRY]: "rgba(242, 148, 233, 0.7)",
   });
 }
 
