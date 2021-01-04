@@ -1,6 +1,7 @@
 import { $enum } from "ts-enum-util";
 import { Type } from "enums";
 import { Color, Filter } from "types";
+import { TypeIcons as icons } from "assets/icons";
 
 export function getTypeName(type: Type): string {
   return $enum.mapValue(type).with({
@@ -107,6 +108,29 @@ function getTypeColor(type: Type): Color {
   });
 }
 
+export function getTypeIcon(type: Type): string {
+  return $enum.mapValue(type).with({
+    [Type.NORMAL]: icons.NormalIcon,
+    [Type.FIRE]: icons.FireIcon,
+    [Type.FIGHTING]: icons.FightingIcon,
+    [Type.WATER]: icons.WaterIcon,
+    [Type.FLYING]: icons.FlyingIcon,
+    [Type.GRASS]: icons.GrassIcon,
+    [Type.POISON]: icons.PoisonIcon,
+    [Type.ELECTRIC]: icons.ElectricIcon,
+    [Type.GROUND]: icons.GroundIcon,
+    [Type.PSYCHIC]: icons.PsychicIcon,
+    [Type.ROCK]: icons.RockIcon,
+    [Type.ICE]: icons.IceIcon,
+    [Type.BUG]: icons.BugIcon,
+    [Type.DRAGON]: icons.DragonIcon,
+    [Type.GHOST]: icons.GhostIcon,
+    [Type.DARK]: icons.DarkIcon,
+    [Type.STEEL]: icons.SteelIcon,
+    [Type.FAIRY]: icons.FairyIcon,
+  });
+}
+
 export function getTypeIconColor(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: "linear-gradient(180deg, #9298a4, #a3a49e)",
@@ -121,7 +145,7 @@ export function getTypeIconColor(type: Type): string {
     [Type.PSYCHIC]: "linear-gradient(180deg, #f66f71, #fe9f92)",
     [Type.ROCK]: "linear-gradient(180deg, #c5b489, #d7cd90)",
     [Type.ICE]: "linear-gradient(180deg, #70ccbd, #8cddd4)",
-    [Type.BUG]: "linear-gradient(180deg, #92bc2c, #afc836)  ",
+    [Type.BUG]: "linear-gradient(180deg, #92bc2c, #afc836)",
     [Type.DRAGON]: "linear-gradient(180deg, #0c69c8, #0180c7)",
     [Type.GHOST]: "linear-gradient(180deg, #516aac, #7773d4)",
     [Type.DARK]: "linear-gradient(180deg, #595761, #6e7587)",

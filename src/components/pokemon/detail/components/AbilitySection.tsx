@@ -2,15 +2,11 @@ import React, { FunctionComponent, useCallback } from "react";
 import Section from "./Section";
 import AbilityInfo from "./AbilityInfo";
 import styled from "styled-components";
-import { Ability } from "services/AbilityService";
+import { PokemonAbility } from "types";
 
 const AbilitiesContainer = styled.div`
   margin: 0 3rem;
 `;
-
-interface PokemonAbility extends Ability {
-  is_hidden: boolean;
-}
 
 interface IProps {
   abilities: PokemonAbility[];

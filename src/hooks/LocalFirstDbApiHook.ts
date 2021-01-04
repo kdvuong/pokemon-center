@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import DbService, { IPouchDB, Document } from "../services/PokemonDbService";
 
 interface ILocalFirstDbApi<T extends Document> {
@@ -20,40 +21,37 @@ async function doLocalFirst<T extends Document>(
   }
 }
 
-const useLocalFirstDbApi = <T extends Document>(
-  dbService: DbService<T>
-): ILocalFirstDbApi<T> => {
-  const replicateToLocal = async (fileCount?: number) => {
-    return dbService.replicate(fileCount);
-  };
+const useLocalFirstDbApi = <T extends Document>(service: DbService<T>): ILocalFirstDbApi<T> => {
+  const replicateToLocal = useCallback(
+    async (fileCount?: number) => {
+      return service.replicate(fileCount);
+    },
+    [service]
+  );
 
-  const getById = async (id: number) => {
-    if (dbService)
-      return await doLocalFirst(
-        (db: IPouchDB<T>) => dbService.getById(db, id),
-        dbService
-      );
-    throw new Error("database does not exist");
-  };
+  const getById = useCallback(
+    async (id: number) => {
+      if (service) return await doLocalFirst((db: IPouchDB<T>) => service.getById(db, id), service);
+      throw new Error("database does not exist");
+    },
+    [service]
+  );
 
-  const getManyByIds = async (ids: number[]) => {
-    if (dbService)
-      return await doLocalFirst(
-        (db: IPouchDB<T>) => dbService.getManyByIds(db, ids),
-        dbService
-      );
-    throw new Error("database does not exist");
-  };
+  const getManyByIds = useCallback(
+    async (ids: number[]) => {
+      if (service)
+        return await doLocalFirst((db: IPouchDB<T>) => service.getManyByIds(db, ids), service);
+      throw new Error("database does not exist");
+    },
+    [service]
+  );
 
-  const getAll = async (): Promise<any> => {
-    if (dbService) {
-      return await doLocalFirst(
-        (db: IPouchDB<T>) => dbService.getAll(db),
-        dbService
-      );
+  const getAll = useCallback(async (): Promise<any> => {
+    if (service) {
+      return await doLocalFirst((db: IPouchDB<T>) => service.getAll(db), service);
     }
     throw new Error("database does not exist");
-  };
+  }, [service]);
 
   return {
     replicateToLocal,

@@ -1,13 +1,11 @@
 import { useCallback } from "react";
 import useDbApi from "./LocalFirstDbApiHook";
-import {
-  moveService,
-  movesetService,
-  typeService,
-} from "services/PokemonDbService";
+import { typeService } from "services/PokemonDbService";
 import { pokemonService } from "services/PokemonService";
 import { evolutionService } from "services/EvolutionService";
 import { abilityService } from "services/AbilityService";
+import { moveService } from "services/MoveService";
+import { movesetService } from "services/MovesetService";
 
 interface ISyncPokemonData {
   sync: () => void;
@@ -24,29 +22,22 @@ export default function useSyncPokemonData(): ISyncPokemonData {
   const replicateToLocal = useCallback(async () => {
     let start = performance.now();
     let importantReplications = [
-      pokemonDbApi.replicateToLocal(3),
+      pokemonDbApi.replicateToLocal(4),
       typeDbApi.replicateToLocal(),
       abilityDbApi.replicateToLocal(),
-      evolutionDbApi.replicateToLocal(),
+      evolutionDbApi.replicateToLocal(2),
     ];
 
     await Promise.all(importantReplications);
     let lessImportantReplications = [
       moveDbApi.replicateToLocal(3),
-      movesetDbApi.replicateToLocal(3),
+      movesetDbApi.replicateToLocal(4),
     ];
 
     await Promise.all(lessImportantReplications);
 
     console.log(performance.now() - start);
-  }, [
-    abilityDbApi,
-    evolutionDbApi,
-    moveDbApi,
-    movesetDbApi,
-    pokemonDbApi,
-    typeDbApi,
-  ]);
+  }, [abilityDbApi, evolutionDbApi, moveDbApi, movesetDbApi, pokemonDbApi, typeDbApi]);
 
   // const populateMoves = useCallback(
   //   async (unpopulatedMoves: any[]): Promise<any> => {

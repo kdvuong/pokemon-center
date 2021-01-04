@@ -1,75 +1,51 @@
-import React, { useEffect, FunctionComponent, UIEvent } from "react";
+import React, { useEffect, FunctionComponent, UIEvent, useState } from "react";
 import Section from "./Section";
 import DescriptionSection from "./DescriptionSection";
 import AbilitySection from "./AbilitySection";
 import StatsSection from "./StatsSection";
 import InfoBox from "./InfoBox";
-import { Stat } from "types";
+import { Pokemon, PokemonAbility } from "types";
+import usePokemonApi from "hooks/PokemonApiHook";
+import useDeepCompareEffect from "use-deep-compare-effect";
+import styled from "styled-components";
 
 interface IProps {
-  id: number;
+  pokemon: Pokemon;
 }
 
-const data = {
-  height: 100,
-  weight: 100,
-  category: "Grass",
-  description:
-    "A very long description as a place holder. Hello world! This is bulbasaur, your frog...",
-  abilities: [
-    {
-      id: 1,
-      name: "speedy boi",
-      description: "Fast",
-      effect: "increase speed",
-      in_depth_effect: "become very fast",
-      is_hidden: false,
-    },
-  ],
-  stats: [
-    {
-      name: "hp",
-      value: 252,
-    },
-    {
-      name: "attack",
-      value: 252,
-    },
-    {
-      name: "defense",
-      value: 252,
-    },
-    {
-      name: "special-attack",
-      value: 252,
-    },
-    {
-      name: "special-defense",
-      value: 252,
-    },
-    {
-      name: "speed",
-      value: 252,
-    },
-  ],
-};
+const InfoTab: FunctionComponent<IProps> = ({ pokemon }) => {
+  const { getAbilitiesByIds } = usePokemonApi();
+  const [abilities, setAbilities] = useState<PokemonAbility[]>([]);
 
-const InfoTab: FunctionComponent<IProps> = ({ id }) => {
-  const { height, weight, category, description, abilities, stats } = data;
+  useDeepCompareEffect(() => {
+    const abilityIds = pokemon.abilities.map((ability) => ability.id);
+    getAbilitiesByIds(abilityIds).then((res) => {
+      const pokemonAbilities: PokemonAbility[] = pokemon.abilities.map((ability) => {
+        const match = res.find((a) => a.id === ability.id) ?? {
+          ...ability,
+          description: "",
+          effect: "",
+          in_depth_effect: "",
+        };
+        return { ...ability, ...match };
+      });
+      setAbilities(pokemonAbilities);
+    });
+  }, [pokemon]);
 
   return (
-    <div>
+    <div className="container">
       <InfoBox
-        height={height}
-        weight={weight}
-        category={category}
+        height={pokemon.height}
+        weight={pokemon.weight}
+        category={pokemon.category}
         growth={"fast"}
         gender={1}
         catchRate={50}
       />
-      <DescriptionSection description={description} />
+      <DescriptionSection description={pokemon.description} />
       <AbilitySection abilities={abilities} />
-      <StatsSection stats={stats as Stat[]} />
+      <StatsSection stats={pokemon.stats} />
     </div>
   );
 };

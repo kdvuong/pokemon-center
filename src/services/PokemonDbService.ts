@@ -117,7 +117,7 @@ class PokemonDbService<T extends Document> {
   }
 
   async getManyByIds(db: IPouchDB<T>, docIds: number[]): Promise<T[]> {
-    var res = await db.allDocs({
+    const res = await db.allDocs({
       include_docs: true,
       keys: docIds.map((id) => id.toString()),
     });
@@ -147,6 +147,4 @@ class PokemonDbService<T extends Document> {
 
 export default PokemonDbService;
 
-export const moveService = new PokemonDbService(DbName.POKEMON_MOVES);
-export const movesetService = new PokemonDbService(DbName.POKEMON_MOVESET);
 export const typeService = new PokemonDbService(DbName.POKEMON_TYPES);

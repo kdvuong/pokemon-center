@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FunctionComponent, useCallback } from "react";
 import maxBy from "lodash-es/maxBy";
 import { toMinStats, toMaxStats } from "utils/statCalculator";
-import { Stat } from "types";
+import { Stat, Stats } from "types";
 import styled from "styled-components";
 
 const Table = styled.table`
@@ -55,14 +55,16 @@ const StatBar = styled.div<{ ratio: number }>`
 `;
 
 interface IProps {
-  stats: Stat[];
+  stats: Stats;
   type: string;
 }
 
 const StatsTable: FunctionComponent<IProps> = (props) => {
   const { stats: baseStats, type } = props;
   const [stats, setStats] = useState(baseStats);
-  const [maxValue, setMaxValue] = useState((maxBy(baseStats, "value") ?? baseStats[0]).value);
+  const [maxValue, setMaxValue] = useState(
+    (maxBy(Object.values(stats), "value") ?? baseStats.hp).value
+  );
 
   useEffect(() => {
     setStats(baseStats);
@@ -73,12 +75,12 @@ const StatsTable: FunctionComponent<IProps> = (props) => {
     if (type === "base") {
       newStats = baseStats;
     } else if (type === "min") {
-      newStats = baseStats.map(toMinStats);
+      newStats = toMinStats(baseStats);
     } else if (type === "max") {
-      newStats = baseStats.map(toMaxStats);
+      newStats = toMaxStats(baseStats);
     }
     setStats(newStats);
-    setMaxValue((maxBy(newStats, "value") ?? newStats[0]).value);
+    setMaxValue((maxBy(Object.values(newStats), "value") ?? newStats.hp).value);
   }, [baseStats, type]);
 
   const formatName = (name: string) => {
@@ -91,9 +93,9 @@ const StatsTable: FunctionComponent<IProps> = (props) => {
         return "Attack";
       case "defense":
         return "Defense";
-      case "special-attack":
+      case "special_attack":
         return "Sp. Atk";
-      case "special-defense":
+      case "special_defense":
         return "Sp. Def";
       case "speed":
         return "Speed";
@@ -111,9 +113,9 @@ const StatsTable: FunctionComponent<IProps> = (props) => {
   return (
     <Table>
       <tbody>
-        {[...stats].map((stat, index) => (
-          <Row key={stat.name} index={index}>
-            <StatName>{formatName(stat.name)}</StatName>
+        {Object.entries(stats).map(([name, stat]: [string, Stat], index) => (
+          <Row key={name} index={index}>
+            <StatName>{formatName(name)}</StatName>
             <StatValue>{stat.value}</StatValue>
             <StatBarContainer>
               <StatBar ratio={scaleLength(stat.value)}>

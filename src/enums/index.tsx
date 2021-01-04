@@ -1,10 +1,10 @@
 export enum DbName {
   POKEMONS = "pokemons",
-  POKEMON_EVOLUTIONS = "pokemon-evolutions",
-  POKEMON_MOVES = "pokemon-moves",
-  POKEMON_MOVESET = "pokemon-moveset",
-  POKEMON_TYPES = "pokemon-types",
-  POKEMON_ABILITIES = "pokemon-abilities",
+  POKEMON_EVOLUTIONS = "evolutions",
+  POKEMON_MOVES = "moves",
+  POKEMON_MOVESET = "movesets",
+  POKEMON_TYPES = "types",
+  POKEMON_ABILITIES = "abilities",
 }
 
 export enum Type {
@@ -37,4 +37,16 @@ export enum Generation {
   GEN_6 = "generation-vi",
   GEN_7 = "generation-vii",
   GEN_8 = "generation-viii",
+}
+
+export enum LearnType {
+  LEVEL_UP = "level_up",
+  MACHINE = "machine",
+  TUTOR = "tutor",
+  EGG = "egg",
+}
+
+export enum SortDirection {
+  ASC = "asc",
+  DESC = "desc",
 }

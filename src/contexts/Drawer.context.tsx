@@ -31,6 +31,7 @@ export function withDrawerContext<P extends object = {}>(
   const DecoratedComponent = (props: P) => {
     const { showToolbar, hideToolbar, setCurrentLink } = useContext(drawerContext);
     const { link, toolbarVisible } = options;
+
     useEffect(() => {
       if (toolbarVisible) {
         showToolbar();

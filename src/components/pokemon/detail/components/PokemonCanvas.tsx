@@ -1,17 +1,25 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useCallback } from "react";
 import useCanvas from "hooks/CanvasHook";
+import { drawSprite } from "utils/SpriteDrawer";
 
 interface IProps {
-  draw: (canvas: HTMLCanvasElement | null) => void;
-  width: string;
-  height: string;
+  id: number;
 }
 
-const PokemonCanvas: FunctionComponent<IProps> = (props) => {
-  const { draw, ...rest } = props;
-  const canvasRef = useCanvas(draw);
+const PokemonCanvas: FunctionComponent<IProps> = ({ id }) => {
+  const drawPokemonSprite = useCallback(
+    (canvas: HTMLCanvasElement | null) => {
+      if (canvas === null) {
+        return;
+      }
+      drawSprite(id, canvas);
+    },
+    [id]
+  );
 
-  return <canvas ref={canvasRef} {...rest} />;
+  const canvasRef = useCanvas(drawPokemonSprite);
+
+  return <canvas ref={canvasRef} width="40" height="30" />;
 };
 
 export default PokemonCanvas;

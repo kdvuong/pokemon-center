@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { StyledToolbar } from "components/common/styled/index.d";
 import { FilterProps } from "types";
 import ResponsiveSelect from "./ResponsiveSelect";
+import { NavIcons } from "assets/icons";
 
 const StyledDiv = styled.div`
   display: flex;
@@ -31,11 +32,7 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
   return (
     <StyledToolbar>
       <IconContainer>
-        <img
-          src={require("assets/icons/svg/pokeball.svg")}
-          style={{ width: 20, height: 20 }}
-          alt="pokeball-icon"
-        />
+        <img src={NavIcons.Pokeball} style={{ width: 20, height: 20 }} alt="pokeball-icon" />
       </IconContainer>
       <StyledDiv>
         {filters.map((filter) => (

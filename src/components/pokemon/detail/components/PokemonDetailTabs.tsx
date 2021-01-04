@@ -1,11 +1,4 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  FunctionComponent,
-  SyntheticEvent,
-  useRef,
-} from "react";
+import React, { useState, useCallback, useEffect, FunctionComponent } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,7 +6,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import styled from "styled-components";
 import InfoTab from "./InfoTab";
-import throttle from "lodash-es/throttle";
+import MoveTab from "./MoveTab";
+import { Pokemon } from "types";
+import usePokemonApi from "hooks/PokemonApiHook";
 
 const PokemonDetailTabsContainer = styled.div`
   background-color: transparent;
@@ -69,9 +64,7 @@ const StyledSwipeableViews = styled(SwipeableViews)`
 
   .react-swipeable-view-container {
     height: 100%;
-
     .container {
-      height: 100%;
       padding-top: 15px;
     }
   }
@@ -79,38 +72,46 @@ const StyledSwipeableViews = styled(SwipeableViews)`
 
 const TabContentContainer = styled.div`
   height: 100%;
-  padding: 0;
 `;
 
 const tabs = [
   {
     name: "Info",
     iconName: "info",
-    content: (id: number) => <InfoTab id={id} />,
+    content: (pokemon: Pokemon) => <InfoTab pokemon={pokemon} />,
   },
   {
     name: "Moves",
     iconName: "movedex",
-    content: (id: number) => <div>moves {id}</div>,
+    content: (pokemon: Pokemon) => <MoveTab movesetId={pokemon.moveset_id} />,
   },
   {
     name: "Matchups",
     iconName: "matchups",
-    content: (id: number) => <div>matchups {id}</div>,
+    content: (pokemon: Pokemon) => <div>matchups {pokemon.name}</div>,
   },
 ];
 
 interface IProps {
   id: number;
-  onScroll: (direction: "up" | "down") => void;
 }
 
-const PokemonDetailTabs: FunctionComponent<IProps> = (props) => {
+const PokemonDetailTabs: FunctionComponent<IProps> = ({ id }) => {
   const theme = useTheme();
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
-  const { id, onScroll } = props;
-  const currentTabRef = useRef<HTMLDivElement>();
-  const prevScrollPositionRef = useRef<number>(0);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const { getPokemonById } = usePokemonApi();
+
+  useEffect(() => {
+    let isSubscribed = true;
+    getPokemonById(id).then((pokemon) => {
+      isSubscribed && setPokemon(pokemon);
+    });
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [getPokemonById, id]);
 
   useEffect(() => {
     setCurrentTabIndex(0);
@@ -123,47 +124,6 @@ const PokemonDetailTabs: FunctionComponent<IProps> = (props) => {
   const handleChangeIndex = useCallback((index) => {
     setCurrentTabIndex(index);
   }, []);
-
-  const handleScroll = useCallback(
-    throttle((event: SyntheticEvent) => {
-      const containerScrollY = event.currentTarget?.getBoundingClientRect().top;
-      const currentTabScrollY =
-        currentTabRef.current?.getBoundingClientRect().top ?? containerScrollY;
-      const offsetTop = containerScrollY - currentTabScrollY;
-      const prevScrollPos = prevScrollPositionRef.current;
-      console.log("parent scroll Y: " + containerScrollY);
-      console.log("tab scroll Y: " + currentTabScrollY);
-      console.log("offsetTop: " + offsetTop);
-      console.log("prevScrollPos: " + prevScrollPos);
-
-      if (offsetTop > prevScrollPos) {
-        console.log("scrolling down");
-        onScroll("down");
-      } else {
-        console.log("scrolling up");
-        onScroll("up");
-      }
-      prevScrollPositionRef.current = offsetTop <= 0 ? 0 : offsetTop;
-    }, 100),
-    [onScroll]
-  );
-
-  const handleScrollPersist = useCallback(
-    (event: SyntheticEvent) => {
-      event.persist();
-      handleScroll(event);
-    },
-    [handleScroll]
-  );
-
-  const onCurrentTabRef = useCallback(
-    (elem: HTMLDivElement | null, index: number) => {
-      if (elem && currentTabIndex === index) {
-        currentTabRef.current = elem;
-      }
-    },
-    [currentTabIndex]
-  );
 
   return (
     <PokemonDetailTabsContainer>
@@ -192,16 +152,11 @@ const PokemonDetailTabs: FunctionComponent<IProps> = (props) => {
           index={currentTabIndex}
           onChangeIndex={handleChangeIndex}
           enableMouseEvents
-          onScroll={handleScrollPersist}
         >
-          {tabs.map((tab, index) => (
-            <div
-              className="container"
-              key={`${tab.name}-content`}
-              ref={(element) => onCurrentTabRef(element, index)}
-            >
-              <TabContentContainer>{tab.content(id)}</TabContentContainer>
-            </div>
+          {tabs.map((tab) => (
+            <TabContentContainer key={`${tab.name}-content`}>
+              {pokemon ? tab.content(pokemon) : <div>Loading...</div>}
+            </TabContentContainer>
           ))}
         </StyledSwipeableViews>
       </StyledTabContent>

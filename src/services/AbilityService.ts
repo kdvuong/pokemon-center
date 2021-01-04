@@ -1,13 +1,6 @@
 import DbService, { Document } from "./PokemonDbService";
 import { DbName } from "enums";
-
-export interface Ability {
-  id: number;
-  name: string;
-  description: string;
-  effect: string;
-  in_depth_effect: string;
-}
+import { Ability } from "types";
 
 export interface AbilityDocument extends Document, Ability {}
 

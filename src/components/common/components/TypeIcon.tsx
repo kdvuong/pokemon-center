@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Type } from "enums";
 import styled from "styled-components";
-import { getTypeIconColor, getTypeIconBoxShadow } from "utils/TypeFilter";
+import { getTypeIconColor, getTypeIconBoxShadow, getTypeIcon } from "utils/TypeFilter";
 
 const Background = styled.div<{ type: Type; size: number; expanded: boolean }>`
   width: ${(props) => (props.expanded ? "auto" : `${props.size}px`)};
@@ -36,12 +36,7 @@ interface IProps {
 const TypeIcon: FunctionComponent<IProps> = ({ type, size, expanded = false }) => {
   return (
     <Background type={type} size={size * 2} expanded={expanded}>
-      <Image
-        src={require(`assets/icons/svg/${type}-icon.svg`)}
-        alt={`${type}-icon`}
-        size={size}
-        expanded={expanded}
-      />
+      <Image src={getTypeIcon(type)} alt={`${type}-icon`} size={size} expanded={expanded} />
       {expanded && <TypeName>{type}</TypeName>}
     </Background>
   );

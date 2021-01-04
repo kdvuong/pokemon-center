@@ -1,27 +1,7 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName, Generation, Type } from "enums";
+import { DbName } from "enums";
+import { Pokemon } from "types";
 
-export interface PokemonDocument extends Document {
-  id: number;
-  abilities: {
-    id: number;
-    name: string;
-    is_hidden: true;
-  };
-  category: string;
-  description: string;
-  evolution_chain_id: number;
-  gender_rate: number;
-  generation: Generation;
-  height: number;
-  moveset_id: number;
-  name: string;
-  stats: {
-    name: string;
-    value: number;
-  }[];
-  types: Type[];
-  weight: number;
-}
+export interface PokemonDocument extends Document, Pokemon {}
 
 export const pokemonService = new DbService<PokemonDocument>(DbName.POKEMONS);

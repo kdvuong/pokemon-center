@@ -16,7 +16,6 @@ interface IProps {
 
 const PokemonDetailView: FunctionComponent<IProps> = (props) => {
   const [id, setId] = useState<number>(props.id);
-  const [showFullBanner, setShowFullBanner] = useState<boolean>(true);
 
   const handleBackward = useCallback(() => {
     const newId = id === 1 ? 807 : id - 1;
@@ -30,23 +29,10 @@ const PokemonDetailView: FunctionComponent<IProps> = (props) => {
     setId(newId);
   }, [id]);
 
-  const handleScroll = useCallback((direction: "up" | "down") => {
-    if (direction === "up") {
-      setShowFullBanner(true);
-    } else {
-      setShowFullBanner(false);
-    }
-  }, []);
-
   return (
     <ViewContainer>
-      <ProfileBanner
-        id={id}
-        onBackwardClick={handleBackward}
-        onForwardClick={handleForward}
-        expand={showFullBanner}
-      />
-      <PokemonDetailTabs id={id} onScroll={handleScroll} />
+      <ProfileBanner id={id} onBackwardClick={handleBackward} onForwardClick={handleForward} />
+      <PokemonDetailTabs id={id} />
     </ViewContainer>
   );
 };

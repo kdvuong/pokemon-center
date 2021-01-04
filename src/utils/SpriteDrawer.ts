@@ -1,3 +1,5 @@
+import pokesprite from "assets/pokeSprites/pokesprite.png";
+
 const sprite = {
   width: 40,
   height: 30,
@@ -17,7 +19,7 @@ spritesheet.image.onload = () => {
   spritesheet.isLoading = false;
 };
 
-spritesheet.image.src = require("../assets/pokeSprites/pokesprite.png");
+spritesheet.image.src = pokesprite;
 
 export const drawSprite = (id: number, canvas: HTMLCanvasElement) => {
   if (spritesheet.isLoading) {

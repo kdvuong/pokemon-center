@@ -1,10 +1,18 @@
 import React, { useState, useEffect, FunctionComponent, ReactNode } from "react";
 import TabNav from "./TabNav";
+import styled from "styled-components";
 
 interface IProps {
   tabs: string[];
   children: (tab: string) => ReactNode;
 }
+
+const Container = styled.div`
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  flex-direction: column;
+`;
 
 const TabTable: FunctionComponent<IProps> = (props) => {
   const { tabs, children } = props;
@@ -15,10 +23,10 @@ const TabTable: FunctionComponent<IProps> = (props) => {
   };
 
   return (
-    <div>
+    <Container>
       <TabNav current={currentTab} tabs={tabs} onTabChange={handleTabChange} />
       {children(currentTab)}
-    </div>
+    </Container>
   );
 };
 
