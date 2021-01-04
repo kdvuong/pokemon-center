@@ -10,7 +10,6 @@ const StyledHeaderCell = styled.th`
 
 const StyledTable = styled.table`
   width: 100%;
-  height: 100%;
   thead tr:nth-child(1) th {
     background: #fafafa;
     position: sticky;

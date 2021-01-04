@@ -1,5 +1,4 @@
-import React, { useEffect, FunctionComponent, UIEvent, useState } from "react";
-import Section from "./Section";
+import React, { FunctionComponent, useState } from "react";
 import DescriptionSection from "./DescriptionSection";
 import AbilitySection from "./AbilitySection";
 import StatsSection from "./StatsSection";
@@ -7,7 +6,6 @@ import InfoBox from "./InfoBox";
 import { Pokemon, PokemonAbility } from "types";
 import usePokemonApi from "hooks/PokemonApiHook";
 import useDeepCompareEffect from "use-deep-compare-effect";
-import styled from "styled-components";
 
 interface IProps {
   pokemon: Pokemon;
