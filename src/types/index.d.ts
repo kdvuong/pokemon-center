@@ -1,4 +1,4 @@
-import { Generation, Type } from "enums";
+import { DamageClass, Generation, Type } from "enums";
 
 export interface IPouchDB {
   load: (path: string) => void;
@@ -10,7 +10,7 @@ export interface IPouchDB {
 //   currentItem: string;
 //   onChange: (newValue: string) => void;
 // }
-export type FilterType = Generation | Type;
+export type FilterType = Generation | Type | DamageClass;
 
 export interface FilterProps {
   filter: Filter<any>;
@@ -90,16 +90,17 @@ export interface PokemonAbility extends Ability {
 }
 
 export interface Move {
-  accuracy: number | null;
-  contest_type: string | null;
-  damage_class: string;
-  description: string;
-  effect: string;
   name: string;
-  power: number;
-  pp: number;
-  tm: string;
-  type: Type;
+  contest_type: string | null;
+  damage_class: string | null;
+  accuracy: number | null;
+  effect: string | null;
+  generation: string;
+  power: number | null;
+  pp: number | null;
+  priority: number;
+  type: string;
+  tm: number | null;
 }
 
 export interface MoveSummary {

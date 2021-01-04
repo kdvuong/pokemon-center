@@ -50,3 +50,9 @@ export enum SortDirection {
   ASC = "asc",
   DESC = "desc",
 }
+
+export enum DamageClass {
+  PHYSICAL = "physical",
+  SPECIAL = "special",
+  STATUS = "status",
+}
