@@ -15,6 +15,7 @@ interface IPokemonApi {
   getAbilitiesByIds: (ids: number[]) => Promise<Ability[]>;
   getMovesetById: (id: number) => Promise<Moveset>;
   getMovesByIds: (ids: number[]) => Promise<Move[]>;
+  getAllMoves: () => Promise<Move[]>;
 }
 
 export default function usePokemonApi(): IPokemonApi {
@@ -59,6 +60,10 @@ export default function usePokemonApi(): IPokemonApi {
     [moveDbApi]
   );
 
+  const getAllMoves = useDeepCallback(() => {
+    return moveDbApi.getAll();
+  }, [moveDbApi]);
+
   return {
     getAllPokemonSummaries,
     getPokemonById,
@@ -66,5 +71,6 @@ export default function usePokemonApi(): IPokemonApi {
     getAbilitiesByIds,
     getMovesetById,
     getMovesByIds,
+    getAllMoves,
   };
 }
