@@ -21,14 +21,18 @@ const FilterCount = styled.div`
   justify-content: flex-end;
   align-items: center;
   color: rgba(0, 0, 0, 0.3);
+  span {
+    text-transform: capitalize;
+  }
 `;
 
 interface IProps {
+  name: string;
   filters: FilterProps[];
   filteredCount: number;
 }
 
-const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
+const FilterBar: FunctionComponent<IProps> = ({ name, filters, filteredCount }) => {
   return (
     <StyledToolbar>
       <IconContainer>
@@ -39,7 +43,7 @@ const FilterBar: FunctionComponent<IProps> = ({ filters, filteredCount }) => {
           <ResponsiveSelect {...filter} key={filter.filter.getName()} />
         ))}
         <FilterCount>
-          <span>{filteredCount} Pokemons</span>
+          <span>{`${filteredCount} ${name}`}</span>
         </FilterCount>
       </StyledDiv>
     </StyledToolbar>

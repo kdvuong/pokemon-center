@@ -15,6 +15,7 @@ const PokemonListView: FunctionComponent = () => {
   const { filter: currentGenFilter, onChange: onGenerationChange } = useFilter<Generation>(
     GenerationFilter
   );
+
   const [pokemons, setPokemons] = useState<PokemonSummary[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<PokemonSummary[]>([]);
 
@@ -55,6 +56,7 @@ const PokemonListView: FunctionComponent = () => {
   return (
     <Fragment>
       <FilterBar
+        name="pokemons"
         filters={[typeFilterProps, generationFilterProps]}
         filteredCount={filteredPokemons.length}
       />
