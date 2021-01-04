@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useEffect, useState } from "react";
-import TabTable from "./TabTable";
-import { getAllLearnTypes } from "utils/LearnTypeFilter";
+import TabView from "./TabView";
+import { getAllLearnTypeNames, getLearnTypeFromName } from "utils/LearnTypeFilter";
 import { LearnType } from "enums";
 import usePokemonApi from "hooks/PokemonApiHook";
 import { Moveset, PokemonMoveset } from "types";
@@ -17,11 +17,12 @@ interface IProps {
 const TableContainer = styled.div`
   height: 100%;
   overflow: hidden;
+  padding: 15px;
 `;
 
 const TableScroll = styled.div`
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const MoveTab: FunctionComponent<IProps> = ({ movesetId }) => {
@@ -54,7 +55,8 @@ const MoveTab: FunctionComponent<IProps> = ({ movesetId }) => {
   }, [moveset]);
 
   const getTable = useCallback(
-    (learnType: LearnType) => {
+    (tab: string) => {
+      const learnType = getLearnTypeFromName(tab);
       const table = $enum.mapValue(learnType).with({
         [LearnType.LEVEL_UP]: <LevelUpMoveTable moves={moveset[LearnType.LEVEL_UP]} />,
         [LearnType.EGG]: <MoveTable moves={moveset[LearnType.EGG]} />,
@@ -70,7 +72,7 @@ const MoveTab: FunctionComponent<IProps> = ({ movesetId }) => {
     [moveset]
   );
 
-  return <TabTable tabs={getAllLearnTypes()}>{(tab) => getTable(tab as LearnType)}</TabTable>;
+  return <TabView tabs={getAllLearnTypeNames()}>{(tab) => getTable(tab)}</TabView>;
 };
 
 export default MoveTab;

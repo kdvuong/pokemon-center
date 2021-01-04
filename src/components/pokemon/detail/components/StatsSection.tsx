@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Section from "./Section";
 import StatsTable from "./StatsTable";
-import TabTable from "./TabTable";
+import TabView from "./TabView";
 import styled from "styled-components";
 import { Stats } from "types";
 
@@ -17,13 +17,13 @@ const StatsSection: FunctionComponent<IProps> = ({ stats }) => {
   return (
     <Section title="Stats">
       {stats && (
-        <TabTable tabs={["base", "min", "max"]}>
+        <TabView tabs={["base", "min", "max"]}>
           {(tab) => (
             <StatsTableWrapper>
               <StatsTable type={tab} stats={stats} />
             </StatsTableWrapper>
           )}
-        </TabTable>
+        </TabView>
       )}
     </Section>
   );
