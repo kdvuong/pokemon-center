@@ -11,6 +11,7 @@ const columns: ColumnModel[] = [
   {
     name: "Level",
     fieldName: "level_learned_at",
+    sortable: true,
   },
   ...baseMoveColumns,
 ];

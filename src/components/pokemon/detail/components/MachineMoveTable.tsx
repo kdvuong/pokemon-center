@@ -11,6 +11,7 @@ const columns: ColumnModel[] = [
   {
     name: "TM",
     fieldName: "tm",
+    sortable: true,
   },
   ...baseMoveColumns,
 ];

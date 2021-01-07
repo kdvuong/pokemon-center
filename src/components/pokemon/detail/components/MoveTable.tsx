@@ -10,18 +10,22 @@ export const baseMoveColumns: ColumnModel[] = [
   {
     name: "Move",
     fieldName: "name",
+    sortable: true,
   },
   {
     name: "Power",
     fieldName: "power",
+    sortable: true,
   },
   {
     name: "Acc.",
     fieldName: "accuracy",
+    sortable: true,
   },
   {
     name: "PP",
     fieldName: "pp",
+    sortable: true,
   },
 ];
 
