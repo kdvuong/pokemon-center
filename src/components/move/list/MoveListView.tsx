@@ -1,8 +1,9 @@
 import FilterBar from "components/common/components/FilterBar";
+import SearchBar from "components/common/components/SearchBar";
 import { DamageClass, Generation, Type } from "enums";
 import useFilter from "hooks/FilterHook";
 import usePokemonApi from "hooks/PokemonApiHook";
-import React, { Fragment, useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
 import { FilterProps, Move } from "types";
 import { DamageClassFilter } from "utils/DamageClassFilter";
 import { GenerationFilter } from "utils/GenerationFilter";
@@ -25,7 +26,6 @@ const MoveListView = () => {
 
   useEffect(() => {
     getAllMoves().then((moves) => {
-      console.log(moves);
       setMoves(moves);
     });
   }, [getAllMoves]);
@@ -35,11 +35,16 @@ const MoveListView = () => {
       let searchValueMatched = searchValue ? move.name.startsWith(searchValue) : true;
       let genFilterMatched = currentGenFilter ? move.generation === currentGenFilter : true;
       let typeFilterMatched = currentTypeFilter ? move.type === currentTypeFilter : true;
+      let damageClassFilterMatched = currentDamageClassFilter
+        ? move.damage_class === currentDamageClassFilter
+        : true;
 
-      return searchValueMatched && genFilterMatched && typeFilterMatched;
+      return (
+        searchValueMatched && genFilterMatched && typeFilterMatched && damageClassFilterMatched
+      );
     });
     setFilteredMoves(filtered);
-  }, [currentGenFilter, currentTypeFilter, moves, searchValue]);
+  }, [currentDamageClassFilter, currentGenFilter, currentTypeFilter, moves, searchValue]);
 
   const generationFilterProps: FilterProps = useMemo(
     (): FilterProps => ({
@@ -68,13 +73,24 @@ const MoveListView = () => {
     [currentDamageClassFilter, onDamageClassChange]
   );
 
+  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.currentTarget.value);
+  };
+
   return (
     <Fragment>
-      <FilterBar
+      <SearchBar
         name="moves"
-        filters={[typeFilterProps, generationFilterProps, damageClassFilterProps]}
-        filteredCount={filteredMoves.length}
+        count={filteredMoves.length}
+        placeholder={"Search by name or effect"}
+        onChange={handleSearchInputChange}
       />
+      <FilterBar filters={[typeFilterProps, generationFilterProps, damageClassFilterProps]} />
+      <div style={{ height: "100%", overflowY: "scroll" }}>
+        {filteredMoves.map((move) => {
+          return <div>{move.name}</div>;
+        })}
+      </div>
     </Fragment>
   );
 };
