@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/nature/list/NatureListView.tsx"],"names":["NatureListView"],"mappings":"wIAKeA,UAHQ,WACrB,OAAO","file":"static/js/14.261b6012.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst NatureListView = () => {\r\n  return <div>Naturedex</div>;\r\n};\r\nexport default NatureListView;\r\n"],"sourceRoot":""}

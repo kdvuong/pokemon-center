@@ -1,0 +1,2 @@
+(this["webpackJsonppokedex-ts"]=this["webpackJsonppokedex-ts"]||[]).push([[15],{401:function(e,t,s){"use strict";s.r(t);var n=s(2);s(0);t.default=function(){return Object(n.jsx)("div",{children:"Type"})}}}]);
+//# sourceMappingURL=15.a88b23ae.chunk.js.map

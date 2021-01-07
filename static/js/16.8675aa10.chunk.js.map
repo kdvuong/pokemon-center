@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/type/list/TypeListView.tsx"],"names":["TypeListView"],"mappings":"wIAMeA,UAJM,WACnB,OAAO","file":"static/js/16.8675aa10.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst TypeListView = () => {\r\n  return <div>Typedex</div>;\r\n};\r\n\r\nexport default TypeListView;\r\n"],"sourceRoot":""}

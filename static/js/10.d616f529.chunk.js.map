@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/ability/detail/AbilityDetailView.tsx"],"names":["AbilityDetailView"],"mappings":"wIAMeA,UAJW,WACxB,OAAO","file":"static/js/10.d616f529.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst AbilityDetailView = () => {\r\n  return <div>Ability</div>;\r\n};\r\n\r\nexport default AbilityDetailView;\r\n"],"sourceRoot":""}

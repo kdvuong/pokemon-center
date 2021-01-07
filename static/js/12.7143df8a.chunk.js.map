@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/move/detail/MoveDetailView.tsx"],"names":["MoveDetailView"],"mappings":"wIAMeA,UAJQ,WACrB,OAAO","file":"static/js/12.7143df8a.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst MoveDetailView = () => {\r\n  return <div>Move</div>;\r\n};\r\n\r\nexport default MoveDetailView;\r\n"],"sourceRoot":""}

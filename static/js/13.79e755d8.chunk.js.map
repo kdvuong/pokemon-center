@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/nature/detail/NatureDetailView.tsx"],"names":["NatureDetailView"],"mappings":"wIAMeA,UAJU,WACvB,OAAO","file":"static/js/13.79e755d8.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst NatureDetailView = () => {\r\n  return <div>Nature</div>;\r\n};\r\n\r\nexport default NatureDetailView;\r\n"],"sourceRoot":""}

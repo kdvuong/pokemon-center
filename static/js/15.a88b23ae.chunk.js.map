@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/type/detail/TypeDetailView.tsx"],"names":["TypeDetailView"],"mappings":"wIAMeA,UAJQ,WACrB,OAAO","file":"static/js/15.a88b23ae.chunk.js","sourcesContent":["import React from \"react\";\r\n\r\nconst TypeDetailView = () => {\r\n  return <div>Type</div>;\r\n};\r\n\r\nexport default TypeDetailView;\r\n"],"sourceRoot":""}
