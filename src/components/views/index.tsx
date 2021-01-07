@@ -12,7 +12,7 @@ const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailView
 const TypeDetailView = lazy(() => import("../type/detail/TypeDetailView"));
 const NatureDetailView = lazy(() => import("../nature/detail/NatureDetailView"));
 
-export default {
+export const views = {
   PokemonListView,
   MoveListView,
   AbilityListView,

@@ -11,21 +11,6 @@ interface IProps {
   types: PokemonType[];
 }
 
-const Card = styled.div`
-  padding: 16px;
-  /* box-shadow: 0px 0px 10px #e1e7ec; */
-  border-radius: 5px;
-  border: 1px solid #e1e7ec;
-  background: white;
-`;
-
-const Header = styled.h2`
-  font-size: 16px;
-  font-family: "Nunito Sans";
-  font-weight: bold;
-  text-align: center;
-`;
-
 const TypePillContainers = styled.div`
   display: flex;
   flex-wrap: wrap;

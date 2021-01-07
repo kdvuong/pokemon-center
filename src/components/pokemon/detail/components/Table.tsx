@@ -74,8 +74,6 @@ const Table: FunctionComponent<IProps> = (props) => {
     ));
   }, [columns, toggleSort]);
 
-  const Row = useMemo(() => {}, []);
-
   return (
     <StyledTable>
       <thead>

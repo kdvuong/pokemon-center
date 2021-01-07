@@ -18,7 +18,7 @@ const TYPE_DETAIL = "/types/:id";
 const NATURE_LIST = "/natures";
 const NATURE_DETAIL = "/natures/:id";
 
-export default {
+export const paths = {
   POKEMON_LIST,
   POKEMON_DETAIL,
   MOVE_LIST,

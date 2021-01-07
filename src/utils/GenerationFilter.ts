@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
 import { Generation } from "enums";
-import { Color, FilterHasShortendName } from "types";
+import { FilterHasShortendName } from "types";
 
 function getGenerationName(generation: Generation): string {
   return $enum.mapValue(generation).with({
@@ -26,13 +26,6 @@ function getGenerationShortenedName(generation: Generation): string {
     [Generation.GEN_7]: "Gen VII",
     [Generation.GEN_8]: "Gen VIII",
   });
-}
-
-function getGenerationColor(): Color {
-  return {
-    text: "#6e7a8a",
-    background: "#ccd4db",
-  };
 }
 
 const generationNameMap: Map<string, Generation> = new Map<string, Generation>();

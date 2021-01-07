@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useCallback, useEffect, useState } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import styled from "styled-components";
 import ProfileBanner from "./components/ProfileBanner";
 import PokemonDetailTabs from "./components/PokemonDetailTabs";

@@ -1,4 +1,4 @@
-import { Stat, StatName, Stats } from "types";
+import { StatName, Stats } from "types";
 
 interface StatVariables {
   level: number;

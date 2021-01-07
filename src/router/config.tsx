@@ -1,6 +1,6 @@
-import React, { ReactNode, LazyExoticComponent, ComponentType } from "react";
-import views from "../components/views";
-import paths from "./paths";
+import React, { ReactNode, ComponentType } from "react";
+import { views } from "../components/views";
+import { paths } from "./paths";
 
 export interface IRoute {
   // Path, like in basic prop

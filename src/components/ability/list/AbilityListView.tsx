@@ -1,4 +1,3 @@
-import { withDrawerContext } from "contexts/Drawer.context";
 import React from "react";
 
 const AbilityListView = () => {
