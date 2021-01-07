@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     appBar: {
+      background: "#dd2020",
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -63,6 +64,9 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
+    },
+    appBarTitle: {
+      fontFamily: "Nunito Sans",
     },
   })
 );
@@ -127,7 +131,7 @@ export default function ResponsiveDrawer(props: IProps) {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography className={classes.appBarTitle} variant="h6" noWrap>
               {currentLink?.name}
             </Typography>
           </Toolbar>
