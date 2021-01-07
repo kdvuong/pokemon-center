@@ -6,14 +6,13 @@ import "./icons.css";
 import App from "./App";
 import { routes } from "./router/config";
 import * as serviceWorker from "./serviceWorker";
-import { Router } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router history={createBrowserHistory()}>
+    <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
       <App routes={routes} />
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -2,7 +2,6 @@ import PouchDB from "pouchdb";
 import orderBy from "lodash-es/orderBy";
 import PouchLoad from "pouchdb-load";
 import { auth } from "../constants/cloudant.config";
-import { DbName } from "enums";
 
 PouchDB.plugin(PouchLoad);
 PouchDB.plugin(require("pouchdb-upsert"));
