@@ -41,6 +41,11 @@ export interface PokemonSummary {
   types: Type[];
 }
 
+export interface PokemonType {
+  id: number;
+  slot: number;
+}
+
 export interface Pokemon {
   id: number;
   abilities: {
@@ -57,7 +62,7 @@ export interface Pokemon {
   moveset_id: number;
   name: string;
   stats: Stats;
-  types: Type[];
+  types: PokemonType[];
   weight: number;
 }
 
@@ -82,7 +87,7 @@ export interface Ability {
   name: string;
   description: string;
   effect: string;
-  in_depth_effect: string;
+  short_effect: string;
 }
 
 export interface PokemonAbility extends Ability {
@@ -140,5 +145,28 @@ export type DataObject = { [key: string]: any };
 export interface ColumnModel {
   name: string;
   fieldName: string;
+  sortable?: boolean;
   sortFunction?: (data: DataObject) => number | string;
+}
+
+export interface TypeData {
+  id: number;
+  name: string;
+  damage_relations: DamageRelations;
+  pokemons: RelatedPokemon[];
+  moves: number[];
+}
+
+export interface RelatedPokemon {
+  id: number;
+  slot: number;
+}
+
+export interface DamageRelations {
+  double_damage_from: string[];
+  double_damage_to: string[];
+  half_damage_from: string[];
+  half_damage_to: string[];
+  no_damage_from: string[];
+  no_damage_to: string[];
 }

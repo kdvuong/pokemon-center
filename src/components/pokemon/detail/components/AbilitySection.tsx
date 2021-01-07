@@ -25,7 +25,7 @@ const AbilitySection: FunctionComponent<IProps> = ({ abilities }) => {
         let abilityInfo = (
           <AbilityInfo
             name={getAbilityName(ability)}
-            effect={ability.effect}
+            effect={ability.short_effect}
             id={ability.id}
             key={ability.name}
           />
