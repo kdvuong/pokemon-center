@@ -15,24 +15,11 @@ const IconContainer = styled.div`
   margin-right: 16px;
 `;
 
-const FilterCount = styled.div`
-  display: flex;
-  flex-grow: 10;
-  justify-content: flex-end;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.3);
-  span {
-    text-transform: capitalize;
-  }
-`;
-
 interface IProps {
-  name: string;
   filters: FilterProps[];
-  filteredCount: number;
 }
 
-const FilterBar: FunctionComponent<IProps> = ({ name, filters, filteredCount }) => {
+const FilterBar: FunctionComponent<IProps> = ({ filters }) => {
   return (
     <StyledToolbar>
       <IconContainer>
@@ -42,9 +29,6 @@ const FilterBar: FunctionComponent<IProps> = ({ name, filters, filteredCount }) 
         {filters.map((filter) => (
           <ResponsiveSelect {...filter} key={filter.filter.getName()} />
         ))}
-        <FilterCount>
-          <span>{`${filteredCount} ${name}`}</span>
-        </FilterCount>
       </StyledDiv>
     </StyledToolbar>
   );
