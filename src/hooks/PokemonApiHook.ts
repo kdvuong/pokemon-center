@@ -1,12 +1,13 @@
 import { useCallback } from "react";
 import useDbApi from "./LocalFirstDbApiHook";
 import { pokemonService } from "services/PokemonService";
-import { Ability, Move, Moveset, Pokemon, PokemonSummary } from "types";
+import { Ability, Move, Moveset, Pokemon, PokemonSummary, TypeData } from "types";
 import pokemonSummaries from "data/pokemonSummaries";
 import { abilityService } from "services/AbilityService";
 import { moveService } from "services/MoveService";
 import { movesetService } from "services/MovesetService";
 import { useDeepCallback } from "utils/useDeepCallback";
+import { typeService } from "services/TypeService";
 
 interface IPokemonApi {
   getAllPokemonSummaries: () => PokemonSummary[];
@@ -16,6 +17,7 @@ interface IPokemonApi {
   getMovesetById: (id: number) => Promise<Moveset>;
   getMovesByIds: (ids: number[]) => Promise<Move[]>;
   getAllMoves: () => Promise<Move[]>;
+  getTypesByIds: (ids: number[]) => Promise<TypeData[]>;
 }
 
 export default function usePokemonApi(): IPokemonApi {
@@ -23,6 +25,7 @@ export default function usePokemonApi(): IPokemonApi {
   const abilityDbApi = useDbApi(abilityService);
   const moveDbApi = useDbApi(moveService);
   const movesetDbApi = useDbApi(movesetService);
+  const typesDbApi = useDbApi(typeService);
 
   const getAllPokemonSummaries = useCallback((): PokemonSummary[] => {
     return pokemonSummaries;
@@ -64,6 +67,13 @@ export default function usePokemonApi(): IPokemonApi {
     return moveDbApi.getAll();
   }, [moveDbApi]);
 
+  const getTypesByIds = useDeepCallback(
+    (ids: number[]) => {
+      return typesDbApi.getManyByIds(ids);
+    },
+    [typesDbApi]
+  );
+
   return {
     getAllPokemonSummaries,
     getPokemonById,
@@ -72,5 +82,6 @@ export default function usePokemonApi(): IPokemonApi {
     getMovesetById,
     getMovesByIds,
     getAllMoves,
+    getTypesByIds,
   };
 }
