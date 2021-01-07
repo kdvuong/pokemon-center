@@ -32,7 +32,7 @@ const Grid: FunctionComponent<IProps> = ({ items, itemsPerRow, GridItem }) => {
             columnWidth={getColumnWidth(width)}
             height={height}
             rowCount={Math.ceil(items.length / itemsPerRow)}
-            rowHeight={120}
+            rowHeight={136}
             width={width}
             itemData={{ items, itemsPerRow }}
             style={{ overflowX: "hidden", overflowY: "auto" }}
