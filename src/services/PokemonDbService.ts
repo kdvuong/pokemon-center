@@ -146,5 +146,3 @@ class PokemonDbService<T extends Document> {
 }
 
 export default PokemonDbService;
-
-export const typeService = new PokemonDbService(DbName.POKEMON_TYPES);

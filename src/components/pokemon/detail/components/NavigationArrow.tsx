@@ -21,7 +21,7 @@ const ArrowForwardIcon = styled(ArrowForwardIosRoundedIcon)`
 
 const ArrowButton = styled.div`
   transform: scaleY(1.2);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(0, 255, 255, 0.5);
   transition: 200ms ease;
   cursor: pointer;
 

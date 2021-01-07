@@ -30,7 +30,7 @@ const ProfileBannerFooter = styled.div`
   display: flex;
   align-items: center;
   height: 3rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 255, 255, 0.5);
 `;
 
 const IdContainer = styled.div`
@@ -92,7 +92,7 @@ const ProfileBannerBodyFull: FunctionComponent<IProps> = ({
           <TypesContainer>
             {pokemon?.types.map((type) => (
               <TypeIconContainer key={`${type}-icon-container`}>
-                <TypeIcon type={type} size={14} key={type} />
+                <TypeIcon type={type} size={14} key={type} expanded={true} />
               </TypeIconContainer>
             ))}
           </TypesContainer>

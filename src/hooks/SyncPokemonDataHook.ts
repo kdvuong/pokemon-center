@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import useDbApi from "./LocalFirstDbApiHook";
-import { typeService } from "services/PokemonDbService";
+import { typeService } from "services/TypeService";
 import { pokemonService } from "services/PokemonService";
 import { evolutionService } from "services/EvolutionService";
 import { abilityService } from "services/AbilityService";

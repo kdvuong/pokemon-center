@@ -9,6 +9,7 @@ import InfoTab from "./InfoTab";
 import MoveTab from "./MoveTab";
 import { Pokemon } from "types";
 import usePokemonApi from "hooks/PokemonApiHook";
+import MatchupTab from "./MatchupTab";
 
 const PokemonDetailTabsContainer = styled.div`
   background-color: transparent;
@@ -88,7 +89,7 @@ const tabs = [
   {
     name: "Matchups",
     iconName: "matchups",
-    content: (pokemon: Pokemon) => <div>matchups {pokemon.name}</div>,
+    content: (pokemon: Pokemon) => <MatchupTab types={pokemon.types} />,
   },
 ];
 

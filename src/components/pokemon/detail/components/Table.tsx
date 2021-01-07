@@ -65,7 +65,10 @@ const Table: FunctionComponent<IProps> = (props) => {
 
   const Header = useMemo(() => {
     return columns.map((column) => (
-      <StyledHeaderCell key={column.name} onClick={() => toggleSort(column.fieldName)}>
+      <StyledHeaderCell
+        key={column.name}
+        onClick={column.sortable ? () => toggleSort(column.fieldName) : undefined}
+      >
         {column.name}
       </StyledHeaderCell>
     ));
@@ -81,9 +84,9 @@ const Table: FunctionComponent<IProps> = (props) => {
       <tbody>
         {sortedData.length > 0 &&
           sortedData.map((datum, index) => (
-            <tr>
+            <tr key={datum.toString() + index}>
               {columns.map((column) => {
-                return <td>{datum[column.fieldName]}</td>;
+                return <td key={column.fieldName}>{datum[column.fieldName]}</td>;
               })}
             </tr>
           ))}

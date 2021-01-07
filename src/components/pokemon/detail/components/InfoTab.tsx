@@ -23,7 +23,7 @@ const InfoTab: FunctionComponent<IProps> = ({ pokemon }) => {
           ...ability,
           description: "",
           effect: "",
-          in_depth_effect: "",
+          short_effect: "",
         };
         return { ...ability, ...match };
       });

@@ -23,7 +23,7 @@ const StyledButton = styled(ButtonBase)`
   border: 4px solid transparent;
   width: 100%;
   flex-direction: row;
-  margin: 16px 0;
+  margin-top: 16px;
   justify-content: flex-start;
   border-radius: 7px;
   &:hover {

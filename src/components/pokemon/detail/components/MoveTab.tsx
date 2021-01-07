@@ -50,10 +50,6 @@ const MoveTab: FunctionComponent<IProps> = ({ movesetId }) => {
     });
   }, [getMovesByIds, getMovesetById, movesetId]);
 
-  useEffect(() => {
-    console.log(moveset);
-  }, [moveset]);
-
   const getTable = useCallback(
     (tab: string) => {
       const learnType = getLearnTypeFromName(tab);
