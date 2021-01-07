@@ -33,6 +33,9 @@ const InfoBox: FunctionComponent<IProps> = ({
   category,
   catchRate,
 }) => {
+  const formatCategory = (category: string) => {
+    return category.replace(" Pokémon", "");
+  };
   return (
     <StyledInfoBox>
       <InfoItemsWrapper className="row no-gutters">
@@ -40,7 +43,11 @@ const InfoBox: FunctionComponent<IProps> = ({
         <InfoItem label="Weight" iconName="icon-weight" description={`${weight / 10} kg`} />
         <InfoItem label="Growth" iconName="icon-weight" description={`Medium Slow`} />
         <InfoItem label="Gender" iconName="icon-gender" description={`50% M / 50% F`} />
-        <InfoItem label="Category" iconName="icon-weight" description={`${category}`} />
+        <InfoItem
+          label="Category"
+          iconName="icon-weight"
+          description={`${formatCategory(category)}`}
+        />
         <InfoItem label="Catch Rate" iconName="icon-catch" description={`50%`} />
       </InfoItemsWrapper>
     </StyledInfoBox>
