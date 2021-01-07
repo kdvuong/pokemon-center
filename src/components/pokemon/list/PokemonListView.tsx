@@ -1,4 +1,11 @@
-import React, { Fragment, FunctionComponent, useEffect, useState, useMemo } from "react";
+import React, {
+  Fragment,
+  FunctionComponent,
+  useEffect,
+  useState,
+  useMemo,
+  ChangeEvent,
+} from "react";
 import usePokemonApi from "hooks/PokemonApiHook";
 import useFilter from "hooks/FilterHook";
 import FilterBar from "components/common/components/FilterBar";
@@ -7,6 +14,10 @@ import { FilterProps, PokemonSummary } from "types";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";
 import PokemonGrid from "./components/PokemonGrid";
+import SearchBar from "components/common/components/SearchBar";
+import Worker from "worker";
+
+const worker = new Worker();
 
 const PokemonListView: FunctionComponent = () => {
   const { getAllPokemonSummaries } = usePokemonApi();
@@ -25,14 +36,13 @@ const PokemonListView: FunctionComponent = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = pokemons.filter((pokemon) => {
-      let searchValueMatched = searchValue ? pokemon.name.startsWith(searchValue) : true;
-      let genFilterMatched = currentGenFilter ? pokemon.generation === currentGenFilter : true;
-      let typeFilterMatched = currentTypeFilter ? pokemon.types.includes(currentTypeFilter) : true;
-
-      return searchValueMatched && genFilterMatched && typeFilterMatched;
-    });
-    setFilteredPokemons(filtered);
+    let isCurrent = true;
+    worker
+      .filter(pokemons, searchValue, currentGenFilter, currentTypeFilter)
+      .then((filtered) => isCurrent && setFilteredPokemons(filtered));
+    return () => {
+      isCurrent = false;
+    };
   }, [currentGenFilter, currentTypeFilter, pokemons, searchValue]);
 
   const generationFilterProps: FilterProps = useMemo(
@@ -53,13 +63,19 @@ const PokemonListView: FunctionComponent = () => {
     [currentTypeFilter, onTypeChange]
   );
 
+  const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.currentTarget.value);
+  };
+
   return (
     <Fragment>
-      <FilterBar
+      <SearchBar
         name="pokemons"
-        filters={[typeFilterProps, generationFilterProps]}
-        filteredCount={filteredPokemons.length}
+        count={filteredPokemons.length}
+        placeholder={"Search by name"}
+        onChange={handleSearchInputChange}
       />
+      <FilterBar filters={[typeFilterProps, generationFilterProps]} />
       <PokemonGrid pokemons={filteredPokemons} />
     </Fragment>
   );
