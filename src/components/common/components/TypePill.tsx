@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Type } from "enums";
 import styled from "styled-components";
-import { getTypePillColor, getTypeName } from "utils/TypeFilter";
+import { getTypePillColor, getTypeName, getTypeIcon } from "utils/TypeFilter";
 
 const Background = styled.div<{ type: Type; size: number }>`
   width: auto;
@@ -34,7 +34,7 @@ interface IProps {
 const TypePill: FunctionComponent<IProps> = ({ type, size }) => {
   return (
     <Background type={type} size={size * 2}>
-      <Icon src={require(`assets/icons/svg/${type}-icon.svg`)} alt={`${type}-icon`} size={size} />
+      <Icon src={getTypeIcon(type)} alt={`${type}-icon`} size={size} />
       <TypeName>{getTypeName(type)}</TypeName>
     </Background>
   );
