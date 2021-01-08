@@ -46,11 +46,12 @@
     "ts-enum-util": "^4.0.2",
     "typescript": "~3.7.2",
     "use-deep-compare-effect": "^1.5.0",
+    "workbox-cli": "^6.0.2",
     "worker-pouch": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "workbox generateSW && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "pre-deploy": "yarn build",
