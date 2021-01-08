@@ -5,7 +5,7 @@ import "./index.css";
 import "./icons.css";
 import App from "./App";
 import { routes } from "./router/config";
-import { register, Config } from "./serviceWorker";
+import { register } from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
@@ -21,14 +21,4 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-const onSuccess = (registration: ServiceWorkerRegistration) => {
-  registration.addEventListener("fetch", (event) => {
-    console.log(event);
-  });
-};
-
-const config: Config = {
-  onSuccess,
-};
-
-register(config);
+register();

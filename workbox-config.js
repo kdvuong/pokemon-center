@@ -1,6 +1,6 @@
 module.exports = {
   globDirectory: "./public/",
-  globPatterns: ["**/*.{html,js}"],
+  globPatterns: ["**/*.{js,css,html,png,svg}"],
   swDest: "./public/service-worker.js",
   clientsClaim: true,
   skipWaiting: true,
