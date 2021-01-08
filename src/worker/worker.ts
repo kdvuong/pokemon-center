@@ -15,7 +15,9 @@ export function filter(
   }
 
   return data.filter((pokemon) => {
-    let searchValueMatched = searchValue ? pokemon.name.startsWith(searchValue) : true;
+    let searchValueMatched = searchValue
+      ? pokemon.name.toLowerCase().startsWith(searchValue.toLowerCase())
+      : true;
     let genFilterMatched = genFilter ? pokemon.generation === genFilter : true;
     let typeFilterMatched = typeFilter ? pokemon.types.includes(typeFilter) : true;
 
