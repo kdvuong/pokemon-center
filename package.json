@@ -1,6 +1,6 @@
 {
   "homepage": "/",
-  "name": "pokedex-ts",
+  "name": "pokemon-center",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
