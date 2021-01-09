@@ -4,7 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 const PokemonDetailViewWrapper = <P extends RouteComponentProps>(props: P) => {
   const PokemonDetailView = lazy(() => import("./PokemonDetailView"));
-  let DecoratedPokemonDetailView = withDrawerContext(PokemonDetailView);
+  let DecoratedPokemonDetailView = withDrawerContext(PokemonDetailView, { toolbarVisible: false });
 
   let id: number = parseInt((props.match.params as any).id);
 
