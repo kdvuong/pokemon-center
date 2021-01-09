@@ -5,7 +5,7 @@ import AbilityListView from "../ability/list/AbilityListViewWrapper";
 import TypeListView from "../type/list/TypeListViewWrapper";
 import NatureListView from "../nature/list/NatureListViewWrapper";
 import PokemonDetailView from "../pokemon/detail/PokemonDetailViewWrapper";
-
+import TeamBuilderView from "../teamBuilder/TeamBuilderViewWrapper";
 // detail views
 const MoveDetailView = lazy(() => import("../move/detail/MoveDetailView"));
 const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailView"));
@@ -23,4 +23,5 @@ export const views = {
   AbilityDetailView,
   TypeDetailView,
   NatureDetailView,
+  TeamBuilderView,
 };

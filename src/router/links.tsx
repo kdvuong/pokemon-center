@@ -30,6 +30,11 @@ export const NATUREDEX_LINK: ILink = {
   name: "Nature Dex",
 };
 
+export const TEAMBUILDER_LINK: ILink = {
+  path: paths.TEAM_BUILDER,
+  name: "Team Builder",
+};
+
 export const DEX_LIST: ILink[] = [
   POKEDEX_LINK,
   MOVEDEX_LINK,

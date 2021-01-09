@@ -16,7 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
 import { IRoute } from "../../router/config";
-import { DEX_LIST } from "../../router/links";
+import { DEX_LIST, TEAMBUILDER_LINK } from "../../router/links";
 import Router from "../../router/Router";
 import { Link } from "react-router-dom";
 import { drawerContext } from "../../contexts/Drawer.context";
@@ -106,12 +106,18 @@ export default function ResponsiveDrawer(props: IProps) {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        <ListItem
+          button
+          key={TEAMBUILDER_LINK.name}
+          component={Link}
+          to={TEAMBUILDER_LINK.path}
+          selected={TEAMBUILDER_LINK === currentLink}
+        >
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary={TEAMBUILDER_LINK.name} />
+        </ListItem>
       </List>
     </div>
   );

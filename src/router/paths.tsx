@@ -18,6 +18,9 @@ const TYPE_DETAIL = "/types/:id";
 const NATURE_LIST = "/natures";
 const NATURE_DETAIL = "/natures/:id";
 
+// team builder
+const TEAM_BUILDER = "/teams";
+
 export const paths = {
   POKEMON_LIST,
   POKEMON_DETAIL,
@@ -29,4 +32,5 @@ export const paths = {
   TYPE_DETAIL,
   NATURE_LIST,
   NATURE_DETAIL,
+  TEAM_BUILDER,
 };

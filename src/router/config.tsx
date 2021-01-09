@@ -96,4 +96,11 @@ export const routes: IRoute[] = [
     private: false,
     fallback: <div> Loading... </div>,
   },
+  {
+    path: paths.TEAM_BUILDER,
+    component: views.TeamBuilderView,
+    exact: true,
+    private: false,
+    fallback: <div> Loading... </div>,
+  },
 ];
