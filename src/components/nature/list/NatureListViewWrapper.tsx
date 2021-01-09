@@ -4,5 +4,5 @@ import { NATUREDEX_LINK } from "router/links";
 
 export default withDrawerContext(
   lazy(() => import("./NatureListView")),
-  { link: NATUREDEX_LINK, toolbarVisible: true }
+  { link: NATUREDEX_LINK }
 );

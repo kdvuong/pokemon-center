@@ -4,5 +4,5 @@ import { POKEDEX_LINK } from "router/links";
 
 export default withDrawerContext(
   lazy(() => import("./PokemonListView")),
-  { link: POKEDEX_LINK, toolbarVisible: true }
+  { link: POKEDEX_LINK }
 );

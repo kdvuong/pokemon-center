@@ -10,7 +10,7 @@ export interface DrawerContext {
 }
 
 const DRAWER_DEFAULT_VALUE: DrawerContext = {
-  isToolbarVisible: false,
+  isToolbarVisible: true,
   currentLink: POKEDEX_LINK,
   showToolbar: () => {},
   hideToolbar: () => {},
@@ -30,7 +30,7 @@ export function withDrawerContext<P extends object = {}>(
 ) {
   const DecoratedComponent = (props: P) => {
     const { showToolbar, hideToolbar, setCurrentLink } = useContext(drawerContext);
-    const { link, toolbarVisible } = options;
+    const { link, toolbarVisible = true } = options;
 
     useEffect(() => {
       if (toolbarVisible) {

@@ -4,5 +4,5 @@ import { TYPEDEX_LINK } from "router/links";
 
 export default withDrawerContext(
   lazy(() => import("./TypeListView")),
-  { link: TYPEDEX_LINK, toolbarVisible: true }
+  { link: TYPEDEX_LINK }
 );
