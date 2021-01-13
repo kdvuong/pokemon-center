@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Type } from "enums";
 import styled from "styled-components";
-import { getTypePillColor, getTypeName, getTypeIcon } from "utils/TypeFilter";
+import { getTypeBackgroundColor, getTypeName, getTypeIcon } from "utils/TypeFilter";
 
 const Background = styled.div<{ type: Type; size: number }>`
   width: auto;
@@ -10,7 +10,7 @@ const Background = styled.div<{ type: Type; size: number }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => getTypePillColor(props.type)};
+  background-color: ${(props) => getTypeBackgroundColor(props.type)};
   flex-direction: row;
 `;
 

@@ -1,14 +1,14 @@
 import { Type } from "enums";
 import React, { FunctionComponent, useMemo } from "react";
 import styled from "styled-components";
-import { getTypePillColor } from "utils/TypeFilter";
+import { getTypeBackgroundColor } from "utils/TypeFilter";
 import { useMediaQuery } from "react-responsive";
 
 const Pill = styled.div<{ type: Type }>`
   position: relative;
   display: flex;
   flex: 1;
-  background: ${(props) => getTypePillColor(props.type)};
+  background: ${(props) => getTypeBackgroundColor(props.type)};
   min-width: calc(100% / 3 - 16px);
   margin: 0 8px;
   margin-top: 1rem;

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Type } from "enums";
 import styled from "styled-components";
-import { getTypeIconColor, getTypeIconBoxShadow, getTypeIcon } from "utils/TypeFilter";
+import { getTypeGradientColor, getTypeIconBoxShadow, getTypeIcon } from "utils/TypeFilter";
 
 const Background = styled.div<{ type: Type; size: number; expanded: boolean }>`
   width: ${(props) => (props.expanded ? "auto" : `${props.size}px`)};
@@ -10,7 +10,7 @@ const Background = styled.div<{ type: Type; size: number; expanded: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: ${(props) => getTypeIconColor(props.type)};
+  background-image: ${(props) => getTypeGradientColor(props.type)};
   box-shadow: 0 0 10px 0 ${(props) => getTypeIconBoxShadow(props.type)};
   flex-direction: row;
 `;

@@ -3,11 +3,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 
 const useStyles = makeStyles({
+  root: {
+    borderRadius: "20px 20px 0 0",
+  },
   list: {
     width: 250,
   },
   fullList: {
     width: "auto",
+    maxHeight: 400,
+    display: "flex",
+    flexDirection: "column",
+    overflow: "hidden",
+    borderRadius: "20px 20px 0 0",
   },
 });
 
@@ -19,12 +27,7 @@ interface IProps {
   onClose: () => void;
 }
 
-const TemporaryDrawer: FunctionComponent<IProps> = ({
-  side,
-  open,
-  children,
-  onClose,
-}) => {
+const TemporaryDrawer: FunctionComponent<IProps> = ({ side, open, children, onClose }) => {
   const classes = useStyles();
 
   const sideList = () => (
@@ -48,7 +51,14 @@ const TemporaryDrawer: FunctionComponent<IProps> = ({
   };
 
   return (
-    <Drawer anchor={side} open={open} onClose={onClose}>
+    <Drawer
+      anchor={side}
+      open={open}
+      onClose={onClose}
+      classes={{
+        paper: classes.root,
+      }}
+    >
       {displayList()}
     </Drawer>
   );
