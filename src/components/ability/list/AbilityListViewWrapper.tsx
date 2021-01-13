@@ -1,8 +1,5 @@
-import { lazy } from "react";
 import { withDrawerContext } from "contexts/Drawer.context";
 import { ABILITYDEX_LINK } from "router/links";
+import AbilityListView from "./AbilityListView";
 
-export default withDrawerContext(
-  lazy(() => import("./AbilityListView")),
-  { link: ABILITYDEX_LINK }
-);
+export default withDrawerContext(AbilityListView, { link: ABILITYDEX_LINK });

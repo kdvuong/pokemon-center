@@ -1,4 +1,4 @@
-import React, { ReactNode, ComponentType } from "react";
+import React, { ReactNode, LazyExoticComponent } from "react";
 import { views } from "../components/views";
 import { paths } from "./paths";
 
@@ -10,7 +10,7 @@ export interface IRoute {
   // Preloader for lazy loading
   fallback: NonNullable<ReactNode> | null;
   // Lazy Loaded component
-  component?: ComponentType<any>;
+  component?: LazyExoticComponent<any>;
   // Sub routes
   routes?: IRoute[];
   // Redirect path

@@ -1,8 +1,5 @@
-import { lazy } from "react";
 import { withDrawerContext } from "contexts/Drawer.context";
 import { TEAMBUILDER_LINK } from "router/links";
+import TeamBuilderView from "./TeamBuilderView";
 
-export default withDrawerContext(
-  lazy(() => import("./TeamBuilderView")),
-  { link: TEAMBUILDER_LINK }
-);
+export default withDrawerContext(TeamBuilderView, { link: TEAMBUILDER_LINK });
