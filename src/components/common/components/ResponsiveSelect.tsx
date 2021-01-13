@@ -6,6 +6,7 @@ import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
 import Drawer from "./TemporaryDrawer";
 import { FilterProps, FilterHasShortendName } from "types";
+import { FilterButton } from "./FilterButton";
 
 const StyledButton = styled(ButtonBase)`
   border-radius: 10px;
@@ -36,10 +37,22 @@ const PopoverContainer = styled.div`
   padding: 12px;
 `;
 
-const DrawerContainer = styled.div`
+const DrawerHeader = styled.h2`
+  font-size: 16px;
+  padding: 16px;
+  justify-content: center;
+  display: flex;
+  color: #6e7a8a;
+  font-family: "Nunito Sans";
+  margin: 0;
+`;
+
+const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 0 12px;
+  padding-bottom: 12px;
+  overflow-y: scroll;
 `;
 
 function instanceOfFilterHasShortendName(object: any): object is FilterHasShortendName<any> {
@@ -106,26 +119,34 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem,
         }}
       >
         <PopoverContainer>
-          {filter.getValues().map((item) => {
+          {filter.getValues().map((value) => {
+            const item = filter.getTypeFromValue(value) ?? null;
             return (
-              <button onClick={handleItemChange} key={item}>
-                {item}
-              </button>
+              <FilterButton
+                item={item}
+                filter={filter}
+                onClick={handleItemChange}
+                selected={item === currentItem}
+              />
             );
           })}
         </PopoverContainer>
       </Popover>
       <Drawer side="bottom" open={openDrawer} onClose={handleClose}>
-        <DrawerContainer>
-          <h2>Select a {filter.getName().toLowerCase()}</h2>
-          {filter.getValues().map((item) => {
+        <DrawerHeader>Select a {filter.getName().toLowerCase()}</DrawerHeader>
+        <ItemsContainer>
+          {filter.getValues().map((value) => {
+            const item = filter.getTypeFromValue(value) ?? null;
             return (
-              <button onClick={handleItemChange} key={item}>
-                {item}
-              </button>
+              <FilterButton
+                item={item}
+                filter={filter}
+                onClick={handleItemChange}
+                selected={item === currentItem}
+              />
             );
           })}
-        </DrawerContainer>
+        </ItemsContainer>
       </Drawer>
     </div>
   );
