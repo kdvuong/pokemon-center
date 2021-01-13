@@ -23,6 +23,7 @@ export interface Filter<T> {
   getValueName: (type: T | null) => string;
   getValues: () => string[];
   getTypeFromValue: (value: string) => T | undefined;
+  getBackgroundColor: (type: T | null) => string;
 }
 
 export interface FilterHasShortendName<T> extends Filter<T> {

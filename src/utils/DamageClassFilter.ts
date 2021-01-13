@@ -38,4 +38,8 @@ export const DamageClassFilter: Filter<DamageClass> = class {
   public static getTypeFromValue(value: string): DamageClass | undefined {
     return damageClassNameMap.get(value);
   }
+
+  public static getBackgroundColor(damageClass: DamageClass | null): string {
+    return "white";
+  }
 };

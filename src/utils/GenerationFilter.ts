@@ -67,4 +67,8 @@ export const GenerationFilter: FilterHasShortendName<Generation> = class Generat
   public static getTypeFromValue(value: string): Generation | undefined {
     return generationNameMap.get(value);
   }
+
+  public static getBackgroundColor(generation: Generation | null): string {
+    return "#ccd4db";
+  }
 };

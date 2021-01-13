@@ -49,7 +49,7 @@ export function getTypeIcon(type: Type): string {
   });
 }
 
-export function getTypeIconColor(type: Type): string {
+export function getTypeGradientColor(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: "linear-gradient(180deg, #9298a4, #a3a49e)",
     [Type.FIRE]: "linear-gradient(180deg, #fb9b51, #fbae46)",
@@ -72,7 +72,7 @@ export function getTypeIconColor(type: Type): string {
   });
 }
 
-export function getTypePillColor(type: Type): string {
+export function getTypeBackgroundColor(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: "#9A9DA1",
     [Type.FIRE]: "#F8A54F",
@@ -145,5 +145,13 @@ export const TypeFilter: Filter<Type> = class {
 
   public static getTypeFromValue(value: string): Type | undefined {
     return typeNameMap.get(value);
+  }
+
+  public static getBackgroundColor(type: Type | null): string {
+    if (type === null) {
+      return "#ccd4db";
+    } else {
+      return getTypeBackgroundColor(type);
+    }
   }
 };
