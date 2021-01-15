@@ -24,10 +24,6 @@ const MatchupTab: FunctionComponent<IProps> = ({ types }) => {
   const normal = useRef<Type[]>([]);
 
   useEffect(() => {
-    mapRef.current = new Map();
-    weakAgainst.current = [];
-    resistAgainst.current = [];
-    normal.current = [];
     getTypesByIds(types.map((t) => t.id)).then((typeData) => {
       const map = mapRef.current;
       $enum(Type)
@@ -61,6 +57,12 @@ const MatchupTab: FunctionComponent<IProps> = ({ types }) => {
           }
         });
     });
+    return () => {
+      mapRef.current = new Map();
+      weakAgainst.current = [];
+      resistAgainst.current = [];
+      normal.current = [];
+    };
   }, [getTypesByIds, types]);
   return (
     <div className="container">
