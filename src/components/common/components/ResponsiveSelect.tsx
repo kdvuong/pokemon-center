@@ -127,6 +127,7 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem,
                 filter={filter}
                 onClick={handleItemChange}
                 selected={item === currentItem}
+                key={item}
               />
             );
           })}
@@ -143,6 +144,7 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem,
                 filter={filter}
                 onClick={handleItemChange}
                 selected={item === currentItem}
+                key={item}
               />
             );
           })}
