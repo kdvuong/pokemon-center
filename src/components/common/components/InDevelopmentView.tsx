@@ -1,4 +1,3 @@
-import { withDrawerContext } from "contexts/Drawer.context";
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
