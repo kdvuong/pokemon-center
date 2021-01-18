@@ -1,30 +1,41 @@
-import React, { useEffect, FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import useSyncPokemonData from "hooks/SyncPokemonDataHook";
-import { IRoute } from "router/config";
 import ResponsiveDrawer from "components/navs/ResponsiveDrawer";
-import { drawerContext } from "contexts/Drawer.context";
-import { useDrawer } from "hooks/DrawerHook";
+import { Route, Switch } from "react-router-dom";
+import { useAuth } from "hooks/AuthHook";
+import { authContext } from "contexts/AuthContext";
+// import { setInterval, clearInterval } from "worker-timers";
+// import Login from "components/login/Login";
 
-interface IProps {
-  routes: IRoute[];
-}
-
-const App: FunctionComponent<IProps> = (props: IProps) => {
-  const { routes } = props;
-  const drawer = useDrawer();
+const App: FunctionComponent = () => {
+  const auth = useAuth();
+  // const { renewToken, isAuthenticated } = auth;
   const { sync } = useSyncPokemonData();
 
   useEffect(() => {
     sync();
-    // authService.renewToken().then((isSuccess) => {
-    //   setAuthenticated(isSuccess);
-    // });
-  }, [sync]);
+    // renewToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // useEffect(() => {
+  //   let intervalId: number;
+  //   if (isAuthenticated) {
+  //     intervalId = setInterval(renewToken, 1000 * 60 * 14);
+  //   }
+
+  //   return () => {
+  //     isAuthenticated && clearInterval(intervalId);
+  //   };
+  // }, [renewToken, isAuthenticated]);
 
   return (
-    <drawerContext.Provider value={drawer}>
-      <ResponsiveDrawer routes={routes} />
-    </drawerContext.Provider>
+    <authContext.Provider value={auth}>
+      <Switch>
+        {/* <Route path="/login" exact component={Login} /> */}
+        <Route path="/" component={ResponsiveDrawer} />
+      </Switch>
+    </authContext.Provider>
   );
 };
 

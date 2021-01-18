@@ -1,5 +1,7 @@
 import { lazy } from "react";
 
+const LoginView = lazy(() => import("../login/Login"));
+
 // list views
 const PokemonListView = lazy(() => import("../pokemon/list/PokemonListViewWrapper"));
 const MoveListView = lazy(() => import("../move/list/MoveListViewWrapper"));
@@ -16,6 +18,7 @@ const NatureDetailView = lazy(() => import("../nature/detail/NatureDetailView"))
 const TeamBuilderView = lazy(() => import("../teamBuilder/TeamBuilderViewWrapper"));
 
 export const views = {
+  LoginView,
   PokemonListView,
   MoveListView,
   AbilityListView,

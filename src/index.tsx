@@ -4,14 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "./icons.css";
 import App from "./App";
-import { routes } from "./router/config";
 import { register } from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
-      <App routes={routes} />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

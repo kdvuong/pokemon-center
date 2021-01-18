@@ -1,3 +1,6 @@
+const LOGIN = "/login";
+const SIGNUP = "/signup";
+
 // pokemons
 const POKEMON_LIST = "/pokemons";
 const POKEMON_DETAIL = "/pokemons/:id";
@@ -22,6 +25,8 @@ const NATURE_DETAIL = "/natures/:id";
 const TEAM_BUILDER = "/teams";
 
 export const paths = {
+  LOGIN,
+  SIGNUP,
   POKEMON_LIST,
   POKEMON_DETAIL,
   MOVE_LIST,

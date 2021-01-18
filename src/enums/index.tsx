@@ -56,3 +56,7 @@ export enum DamageClass {
   SPECIAL = "special",
   STATUS = "status",
 }
+
+export enum OAuthType {
+  GOOGLE = "google",
+}
