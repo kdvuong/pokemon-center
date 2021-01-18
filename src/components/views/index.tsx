@@ -10,10 +10,10 @@ const TypeListView = lazy(() => import("../type/list/TypeListViewWrapper"));
 const NatureListView = lazy(() => import("../nature/list/NatureListViewWrapper"));
 // detail views
 const PokemonDetailView = lazy(() => import("../pokemon/detail/PokemonDetailViewWrapper"));
-const MoveDetailView = lazy(() => import("../move/detail/MoveDetailView"));
-const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailView"));
-const TypeDetailView = lazy(() => import("../type/detail/TypeDetailView"));
-const NatureDetailView = lazy(() => import("../nature/detail/NatureDetailView"));
+const MoveDetailView = lazy(() => import("../move/detail/MoveDetailViewWrapper"));
+const AbilityDetailView = lazy(() => import("../ability/detail/AbilityDetailViewWrapper"));
+const TypeDetailView = lazy(() => import("../type/detail/TypeDetailViewWrapper"));
+const NatureDetailView = lazy(() => import("../nature/detail/NatureDetailViewWrapper"));
 
 const TeamBuilderView = lazy(() => import("../teamBuilder/TeamBuilderViewWrapper"));
 
