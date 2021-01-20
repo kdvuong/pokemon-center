@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import ErrorIcon from "@material-ui/icons/Error";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
