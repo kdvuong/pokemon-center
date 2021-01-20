@@ -20,8 +20,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useDrawer } from "hooks/DrawerHook";
 import { drawerContext } from "contexts/Drawer.context";
-// import { authContext } from "contexts/AuthContext";
-// import { paths } from "router/paths";
+import UserControl from "components/common/components/UserControl";
 
 const drawerWidth = 240;
 
@@ -73,6 +72,25 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "auto",
       margin: "8px",
       borderRadius: "5px",
+      color: "#203e55",
+      "&:hover": {
+        backgroundColor: "rgba(221, 32, 32, 0.08)",
+        color: "#dd2020",
+      },
+    },
+    listItemSelected: {
+      backgroundColor: "rgba(221, 32, 32, 0.12) !important",
+      color: "#dd2020",
+      "&:hover": {
+        backgroundColor: "rgba(221, 32, 32, 0.12)",
+      },
+    },
+    listItemText: {
+      display: "flex",
+      fontSize: "1rem",
+      fontFamily: "Nunito Sans",
+      lineHeight: 2,
+      flex: 1,
     },
     warning: {
       color: "#f4ca64",
@@ -82,7 +100,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function ResponsiveDrawer() {
   const drawer = useDrawer();
-  // const { isAuthenticated, logout } = useContext(authContext);
   const { isToolbarVisible, currentLink } = drawer;
   const classes = useStyles();
   const theme = useTheme();
@@ -95,11 +112,7 @@ export default function ResponsiveDrawer() {
   const DrawerContent = (
     <div>
       <div className={classes.toolbar}>
-        {/* {isAuthenticated ? (
-          <button onClick={logout}>logout</button>
-        ) : (
-          <Link to={paths.LOGIN}>Login</Link>
-        )} */}
+        <UserControl />
       </div>
       <Divider />
       <List>
@@ -110,9 +123,9 @@ export default function ResponsiveDrawer() {
             component={Link}
             to={dex.path}
             selected={dex === currentLink}
-            className={classes.listItem}
+            classes={{ root: classes.listItem, selected: classes.listItemSelected }}
           >
-            <ListItemText primary={dex.name} />
+            <span className={classes.listItemText}>{dex.name}</span>
             {dex.wip && <ErrorIcon className={classes.warning} />}
           </ListItem>
         ))}
@@ -125,9 +138,9 @@ export default function ResponsiveDrawer() {
           component={Link}
           to={TEAMBUILDER_LINK.path}
           selected={TEAMBUILDER_LINK === currentLink}
-          className={classes.listItem}
+          classes={{ root: classes.listItem, selected: classes.listItemSelected }}
         >
-          <ListItemText primary={TEAMBUILDER_LINK.name} />
+          <span className={classes.listItemText}>{TEAMBUILDER_LINK.name}</span>
           {TEAMBUILDER_LINK.wip && <ErrorIcon className={classes.warning} />}
         </ListItem>
       </List>
