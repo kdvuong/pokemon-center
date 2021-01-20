@@ -1,5 +1,5 @@
 const LOGIN = "/login";
-const SIGNUP = "/signup";
+const REGISTER = "/register";
 
 // pokemons
 const POKEMON_LIST = "/pokemons";
@@ -26,7 +26,7 @@ const TEAM_BUILDER = "/teams";
 
 export const paths = {
   LOGIN,
-  SIGNUP,
+  REGISTER,
   POKEMON_LIST,
   POKEMON_DETAIL,
   MOVE_LIST,

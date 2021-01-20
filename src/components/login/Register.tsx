@@ -1,17 +1,18 @@
 import { authContext } from "contexts/AuthContext";
 import React, { FormEvent, FunctionComponent, useCallback, useContext, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
+import { Link } from "react-router-dom";
 import {
-  Container,
-  Title,
-  Background,
-  StyledGoogleLogin,
-  Input,
   ActionButton,
-  SubTextContainer,
-  Divider,
+  Background,
   BackToApp,
+  Container,
+  Divider,
+  Input,
+  StyledGoogleLogin,
+  SubTextContainer,
+  Title,
 } from "./style";
 import { Console } from "utils/Console";
 
@@ -23,46 +24,69 @@ function isGoogleResponse(
   return (response as GoogleLoginResponse).accessToken !== undefined;
 }
 
-const Login: FunctionComponent<IProps> = () => {
-  const { isAuthenticated, login, googleLogin } = useContext(authContext);
+const Register: FunctionComponent<IProps> = () => {
+  const { isAuthenticated, register, googleLogin } = useContext(authContext);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isEmailError, setIsEmailError] = useState<boolean>(false);
-  const [isPasswordError, setIsPasswordError] = useState<boolean>(false);
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
 
   const handleEmailChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setIsEmailError(false);
-
+    setEmailError("");
     setEmail(event.currentTarget.value);
   };
 
   const handlePasswordChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setIsPasswordError(false);
+    setPasswordError("");
     setPassword(event.currentTarget.value);
   };
 
-  const handleLogin = useCallback(async () => {
+  const handleConfirmPasswordChange = (
+    event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setConfirmPasswordError("");
+    setConfirmPassword(event.currentTarget.value);
+  };
+
+  const handleRegister = useCallback(async () => {
     const isEmailEmpty = email.length === 0;
     const isPasswordEmpty = password.length === 0;
+    const isConfirmPasswordEmpty = confirmPassword.length === 0;
+
+    const isPasswordMatched = password === confirmPassword;
+
     if (isEmailEmpty) {
-      setIsEmailError(true);
+      setEmailError("Email cannot be empty");
     }
 
     if (isPasswordEmpty) {
-      setIsPasswordError(true);
+      setPasswordError("Password cannot be empty");
     }
 
-    if (isEmailEmpty || isPasswordEmpty) {
+    if (isConfirmPasswordEmpty) {
+      setConfirmPasswordError("Confirm password cannot be empty");
+    }
+
+    if (!isPasswordMatched) {
+      setConfirmPasswordError("Confirm password does not match password");
+    }
+
+    if (isEmailEmpty || isPasswordEmpty || isConfirmPasswordEmpty || !isPasswordMatched) {
       return;
     }
 
     try {
-      await login(email, password);
+      await register(email, password);
+      setIsSuccess(true);
     } catch (err) {
-      setIsEmailError(true);
-      setIsPasswordError(true);
+      if (err.statusCode === 409) {
+        setEmailError("Email already registered");
+      }
     }
-  }, [email, login, password]);
+  }, [email, password, confirmPassword, register]);
 
   const handleGoogleResponse = useCallback(
     async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -80,33 +104,45 @@ const Login: FunctionComponent<IProps> = () => {
   );
 
   if (isAuthenticated) {
-    return <Redirect to="/pokemons" push />;
+    return <Redirect to="/" />;
+  }
+
+  if (isSuccess) {
+    return <Redirect to="/login" />;
   }
 
   return (
     <Background>
       <Container className="container">
-        <Title>Login</Title>
+        <Title>Register</Title>
         <Input
           id="filled-basic-email"
           label="Email"
           variant="filled"
           onChange={handleEmailChange}
-          error={isEmailError}
-          helperText={isEmailError && "Email and password do not match"}
+          error={emailError.length > 0}
+          helperText={emailError}
         />
         <Input
           id="filled-basic-password"
           label="Password"
           variant="filled"
           onChange={handlePasswordChange}
-          error={isPasswordError}
-          helperText={isPasswordError && "Email and password do not match"}
+          error={passwordError.length > 0}
+          helperText={passwordError}
         />
-        <ActionButton onClick={handleLogin}>Login</ActionButton>
+        <Input
+          id="filled-basic-confirm-password"
+          label="Confirm Password"
+          variant="filled"
+          onChange={handleConfirmPasswordChange}
+          error={confirmPasswordError.length > 0}
+          helperText={confirmPasswordError}
+        />
+        <ActionButton onClick={handleRegister}>Register</ActionButton>
         <SubTextContainer>
           <span>
-            Don't have an account? <Link to="/register">Register here</Link>
+            Already have an account? <Link to="/login">Log in here</Link>
           </span>
           <Divider />
         </SubTextContainer>
@@ -126,4 +162,4 @@ const Login: FunctionComponent<IProps> = () => {
   );
 };
 
-export default Login;
+export default Register;

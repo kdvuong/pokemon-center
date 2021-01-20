@@ -11,16 +11,15 @@ export const useAuth = (): AuthContext => {
       await authService.login(email, password);
       setIsAuthenticated(true);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }, []);
 
   const register = async (email: string, password: string) => {
     try {
       await authService.register(email, password);
-      setIsAuthenticated(true);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   };
 
@@ -29,7 +28,7 @@ export const useAuth = (): AuthContext => {
       await authService.logout();
       setIsAuthenticated(false);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }, []);
 
@@ -38,7 +37,7 @@ export const useAuth = (): AuthContext => {
       await authService.oAuthLogin({ googleAccessToken }, OAuthType.GOOGLE);
       setIsAuthenticated(true);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }, []);
 
@@ -47,7 +46,7 @@ export const useAuth = (): AuthContext => {
       await authService.renewToken();
       setIsAuthenticated(true);
     } catch (err) {
-      console.log(err);
+      throw err;
     }
   }, []);
 

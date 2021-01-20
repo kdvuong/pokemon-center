@@ -1,5 +1,7 @@
 import { OAuthType } from "enums";
 import { axios } from "utils/axios";
+import { Console } from "utils/Console";
+import { ServiceError } from "utils/ServiceError";
 
 interface AuthService {
   login: (email: string, password: string) => Promise<void>;
@@ -16,10 +18,11 @@ export const authService: AuthService = class {
         email,
         password,
       });
+      Console.log("success");
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      console.log(err.response);
-      throw err;
+      Console.log(err);
+      throw new ServiceError(err);
     }
   }
 
@@ -31,7 +34,8 @@ export const authService: AuthService = class {
       });
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      throw err;
+      Console.log(err);
+      throw new ServiceError(err);
     }
   }
 
@@ -40,7 +44,7 @@ export const authService: AuthService = class {
       await axios.post("/auth/logout");
       this.updateAuthHeader("");
     } catch (err) {
-      throw err;
+      throw new ServiceError(err);
     }
   }
 
@@ -49,13 +53,17 @@ export const authService: AuthService = class {
       const res = await axios.post(`/auth/${type}`, payLoad);
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      throw err;
+      throw new ServiceError(err);
     }
   }
 
   public static async renewToken() {
-    const res = await axios.post("/auth/renew-token");
-    this.updateAuthHeader(res.data.accessToken);
+    try {
+      const res = await axios.post("/auth/renew-token");
+      this.updateAuthHeader(res.data.accessToken);
+    } catch (err) {
+      throw new ServiceError(err);
+    }
   }
 
   private static updateAuthHeader(accessToken: string) {
