@@ -1,4 +1,5 @@
 import pokesprite from "assets/pokeSprites/pokesprite.png";
+import { Console } from "./Console";
 
 const sprite = {
   width: 40,
@@ -15,7 +16,7 @@ const spritesheet = {
 };
 
 spritesheet.image.onload = () => {
-  console.log("Spritesheet is loaded");
+  Console.log("Spritesheet is loaded");
   spritesheet.isLoading = false;
 };
 
@@ -23,7 +24,7 @@ spritesheet.image.src = pokesprite;
 
 export const drawSprite = (id: number, canvas: HTMLCanvasElement) => {
   if (spritesheet.isLoading) {
-    console.log("Spritesheet is loading, retrying...");
+    Console.log("Spritesheet is loading, retrying...");
     setTimeout(() => drawSprite(id, canvas), 10);
     return;
   }

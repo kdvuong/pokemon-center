@@ -6,6 +6,7 @@ import { evolutionService } from "services/EvolutionService";
 import { abilityService } from "services/AbilityService";
 import { moveService } from "services/MoveService";
 import { movesetService } from "services/MovesetService";
+import { Console } from "utils/Console";
 
 interface ISyncPokemonData {
   sync: () => void;
@@ -36,7 +37,7 @@ export default function useSyncPokemonData(): ISyncPokemonData {
 
     await Promise.all(lessImportantReplications);
 
-    console.log(performance.now() - start);
+    Console.log(performance.now() - start);
   }, [abilityDbApi, evolutionDbApi, moveDbApi, movesetDbApi, pokemonDbApi, typeDbApi]);
 
   // const populateMoves = useCallback(
@@ -73,7 +74,7 @@ export default function useSyncPokemonData(): ISyncPokemonData {
 
   //       return moves;
   //     } catch (err) {
-  //       console.log(err.message);
+  //       Console.log(err.message);
   //     }
   //   },
   //   [movesetDbApi, populateMoves]

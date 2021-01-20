@@ -11,7 +11,7 @@ import { useDeepCompareRef } from "./useDeepCompareRef";
  * @returns A memoized callback
  * @example
  * const Child = memo(function Child({onClick}) {
- *   console.log('Child has rendered.');
+ *   Console.log('Child has rendered.');
  *   return <button onClick={onClick}>Click me</button>;
  * });
  *
