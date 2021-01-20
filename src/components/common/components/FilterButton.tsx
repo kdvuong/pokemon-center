@@ -4,20 +4,20 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import styled from "styled-components";
 
 const StyledButton = styled(ButtonBase)<{ selected: boolean; background: string; color: string }>`
-  border-radius: 5px;
-  color: ${(props) => props.color};
-  background: ${(props) => props.background};
-  transition: all 150ms ease-in-out;
-  min-width: 160px;
-  margin: 3px 0;
-  border: 2px solid transparent;
+  border-radius: 5px !important;
+  color: ${(props) => props.color} !important;
+  background: ${(props) => props.background} !important;
+  transition: all 150ms ease-in-out !important;
+  min-width: 160px !important;
+  margin: 3px 0 !important;
+  border: 2px solid transparent !important;
   ${(props) =>
     props.selected &&
-    `background: transparent; border: 2px solid ${props.background}; color: ${props.background};`}
+    `background: transparent !important; border: 2px solid ${props.background} !important; color: ${props.background} !important;`}
   &:hover {
-    background: transparent;
-    border: 2px solid ${(props) => props.background};
-    color: ${(props) => props.background};
+    background: transparent !important;
+    border: 2px solid ${(props) => props.background} !important;
+    color: ${(props) => props.background} !important;
   }
 `;
 

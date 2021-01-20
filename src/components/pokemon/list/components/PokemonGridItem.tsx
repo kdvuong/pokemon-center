@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import { PokemonSummary } from "types";
 import { Link } from "react-router-dom";
 import { GridChildComponentProps } from "react-window";
@@ -19,17 +18,21 @@ const gradientAnimation = keyframes`
   }
 `;
 
-const StyledButton = styled(ButtonBase)`
-  border: 4px solid transparent;
+const StyledButton = styled.button`
+  display: inline-flex;
+  align-items: center;
   width: 100%;
   flex-direction: row;
-  margin-top: 16px;
+  margin-top: 16px !important;
   justify-content: flex-start;
   border-radius: 7px;
+  background-color: transparent;
+  vertical-align: middle;
   &:hover {
-    animation: ${gradientAnimation} 1s infinite;
+    animation: ${gradientAnimation} 1s infinite !important;
     box-shadow: 0px 0px 10px rgba(96, 173, 225, 0.7);
   }
+  border: 4px solid transparent;
 `;
 
 const StyledLink = styled(Link)`

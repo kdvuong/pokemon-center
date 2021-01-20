@@ -21,9 +21,9 @@ const PokemonDetailTabsContainer = styled.div`
 `;
 
 const StyledAppBar = styled(AppBar)`
-  box-shadow: none;
-  background-color: #fafafa;
-  border-bottom: 1px solid rgb(225, 231, 236);
+  box-shadow: none !important;
+  background-color: #fafafa !important;
+  border-bottom: 1px solid rgb(225, 231, 236) !important;
 `;
 
 const StyledTabs = styled(Tabs)`

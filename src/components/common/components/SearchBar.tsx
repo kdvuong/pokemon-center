@@ -4,7 +4,7 @@ import { StyledToolbar } from "components/common/styled/index.d";
 import { NavIcons } from "assets/icons";
 
 const Toolbar = styled(StyledToolbar)`
-  padding: 8px;
+  padding: 8px !important;
 `;
 
 const StyledDiv = styled.div`
