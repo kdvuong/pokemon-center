@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 const config: AxiosRequestConfig = {
-  baseURL: "http://localhost:3001/",
+  baseURL: process.env.REACT_APP_BACKEND_URL ?? "http://localhost:3001/",
   timeout: 1000,
   withCredentials: true,
   headers: {
