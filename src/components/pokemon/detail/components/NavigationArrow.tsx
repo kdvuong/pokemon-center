@@ -12,11 +12,11 @@ const ArrowContainer = styled.div<{ direction: Direction }>`
   justify-content: ${(props) => (props.direction === "back" ? "flex-start" : "flex-end")};
 `;
 const ArrowBackIcon = styled(ArrowBackIosRoundedIcon)`
-  font-size: 3em;
+  font-size: 3em !important;
 `;
 
 const ArrowForwardIcon = styled(ArrowForwardIosRoundedIcon)`
-  font-size: 3em;
+  font-size: 3em !important;
 `;
 
 const ArrowButton = styled.div`
