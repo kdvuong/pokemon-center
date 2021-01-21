@@ -150,22 +150,3 @@ export function unregister() {
       });
   }
 }
-
-export const createUpdatePrompt = (onAccept: () => void) => {
-  console.log("rendering update prompt");
-  const container = document.createElement("div");
-  const acceptButton = document.createElement("button");
-  const dismissButton = document.createElement("button");
-  const text = document.createElement("span");
-  acceptButton.addEventListener("click", onAccept);
-  acceptButton.textContent = "Update";
-  dismissButton.addEventListener("click", () => document.body.removeChild(container));
-  dismissButton.textContent = "Dismiss";
-  text.textContent = "New version available";
-  container.id = "update-prompt";
-
-  container.appendChild(text);
-  container.appendChild(acceptButton);
-  container.appendChild(dismissButton);
-  document.body.appendChild(container);
-};
