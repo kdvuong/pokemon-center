@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import "./icons.css";
 import App from "./App";
-import { register } from "./serviceWorker";
+import { Config, createUpdatePrompt, register } from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
@@ -20,4 +20,13 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 
-register();
+const config: Config = {
+  onUpdate: (registration) => {
+    console.log("updating service worker");
+    createUpdatePrompt(() => {
+      registration.waiting?.postMessage("skipWaiting");
+    });
+  },
+};
+
+register(config);

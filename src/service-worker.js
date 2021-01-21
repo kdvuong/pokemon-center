@@ -1,11 +1,16 @@
 /* eslint-disable no-restricted-globals */
 import { precacheAndRoute } from "workbox-precaching";
-import { registerRoute } from "workbox-routing";
-import { StaleWhileRevalidate } from "workbox-strategies";
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-registerRoute(
-  ({ url }) => url.origin === self.location.origin && url.pathname.startsWith("/static/"),
-  new StaleWhileRevalidate()
-);
+self.addEventListener("fetch", function (event) {
+  event.respondWith(
+    caches.match(event.request).then(function (response) {
+      return response || fetch(event.request);
+    })
+  );
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data === "skipWaiting") return self.skipWaiting();
+});

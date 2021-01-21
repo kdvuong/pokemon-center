@@ -20,6 +20,8 @@ const isLocalhost = Boolean(
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
+let isRefreshing: boolean;
+
 export type Config = {
   onSuccess?: (registration: ServiceWorkerRegistration) => void;
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
@@ -83,6 +85,12 @@ function registerValidSW(swUrl: string, config?: Config) {
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
               }
+
+              navigator.serviceWorker.addEventListener("controllerchange", function () {
+                if (isRefreshing) return;
+                isRefreshing = true;
+                window.location.reload();
+              });
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
@@ -142,3 +150,22 @@ export function unregister() {
       });
   }
 }
+
+export const createUpdatePrompt = (onAccept: () => void) => {
+  console.log("rendering update prompt");
+  const container = document.createElement("div");
+  const acceptButton = document.createElement("button");
+  const dismissButton = document.createElement("button");
+  const text = document.createElement("span");
+  acceptButton.addEventListener("click", onAccept);
+  acceptButton.textContent = "Update";
+  dismissButton.addEventListener("click", () => document.body.removeChild(container));
+  dismissButton.textContent = "Dismiss";
+  text.textContent = "New version available";
+  container.id = "update-prompt";
+
+  container.appendChild(text);
+  container.appendChild(acceptButton);
+  container.appendChild(dismissButton);
+  document.body.appendChild(container);
+};

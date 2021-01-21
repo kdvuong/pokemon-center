@@ -3,5 +3,5 @@ module.exports = {
   globPatterns: ["**/*.{js,css,html,png,svg}"],
   swDest: "./public/service-worker.js",
   clientsClaim: true,
-  skipWaiting: true,
+  skipWaiting: false,
 };
