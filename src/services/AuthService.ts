@@ -1,6 +1,5 @@
 import { OAuthType } from "enums";
 import { axios } from "utils/axios";
-import { Console } from "utils/Console";
 import { ServiceError } from "utils/ServiceError";
 
 interface AuthService {
@@ -18,10 +17,10 @@ export const authService: AuthService = class {
         email,
         password,
       });
-      Console.log("success");
+      console.log("success");
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      Console.log(err);
+      console.log(err);
       throw new ServiceError(err);
     }
   }
@@ -34,7 +33,7 @@ export const authService: AuthService = class {
       });
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      Console.log(err);
+      console.log(err);
       throw new ServiceError(err);
     }
   }

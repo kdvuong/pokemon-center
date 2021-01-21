@@ -2,7 +2,6 @@ import PouchDB from "pouchdb";
 import orderBy from "lodash-es/orderBy";
 import PouchLoad from "pouchdb-load";
 import { auth } from "../constants/cloudant.config";
-import { Console } from "utils/Console";
 
 PouchDB.plugin(PouchLoad);
 PouchDB.plugin(require("pouchdb-upsert"));
@@ -84,10 +83,10 @@ class PokemonDbService<T extends Document> {
     const local = this.local;
     const isReplicated = await this.checkReplicated();
     if (isReplicated) {
-      Console.log(`replication already done`);
+      console.log(`replication already done`);
       return;
     }
-    //   Console.log(`started replication`);
+    //   console.log(`started replication`);
     let file = `${process.env.PUBLIC_URL}/assets/localData/${this.name}.txt`;
     if (numFiles) {
       let replications = [];
@@ -99,15 +98,15 @@ class PokemonDbService<T extends Document> {
         await Promise.all(replications);
         this.markReplicated();
       } catch (err) {
-        Console.log(err);
+        console.log(err);
       }
     } else {
       try {
-        Console.log("start: " + file);
+        console.log("start: " + file);
         await local.load(file);
         this.markReplicated();
       } catch (err) {
-        Console.log(err);
+        console.log(err);
       }
     }
   }

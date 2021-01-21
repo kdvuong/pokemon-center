@@ -13,7 +13,6 @@ import {
   Divider,
   BackToApp,
 } from "./style";
-import { Console } from "utils/Console";
 
 interface IProps {}
 
@@ -70,10 +69,10 @@ const Login: FunctionComponent<IProps> = () => {
         try {
           await googleLogin(response.accessToken);
         } catch (err) {
-          Console.log(err);
+          console.log(err);
         }
       } else {
-        Console.log("error google login");
+        console.log("error google login");
       }
     },
     [googleLogin]
