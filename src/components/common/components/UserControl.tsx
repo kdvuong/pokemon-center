@@ -12,9 +12,10 @@ const Header = styled.div`
   align-items: center;
   font-family: "Nunito Sans";
   color: #dd2020;
+  flex-direction: column;
   svg {
-    font-size: 3rem;
-    margin: 1rem 0rem 1rem 1rem;
+    font-size: 5rem;
+    margin: 1rem;
   }
 `;
 
@@ -22,11 +23,13 @@ const Control = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  margin: 1rem;
+  padding: 0 1rem 1rem 1rem;
+  width: 100%;
   p {
     color: #203e55;
     margin-bottom: 0;
     font-weight: bold;
+    text-align: center;
   }
 `;
 
