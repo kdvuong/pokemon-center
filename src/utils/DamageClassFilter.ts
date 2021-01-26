@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
-import { DamageClass } from "enums";
-import { Filter } from "types";
+import { DamageClass } from "shared/enums";
+import { Filter } from "shared/interfaces";
 
 export function getDamageClassName(damageClass: DamageClass): string {
   return $enum.mapValue(damageClass).with({

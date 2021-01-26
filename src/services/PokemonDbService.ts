@@ -1,7 +1,6 @@
 import PouchDB from "pouchdb";
 import orderBy from "lodash-es/orderBy";
 import PouchLoad from "pouchdb-load";
-import { auth } from "../constants/cloudant.config";
 
 PouchDB.plugin(PouchLoad);
 PouchDB.plugin(require("pouchdb-upsert"));
@@ -39,6 +38,11 @@ export interface IPouchDB<T> {
   info: () => Promise<DBInfo>;
   load: (path: string) => Promise<void>;
 }
+
+const auth = {
+  username: process.env.REACT_APP_CLOUDANT_USER,
+  password: process.env.REACT_APP_CLOUDANT_PASSWORD,
+};
 
 class PokemonDbService<T extends Document> {
   private url: string;

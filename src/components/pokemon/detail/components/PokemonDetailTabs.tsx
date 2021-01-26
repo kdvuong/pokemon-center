@@ -5,11 +5,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import styled from "styled-components";
-import InfoTab from "./InfoTab";
-import MoveTab from "./MoveTab";
-import { Pokemon } from "types";
+import InfoTab from "./info/InfoTab";
+import MoveTab from "./moves/MoveTab";
+import { Pokemon } from "shared/interfaces";
 import usePokemonApi from "hooks/PokemonApiHook";
-import MatchupTab from "./MatchupTab";
+import MatchupTab from "./matchup/MatchupTab";
 
 const PokemonDetailTabsContainer = styled.div`
   background-color: transparent;

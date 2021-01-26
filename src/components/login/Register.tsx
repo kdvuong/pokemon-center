@@ -26,12 +26,19 @@ function isGoogleResponse(
 const Register: FunctionComponent<IProps> = () => {
   const { isAuthenticated, register, googleLogin } = useContext(authContext);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [usernameError, setUsernameError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [confirmPasswordError, setConfirmPasswordError] = useState<string>("");
+
+  const handleUsernameChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setUsernameError("");
+    setUsername(event.currentTarget.value);
+  };
 
   const handleEmailChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setEmailError("");
@@ -51,11 +58,16 @@ const Register: FunctionComponent<IProps> = () => {
   };
 
   const handleRegister = useCallback(async () => {
+    const isUsernameEmpty = username.length === 0;
     const isEmailEmpty = email.length === 0;
     const isPasswordEmpty = password.length === 0;
     const isConfirmPasswordEmpty = confirmPassword.length === 0;
 
     const isPasswordMatched = password === confirmPassword;
+
+    if (isUsernameEmpty) {
+      setUsernameError("Username cannot be empty");
+    }
 
     if (isEmailEmpty) {
       setEmailError("Email cannot be empty");
@@ -78,14 +90,14 @@ const Register: FunctionComponent<IProps> = () => {
     }
 
     try {
-      await register(email, password);
+      await register(username, email, password);
       setIsSuccess(true);
     } catch (err) {
       if (err.statusCode === 409) {
         setEmailError("Email already registered");
       }
     }
-  }, [email, password, confirmPassword, register]);
+  }, [username, email, password, confirmPassword, register]);
 
   const handleGoogleResponse = useCallback(
     async (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -114,6 +126,14 @@ const Register: FunctionComponent<IProps> = () => {
     <Background>
       <Container className="container">
         <Title>Register</Title>
+        <Input
+          id="filled-basic-username"
+          label="Username"
+          variant="filled"
+          onChange={handleUsernameChange}
+          error={usernameError.length > 0}
+          helperText={usernameError}
+        />
         <Input
           id="filled-basic-email"
           label="Email"

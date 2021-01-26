@@ -24,6 +24,9 @@ const NATURE_DETAIL = "/natures/:id";
 // team builder
 const TEAM_BUILDER = "/teams";
 
+// settingss
+const SETTINGS = "/settings";
+
 export const paths = {
   LOGIN,
   REGISTER,
@@ -38,4 +41,5 @@ export const paths = {
   NATURE_LIST,
   NATURE_DETAIL,
   TEAM_BUILDER,
+  SETTINGS,
 };

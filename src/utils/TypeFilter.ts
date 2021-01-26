@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
-import { Type } from "enums";
-import { Filter } from "types";
+import { Type } from "shared/enums";
+import { Filter } from "shared/interfaces";
 import { TypeIcons as icons } from "assets/icons";
 
 export function getTypeName(type: Type): string {

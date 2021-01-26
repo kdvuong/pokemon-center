@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useCallback, useState } from "react";
 import styled from "styled-components";
-import ProfileBanner from "./components/ProfileBanner";
+import ProfileBanner from "./components/banner/ProfileBanner";
 import PokemonDetailTabs from "./components/PokemonDetailTabs";
 
 const ViewContainer = styled.div`

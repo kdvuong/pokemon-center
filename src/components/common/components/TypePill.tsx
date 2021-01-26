@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Type } from "enums";
+import { Type } from "shared/enums";
 import styled from "styled-components";
 import { getTypeBackgroundColor, getTypeName, getTypeIcon } from "utils/TypeFilter";
 

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Filter } from "types";
+import { Filter } from "shared/interfaces";
 
 interface IFilter<T> {
   filter: T | null;

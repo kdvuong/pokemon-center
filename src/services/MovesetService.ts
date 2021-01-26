@@ -1,6 +1,6 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName } from "enums";
-import { Moveset } from "types";
+import { DbName } from "shared/enums";
+import { Moveset } from "shared/interfaces";
 
 interface MovesetDocument extends Document, Moveset {}
 

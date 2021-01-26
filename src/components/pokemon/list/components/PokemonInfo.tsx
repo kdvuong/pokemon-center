@@ -1,4 +1,4 @@
-import { Type } from "enums";
+import { Type } from "shared/enums";
 import React, { FunctionComponent } from "react";
 import TypeIcon from "../../../common/components/TypeIcon";
 import styled from "styled-components";

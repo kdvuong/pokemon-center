@@ -9,8 +9,8 @@ import React, {
 import usePokemonApi from "hooks/PokemonApiHook";
 import useFilter from "hooks/FilterHook";
 import FilterBar from "components/common/components/FilterBar";
-import { Generation, Type } from "enums";
-import { FilterProps, PokemonSummary } from "types";
+import { Generation, Type } from "shared/enums";
+import { FilterProps, PokemonSummary } from "shared/interfaces";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";
 import PokemonGrid from "./components/PokemonGrid";

@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
 import Drawer from "./TemporaryDrawer";
-import { FilterProps, FilterHasShortendName } from "types";
+import { FilterProps, FilterHasShortendName } from "shared/interfaces";
 import { FilterButton } from "./FilterButton";
 
 const StyledButton = styled(ButtonBase)`
