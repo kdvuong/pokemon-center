@@ -15,6 +15,7 @@ const Main = styled.main`
   height: 100%;
   display: flex;
   flex-flow: column;
+  background: white;
 `;
 
 const useStyles = makeStyles((theme: Theme) =>
