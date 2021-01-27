@@ -19,3 +19,6 @@ A progressive web app to display all Pokemon data without internet connection
 - Nature Dex - A table that displays a type resistant
 - Ability Dex - A table that displays all abilities
 - Settings/Account - Modal to update username
+
+### Credits
+- [Design inspiration](https://www.behance.net/gallery/35005391/Pokdex) 
