@@ -1,7 +1,7 @@
 /* ./worker/worker.ts */
 
-import { Generation, Type } from "enums";
-import { PokemonSummary } from "types";
+import { Generation, Type } from "shared/enums";
+import { PokemonSummary } from "shared/interfaces";
 
 export function filter(
   data: PokemonSummary[],

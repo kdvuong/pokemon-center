@@ -1,6 +1,6 @@
 import { $enum } from "ts-enum-util";
-import { Generation } from "enums";
-import { FilterHasShortendName } from "types";
+import { Generation } from "shared/enums";
+import { FilterHasShortendName } from "shared/interfaces";
 
 function getGenerationName(generation: Generation): string {
   return $enum.mapValue(generation).with({

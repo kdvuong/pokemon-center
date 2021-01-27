@@ -1,10 +1,10 @@
 import FilterBar from "components/common/components/FilterBar";
 import SearchBar from "components/common/components/SearchBar";
-import { DamageClass, Generation, Type } from "enums";
+import { DamageClass, Generation, Type } from "shared/enums";
 import useFilter from "hooks/FilterHook";
 import usePokemonApi from "hooks/PokemonApiHook";
 import React, { ChangeEvent, Fragment, useEffect, useMemo, useState } from "react";
-import { FilterProps, Move } from "types";
+import { FilterProps, Move } from "shared/interfaces";
 import { DamageClassFilter } from "utils/DamageClassFilter";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";

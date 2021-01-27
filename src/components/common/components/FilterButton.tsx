@@ -1,5 +1,5 @@
 import React, { FunctionComponent, MouseEvent } from "react";
-import { Filter, FilterType } from "types";
+import { Filter, FilterType } from "shared/interfaces";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import styled from "styled-components";
 

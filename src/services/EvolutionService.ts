@@ -1,5 +1,5 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName } from "enums";
+import { DbName } from "shared/enums";
 
 interface EvolutionDocument extends Document {
   chain: {
@@ -25,6 +25,4 @@ interface EvolutionDocument extends Document {
   }[];
 }
 
-export const evolutionService = new DbService<EvolutionDocument>(
-  DbName.POKEMON_EVOLUTIONS
-);
+export const evolutionService = new DbService<EvolutionDocument>(DbName.POKEMON_EVOLUTIONS);

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { PokemonSummary } from "types";
+import { PokemonSummary } from "shared/interfaces";
 import { Link } from "react-router-dom";
 import { GridChildComponentProps } from "react-window";
 import styled, { keyframes } from "styled-components";

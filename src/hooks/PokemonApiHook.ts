@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import useDbApi from "./LocalFirstDbApiHook";
 import { pokemonService } from "services/PokemonService";
-import { Ability, Move, Moveset, Pokemon, PokemonSummary, TypeData } from "types";
+import { Ability, Move, Moveset, Pokemon, PokemonSummary, TypeData } from "shared/interfaces";
 import pokemonSummaries from "data/pokemonSummaries";
 import { abilityService } from "services/AbilityService";
 import { moveService } from "services/MoveService";

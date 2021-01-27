@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { Switch } from "react-router";
-import { IRoute } from "./config";
+import { IRoute } from "./routes";
 import RouteWithSubRoutes from "./RouteWithSubRoutes";
 
 interface IProps {

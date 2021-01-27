@@ -1,6 +1,6 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName } from "enums";
-import { TypeData } from "types";
+import { DbName } from "shared/enums";
+import { TypeData } from "shared/interfaces";
 
 export interface TypeDocument extends Document, TypeData {}
 

@@ -1,5 +1,5 @@
 import { $enum } from "ts-enum-util";
-import { LearnType } from "enums";
+import { LearnType } from "shared/enums";
 
 export function getAllLearnTypeNames(): string[] {
   return $enum(LearnType).getValues().map(getLearnTypeName);

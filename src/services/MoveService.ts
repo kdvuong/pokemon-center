@@ -1,6 +1,6 @@
 import DbService, { Document } from "./PokemonDbService";
-import { DbName } from "enums";
-import { Move } from "types";
+import { DbName } from "shared/enums";
+import { Move } from "shared/interfaces";
 
 interface MoveDocument extends Document, Move {}
 

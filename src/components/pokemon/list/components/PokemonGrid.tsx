@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { PokemonSummary } from "types";
+import { PokemonSummary } from "shared/interfaces";
 import Grid from "components/common/components/Grid";
 import PokemonGridItem from "./PokemonGridItem";
 import { useMediaQuery } from "react-responsive";

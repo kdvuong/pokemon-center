@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { authService } from "services/AuthService";
-import { OAuthType } from "enums";
+import { OAuthType } from "shared/enums";
 
 export const useAuth = (): AuthContext => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -15,9 +15,9 @@ export const useAuth = (): AuthContext => {
     }
   }, []);
 
-  const register = async (email: string, password: string) => {
+  const register = async (username: string, email: string, password: string) => {
     try {
-      await authService.register(email, password);
+      await authService.register(username, email, password);
     } catch (err) {
       throw err;
     }

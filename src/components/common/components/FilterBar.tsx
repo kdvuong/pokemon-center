@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import { StyledToolbar } from "components/common/styled/index.d";
-import { FilterProps } from "types";
+import { FilterProps } from "shared/interfaces";
 import ResponsiveSelect from "./ResponsiveSelect";
 import { NavIcons } from "assets/icons";
 

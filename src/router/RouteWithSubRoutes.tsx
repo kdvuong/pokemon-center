@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
+import { authContext } from "contexts/AuthContext";
+import React, { Suspense, useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { IRoute } from "./config";
+import { IRoute } from "./routes";
 const RouteWithSubRoutes = (route: IRoute) => {
-  /** Authenticated flag */
-  const authenticated: boolean = false;
+  const { isAuthenticated } = useContext(authContext);
 
   return (
     <Suspense fallback={route.fallback}>
@@ -13,17 +13,13 @@ const RouteWithSubRoutes = (route: IRoute) => {
           route.redirect ? (
             <Redirect to={route.redirect} />
           ) : route.private ? (
-            authenticated ? (
-              route.component && (
-                <route.component {...props} routes={route.routes} />
-              )
+            isAuthenticated ? (
+              route.component && <route.component {...props} routes={route.routes} />
             ) : (
-              <Redirect to="/home/login" />
+              <Redirect to="/login" />
             )
           ) : (
-            route.component && (
-              <route.component {...props} routes={route.routes} />
-            )
+            route.component && <route.component {...props} routes={route.routes} />
           )
         }
       />
