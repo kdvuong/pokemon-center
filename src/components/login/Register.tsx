@@ -146,6 +146,7 @@ const Register: FunctionComponent<IProps> = () => {
           id="filled-basic-password"
           label="Password"
           variant="filled"
+          type="password"
           onChange={handlePasswordChange}
           error={passwordError.length > 0}
           helperText={passwordError}
@@ -154,6 +155,7 @@ const Register: FunctionComponent<IProps> = () => {
           id="filled-basic-confirm-password"
           label="Confirm Password"
           variant="filled"
+          type="password"
           onChange={handleConfirmPasswordChange}
           error={confirmPasswordError.length > 0}
           helperText={confirmPasswordError}

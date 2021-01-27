@@ -98,6 +98,7 @@ const Login: FunctionComponent<IProps> = () => {
           id="filled-basic-password"
           label="Password"
           variant="filled"
+          type="password"
           onChange={handlePasswordChange}
           error={isPasswordError}
           helperText={isPasswordError && "Email and password do not match"}
