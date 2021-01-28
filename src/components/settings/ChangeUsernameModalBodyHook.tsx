@@ -112,11 +112,7 @@ const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
       await updateUsername({ name, discriminator: parseInt(discriminator, 10) });
     } catch (err) {
       console.log(err);
-      if (err.statusCode === 409) {
-        setError("Name and discriminator combination already in use");
-      } else {
-        setError("Unexpected error occurred");
-      }
+      setError(err.message);
     }
   }, [discriminator, name, updateUsername]);
 
@@ -134,6 +130,9 @@ const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
               id="discriminator"
               value={discriminator}
               onChange={handleDiscriminatorChange}
+              type="number"
+              min="1"
+              max="9999"
             />
           </InputContainer>
           {error && <span>{error}</span>}
