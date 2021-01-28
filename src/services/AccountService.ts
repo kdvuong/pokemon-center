@@ -1,6 +1,6 @@
 import { Username } from "shared/interfaces";
 import { axios } from "utils/axios";
-import { ServiceError } from "utils/ServiceError";
+import { ErrorFactory } from "utils/ErrorFactory";
 
 interface AccountInfo {
   username: Username;
@@ -21,7 +21,7 @@ export const accountService: AccountService = class {
         email: res.data.email,
       };
     } catch (err) {
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
   public static async updateUsername(username: Username): Promise<Username> {
@@ -31,7 +31,7 @@ export const accountService: AccountService = class {
       console.log("done updating username");
       return username;
     } catch (err) {
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 };
