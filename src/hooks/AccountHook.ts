@@ -9,11 +9,15 @@ export const useAccount = (isAuthenticated: boolean): AccountContext => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("called");
-      accountService.getAccountInfo().then((accountInfo) => {
-        setUsername(accountInfo.username);
-        setEmail(accountInfo.email);
-      });
+      accountService
+        .getAccountInfo()
+        .then((accountInfo) => {
+          setUsername(accountInfo.username);
+          setEmail(accountInfo.email);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } else {
       setUsername(null);
       setEmail(null);
