@@ -1,6 +1,6 @@
 import { OAuthType } from "shared/enums";
 import { axios } from "utils/axios";
-import { ServiceError } from "utils/ServiceError";
+import { ErrorFactory } from "utils/ErrorFactory";
 
 interface AuthService {
   login: (email: string, password: string) => Promise<void>;
@@ -20,8 +20,7 @@ export const authService: AuthService = class {
       console.log("success");
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      console.log(err);
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 
@@ -34,8 +33,7 @@ export const authService: AuthService = class {
       });
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      console.log(err);
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 
@@ -44,7 +42,7 @@ export const authService: AuthService = class {
       await axios.post("/auth/logout");
       this.updateAuthHeader("");
     } catch (err) {
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 
@@ -53,7 +51,7 @@ export const authService: AuthService = class {
       const res = await axios.post(`/auth/${type}`, payLoad);
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 
@@ -62,7 +60,7 @@ export const authService: AuthService = class {
       const res = await axios.post("/auth/renew-token");
       this.updateAuthHeader(res.data.accessToken);
     } catch (err) {
-      throw new ServiceError(err);
+      throw ErrorFactory.get(err);
     }
   }
 

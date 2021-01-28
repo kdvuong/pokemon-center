@@ -7,12 +7,13 @@ interface ErrorObject {
   };
 }
 
-export class ServiceError {
-  private readonly statusCode: number;
-  private readonly message: string;
+export class ServiceError extends Error {
+  readonly statusCode: number;
+  readonly message: string;
 
   constructor(error: ErrorObject) {
-    this.statusCode = error.response.data.statusCode;
-    this.message = error.response.data.message;
+    super();
+    this.statusCode = error.response?.data?.statusCode;
+    this.message = error.response?.data?.message;
   }
 }

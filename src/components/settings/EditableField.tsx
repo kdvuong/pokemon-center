@@ -30,12 +30,20 @@ const EditButton = styled(ButtonBase)``;
 interface IProps {
   name: string;
   value: string;
-  onEdit: () => void;
-  modalBody: ReactElement;
+  modalOption: {
+    title: string;
+    renderBody: () => ReactElement;
+    actionOption?: {
+      onClick: () => Promise<void>;
+      text: string;
+    };
+    onClose: () => void;
+  };
 }
 
-const EditableField: FunctionComponent<IProps> = ({ name, value, onEdit, modalBody }) => {
+const EditableField: FunctionComponent<IProps> = ({ name, value, modalOption }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { onClose, ...restModalOption } = modalOption;
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -43,8 +51,8 @@ const EditableField: FunctionComponent<IProps> = ({ name, value, onEdit, modalBo
 
   const handleClose = () => {
     setIsOpen(false);
+    onClose?.();
   };
-
   return (
     <Container>
       <TextWrapper>
@@ -52,7 +60,7 @@ const EditableField: FunctionComponent<IProps> = ({ name, value, onEdit, modalBo
         <span>{value}</span>
       </TextWrapper>
       <EditButton onClick={handleOpen}>Edit</EditButton>
-      <EditModal open={isOpen} onClose={handleClose} body={modalBody} />
+      <EditModal open={isOpen} onClose={handleClose} {...restModalOption} />
     </Container>
   );
 };
