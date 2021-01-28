@@ -134,6 +134,9 @@ const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
               id="discriminator"
               value={discriminator}
               onChange={handleDiscriminatorChange}
+              type="number"
+              min="1"
+              max="9999"
             />
           </InputContainer>
           {error && <span>{error}</span>}
