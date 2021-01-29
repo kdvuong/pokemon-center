@@ -5,6 +5,7 @@ import React, { Fragment, FunctionComponent, ReactElement, useCallback, useState
 import styled from "styled-components";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Zoom from "@material-ui/core/Zoom";
+import Backdrop from "@material-ui/core/Backdrop";
 
 const Modal = styled(MuiModal)`
   display: flex;
@@ -46,8 +47,16 @@ const Footer = styled.div`
 `;
 
 const SuccessIcon = styled(CheckCircleIcon)`
-  font-size: 2rem;
+  font-size: 2rem !important;
   color: #74d99f;
+`;
+
+const FadeContent = styled.div`
+  width: 100%;
+`;
+
+const FadeLoading = styled.div`
+  position: absolute;
 `;
 
 interface IProps {
@@ -92,7 +101,6 @@ const EditModal: FunctionComponent<IProps> = ({
         setQuery(Query.SUCCESS);
         setTimeout(() => {
           onSuccess();
-          setQuery(Query.IDLE);
         }, 500);
       } catch (err) {
         setQuery(Query.IDLE);
@@ -100,45 +108,49 @@ const EditModal: FunctionComponent<IProps> = ({
     }
   }, [actionOption, onSuccess]);
 
-  const getBodyContent = useCallback(() => {
-    switch (query) {
-      case Query.IDLE:
-        return (
-          <Fragment>
-            <Content>
-              <Title>{title}</Title>
-              {renderBody()}
-            </Content>
-            <Footer>
-              <button onClick={handleClose}>Cancel</button>
-              {actionOption && <button onClick={handleClick}>{actionOption.text}</button>}
-            </Footer>
-          </Fragment>
-        );
-      case Query.PROGRESS:
-        return (
-          <Fade
-            in={true}
-            style={{
-              transitionDelay: "800ms",
-            }}
-            unmountOnExit
-          >
-            <CircularProgress />
-          </Fade>
-        );
-      case Query.SUCCESS:
-        return (
-          <Zoom in={true} unmountOnExit>
-            <SuccessIcon />
-          </Zoom>
-        );
-    }
-  }, [actionOption, handleClick, handleClose, query, renderBody, title]);
+  const handleExit = () => {
+    setQuery(Query.IDLE);
+  };
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <ModalBody>{getBodyContent()}</ModalBody>
+    <Modal
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Zoom in={open} onExited={handleExit}>
+        <ModalBody>
+          {query === Query.SUCCESS ? (
+            <Zoom in={true} unmountOnExit>
+              <SuccessIcon />
+            </Zoom>
+          ) : (
+            <Fragment>
+              <Fade in={query === Query.IDLE}>
+                <FadeContent>
+                  <Content>
+                    <Title>{title}</Title>
+                    {renderBody()}
+                  </Content>
+                  <Footer>
+                    <button onClick={handleClose}>Cancel</button>
+                    {actionOption && <button onClick={handleClick}>{actionOption.text}</button>}
+                  </Footer>
+                </FadeContent>
+              </Fade>
+              <Fade in={query === Query.PROGRESS} unmountOnExit>
+                <FadeLoading>
+                  <CircularProgress />
+                </FadeLoading>
+              </Fade>
+            </Fragment>
+          )}
+        </ModalBody>
+      </Zoom>
     </Modal>
   );
 };
