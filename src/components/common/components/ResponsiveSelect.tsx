@@ -9,7 +9,7 @@ import { FilterProps, FilterHasShortendName } from "shared/interfaces";
 import { FilterButton } from "./FilterButton";
 
 const StyledButton = styled(ButtonBase)`
-  border-radius: 10px;
+  border-radius: 10px !important;
   color: #203e55;
   font-weight: bold;
   transition: all 50ms ease-in-out;
