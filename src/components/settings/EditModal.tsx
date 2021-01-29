@@ -1,22 +1,33 @@
-import Modal from "@material-ui/core/Modal";
-import React, { Fragment, FunctionComponent, ReactElement, useState } from "react";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Fade from "@material-ui/core/Fade";
+import MuiModal from "@material-ui/core/Modal";
+import React, { Fragment, FunctionComponent, ReactElement, useCallback, useState } from "react";
 import styled from "styled-components";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import Zoom from "@material-ui/core/Zoom";
+
+const Modal = styled(MuiModal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ModalBody = styled.div`
   display: flex;
   background-color: white;
   width: 350px;
+  min-height: 200px;
   margin: 1rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   flex-direction: column;
   border-radius: 5px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Content = styled.div`
   padding: 1rem;
+  flex: 1;
+  width: 100%;
 `;
 
 const Title = styled.h2`
@@ -31,12 +42,19 @@ const Footer = styled.div`
   justify-content: flex-end;
   background-color: rgb(242, 243, 245);
   border-radius: 0 0 5px 5px;
+  width: 100%;
+`;
+
+const SuccessIcon = styled(CheckCircleIcon)`
+  font-size: 2rem;
+  color: #74d99f;
 `;
 
 interface IProps {
   title: string;
   open: boolean;
   onClose: () => void;
+  onSuccess: () => void;
   renderBody: () => ReactElement;
   actionOption?: {
     onClick: () => Promise<void>;
@@ -44,41 +62,83 @@ interface IProps {
   };
 }
 
+enum Query {
+  IDLE,
+  PROGRESS,
+  SUCCESS,
+}
+
 const EditModal: FunctionComponent<IProps> = ({
   title,
   open,
   onClose,
+  onSuccess,
   renderBody,
   actionOption,
 }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [query, setQuery] = useState<Query>(Query.IDLE);
 
-  const handleClick = async () => {
-    if (actionOption) {
-      setIsLoading(true);
-      await actionOption.onClick();
-      setIsLoading(false);
+  const handleClose = useCallback(() => {
+    if (query === Query.IDLE) {
+      onClose();
     }
-  };
+  }, [onClose, query]);
 
-  return (
-    <Modal open={open} onClose={onClose}>
-      <ModalBody>
-        {isLoading ? (
-          <div>is loading</div>
-        ) : (
+  const handleClick = useCallback(async () => {
+    if (actionOption) {
+      setQuery(Query.PROGRESS);
+      try {
+        await actionOption.onClick();
+        setQuery(Query.SUCCESS);
+        setTimeout(() => {
+          onSuccess();
+          setQuery(Query.IDLE);
+        }, 500);
+      } catch (err) {
+        setQuery(Query.IDLE);
+      }
+    }
+  }, [actionOption, onSuccess]);
+
+  const getBodyContent = useCallback(() => {
+    switch (query) {
+      case Query.IDLE:
+        return (
           <Fragment>
             <Content>
               <Title>{title}</Title>
               {renderBody()}
             </Content>
             <Footer>
-              <button onClick={onClose}>Cancel</button>
+              <button onClick={handleClose}>Cancel</button>
               {actionOption && <button onClick={handleClick}>{actionOption.text}</button>}
             </Footer>
           </Fragment>
-        )}
-      </ModalBody>
+        );
+      case Query.PROGRESS:
+        return (
+          <Fade
+            in={true}
+            style={{
+              transitionDelay: "800ms",
+            }}
+            unmountOnExit
+          >
+            <CircularProgress />
+          </Fade>
+        );
+      case Query.SUCCESS:
+        return (
+          <Zoom in={true} unmountOnExit>
+            <SuccessIcon />
+          </Zoom>
+        );
+    }
+  }, [actionOption, handleClick, handleClose, query, renderBody, title]);
+
+  return (
+    <Modal open={open} onClose={handleClose}>
+      <ModalBody>{getBodyContent()}</ModalBody>
     </Modal>
   );
 };

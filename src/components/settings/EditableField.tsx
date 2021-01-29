@@ -53,6 +53,11 @@ const EditableField: FunctionComponent<IProps> = ({ name, value, modalOption }) 
     setIsOpen(false);
     onClose?.();
   };
+
+  const handleSuccess = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Container>
       <TextWrapper>
@@ -60,7 +65,12 @@ const EditableField: FunctionComponent<IProps> = ({ name, value, modalOption }) 
         <span>{value}</span>
       </TextWrapper>
       <EditButton onClick={handleOpen}>Edit</EditButton>
-      <EditModal open={isOpen} onClose={handleClose} {...restModalOption} />
+      <EditModal
+        open={isOpen}
+        onClose={handleClose}
+        onSuccess={handleSuccess}
+        {...restModalOption}
+      />
     </Container>
   );
 };
