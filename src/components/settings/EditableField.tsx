@@ -6,6 +6,7 @@ import EditModal from "./EditModal";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
 `;
 
 const TextWrapper = styled.div`
@@ -25,7 +26,15 @@ const TextWrapper = styled.div`
   }
 `;
 
-const EditButton = styled(ButtonBase)``;
+const EditButton = styled(ButtonBase)`
+  padding: 0.5rem 1rem !important;
+  color: #1e90ff !important;
+  height: fit-content !important;
+  border-radius: 5px !important;
+  &:hover {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+`;
 
 interface IProps {
   name: string;

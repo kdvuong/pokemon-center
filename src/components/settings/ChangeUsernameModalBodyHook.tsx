@@ -149,6 +149,7 @@ const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
   const reset = useCallback(() => {
     setName(currentName);
     setDiscriminator(currentDiscriminator);
+    setError("");
   }, [currentDiscriminator, currentName]);
 
   return {
