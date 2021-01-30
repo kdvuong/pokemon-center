@@ -1,5 +1,5 @@
 import { AccountContext } from "contexts/AccountContext";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { accountService } from "services/AccountService";
 import { Username } from "shared/interfaces";
 
@@ -25,19 +25,24 @@ export const useAccount = (isAuthenticated: boolean): AccountContext => {
   }, [isAuthenticated]);
 
   const updateUsername = async (newUsername: Username) => {
-    if (
-      newUsername.name === username?.name &&
-      newUsername.discriminator === username?.discriminator
-    ) {
+    if (newUsername.name === username?.name && newUsername.tag === username?.tag) {
       return;
     }
     await accountService.updateUsername(newUsername);
     setUsername(newUsername);
   };
 
+  const getFormattedUsername = useCallback(() => {
+    return {
+      name: username?.name ?? "",
+      tag: username?.tag.toString().padStart(4, "0") ?? "",
+    };
+  }, [username]);
+
   return {
     username,
     email,
     updateUsername,
+    getFormattedUsername,
   };
 };

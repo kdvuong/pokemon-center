@@ -168,5 +168,10 @@ export interface DamageRelations {
 
 export interface Username {
   name: string;
-  discriminator: number;
+  tag: number;
+}
+
+export interface FormattedUsername {
+  name: string;
+  tag: string;
 }

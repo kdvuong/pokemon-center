@@ -28,16 +28,14 @@ const AccountInfoCard = styled.div`
 `;
 
 const AccountCard: FunctionComponent = () => {
-  const { username } = useContext(accountContext);
-
-  const currentName = username?.name ?? "";
-  const currentDiscriminator = username?.discriminator.toString() ?? "";
+  const { getFormattedUsername } = useContext(accountContext);
+  const { name, tag } = getFormattedUsername();
 
   return (
     <Card>
       <Title>
-        <span>{currentName}</span>
-        <span>{`#${currentDiscriminator}`}</span>
+        <span>{name}</span>
+        <span>{`#${tag}`}</span>
       </Title>
       <AccountInfoCard>
         <UserField />
