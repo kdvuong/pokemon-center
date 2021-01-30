@@ -41,12 +41,8 @@ const InputContainer = styled.div`
   input:nth-child(1) {
     flex: 1;
   }
-  input:nth-child(3) {
+  input:nth-child(4) {
     max-width: 80px;
-    &::before {
-      position: relative;
-      content: "#";
-    }
   }
   &:focus-within {
     border: 1px solid rgba(0, 0, 0, 1);
@@ -57,8 +53,12 @@ const Separator = styled.div`
   border-left: 1px solid rgba(0, 0, 0, 0.3);
   display: flex;
   flex: 1;
-  margin: 0 0.25rem;
+  margin-right: 1rem;
   max-width: 0;
+`;
+
+const TagPrefix = styled.span`
+  padding: 1px 0;
 `;
 
 interface IChangeUsernameModalHook {
@@ -68,72 +68,72 @@ interface IChangeUsernameModalHook {
 }
 
 const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
-  const { username, updateUsername } = useContext(accountContext);
+  const { updateUsername, getFormattedUsername } = useContext(accountContext);
 
-  const currentName = username?.name ?? "";
-  const currentDiscriminator = username?.discriminator.toString() ?? "";
+  const { name: currentName, tag: currentTag } = getFormattedUsername();
 
   const [name, setName] = useState<string>(currentName);
-  const [discriminator, setDiscriminator] = useState<string>(currentDiscriminator);
+  const [tag, setTag] = useState<string>(currentTag);
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
     setName(currentName);
-    setDiscriminator(currentDiscriminator);
-  }, [currentDiscriminator, currentName]);
+    setTag(currentTag);
+  }, [currentTag, currentName]);
 
   const handleNameChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setError("");
     setName(event.currentTarget.value);
   };
 
-  const handleDiscriminatorChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleTagChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setError("");
-    setDiscriminator(event.currentTarget.value);
+    setTag(event.currentTarget.value);
   };
 
   const handleClick = useCallback(async () => {
     const isNameEmpty = name.length === 0;
-    const isDiscriminatorEmpty = discriminator.length === 0;
+    const isTagEmpty = tag.length === 0;
 
     if (isNameEmpty) {
       setError("Name cannot be empty");
     }
 
-    if (isDiscriminatorEmpty) {
-      setError("Discriminator cannot be empty");
+    if (isTagEmpty) {
+      setError("Tag cannot be empty");
     }
 
-    if (isNameEmpty || isDiscriminatorEmpty) {
-      return;
+    if (isNameEmpty || isTagEmpty) {
+      throw new Error();
     }
 
     try {
-      await updateUsername({ name, discriminator: parseInt(discriminator, 10) });
+      await updateUsername({ name, tag: parseInt(tag, 10) });
     } catch (err) {
       if (err.statusCode === 409) {
-        setError("Name and discriminator combination already in use");
+        setError("Name and tag combination already in use");
       } else {
         setError("Unexpected error occurred");
       }
       throw err;
     }
-  }, [discriminator, name, updateUsername]);
+  }, [tag, name, updateUsername]);
 
   const renderBody = useCallback(
     () => (
       <Fragment>
         <Label htmlFor="username">Username</Label>
-        <HiddenLabel htmlFor="discriminator">Discriminator</HiddenLabel>
+        <HiddenLabel htmlFor="tag">Tag</HiddenLabel>
         <InputWrapper>
           <InputContainer>
             <input name="username" id="username" value={name} onChange={handleNameChange} />
             <Separator />
+            <TagPrefix>#</TagPrefix>
             <input
-              name="discriminator"
-              id="discriminator"
-              value={discriminator}
-              onChange={handleDiscriminatorChange}
+              name="tag"
+              id="tag"
+              value={tag}
+              onChange={handleTagChange}
               type="number"
               min="1"
               max="9999"
@@ -143,14 +143,14 @@ const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
         </InputWrapper>
       </Fragment>
     ),
-    [discriminator, error, name]
+    [tag, error, name]
   );
 
   const reset = useCallback(() => {
     setName(currentName);
-    setDiscriminator(currentDiscriminator);
+    setTag(currentTag);
     setError("");
-  }, [currentDiscriminator, currentName]);
+  }, [currentTag, currentName]);
 
   return {
     renderBody,

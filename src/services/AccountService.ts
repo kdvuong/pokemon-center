@@ -26,9 +26,7 @@ export const accountService: AccountService = class {
   }
   public static async updateUsername(username: Username): Promise<Username> {
     try {
-      console.log("updating username");
-      await axios.post("/users/updateUsername", username);
-      console.log("done updating username");
+      await axios.patch("/users/update_username", username);
       return username;
     } catch (err) {
       throw ErrorFactory.get(err);

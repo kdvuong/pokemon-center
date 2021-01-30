@@ -4,14 +4,13 @@ import useChangeUsernameModalHook from "./ChangeUsernameModalBodyHook";
 import EditableField from "./EditableField";
 
 const UserField = () => {
-  const { username } = useContext(accountContext);
+  const { getFormattedUsername } = useContext(accountContext);
   const { renderBody, onSubmit, reset } = useChangeUsernameModalHook();
-  const currentName = username?.name ?? "";
-  const currentDiscriminator = username?.discriminator.toString() ?? "";
+  const { name, tag } = getFormattedUsername();
   return (
     <EditableField
       name="Username"
-      value={`${currentName}#${currentDiscriminator}`}
+      value={`${name}#${tag}`}
       modalOption={{
         title: "Change your username",
         renderBody,
