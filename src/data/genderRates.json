@@ -1,0 +1,58 @@
+[
+  {
+    "id": -1,
+    "ratio": {
+      "male": 0,
+      "female": 0
+    }
+  },
+  {
+    "id": 0,
+    "ratio": {
+      "male": 100,
+      "female": 0
+    }
+  },
+  {
+    "id": 1,
+    "ratio": {
+      "male": 87.5,
+      "female": 12.5
+    }
+  },
+  {
+    "id": 2,
+    "ratio": {
+      "male": 75,
+      "female": 25
+    }
+  },
+  {
+    "id": 4,
+    "ratio": {
+      "male": 50,
+      "female": 50
+    }
+  },
+  {
+    "id": 6,
+    "ratio": {
+      "male": 25,
+      "female": 75
+    }
+  },
+  {
+    "id": 7,
+    "ratio": {
+      "male": 12.5,
+      "female": 87.5
+    }
+  },
+  {
+    "id": 8,
+    "ratio": {
+      "male": 0,
+      "female": 100
+    }
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "hardy",
+    "increase": null,
+    "decrease": null
+  },
+  {
+    "id": 2,
+    "name": "bold",
+    "increase": "defense",
+    "decrease": "attack"
+  },
+  {
+    "id": 3,
+    "name": "modest",
+    "increase": "special_attack",
+    "decrease": "attack"
+  },
+  {
+    "id": 4,
+    "name": "calm",
+    "increase": "special_defense",
+    "decrease": "attack"
+  },
+  {
+    "id": 5,
+    "name": "timid",
+    "increase": "speed",
+    "decrease": "attack"
+  },
+  {
+    "id": 6,
+    "name": "lonely",
+    "increase": "attack",
+    "decrease": "defense"
+  },
+  {
+    "id": 7,
+    "name": "docile",
+    "increase": null,
+    "decrease": null
+  },
+  {
+    "id": 8,
+    "name": "mild",
+    "increase": "special_attack",
+    "decrease": "defense"
+  },
+  {
+    "id": 9,
+    "name": "gentle",
+    "increase": "special_defense",
+    "decrease": "defense"
+  },
+  {
+    "id": 10,
+    "name": "hasty",
+    "increase": "speed",
+    "decrease": "defense"
+  },
+  {
+    "id": 11,
+    "name": "adamant",
+    "increase": "attack",
+    "decrease": "special_attack"
+  },
+  {
+    "id": 12,
+    "name": "impish",
+    "increase": "defense",
+    "decrease": "special_attack"
+  },
+  {
+    "id": 13,
+    "name": "bashful",
+    "increase": null,
+    "decrease": null
+  },
+  {
+    "id": 14,
+    "name": "careful",
+    "increase": "special_defense",
+    "decrease": "special_attack"
+  },
+  {
+    "id": 15,
+    "name": "jolly",
+    "increase": "speed",
+    "decrease": "special_attack"
+  },
+  {
+    "id": 16,
+    "name": "naughty",
+    "increase": "attack",
+    "decrease": "special_defense"
+  },
+  {
+    "id": 17,
+    "name": "lax",
+    "increase": "defense",
+    "decrease": "special_defense"
+  },
+  {
+    "id": 18,
+    "name": "rash",
+    "increase": "special_attack",
+    "decrease": "special_defense"
+  },
+  {
+    "id": 19,
+    "name": "quirky",
+    "increase": null,
+    "decrease": null
+  },
+  {
+    "id": 20,
+    "name": "naive",
+    "increase": "speed",
+    "decrease": "special_defense"
+  },
+  {
+    "id": 21,
+    "name": "brave",
+    "increase": "attack",
+    "decrease": "speed"
+  },
+  {
+    "id": 22,
+    "name": "relaxed",
+    "increase": "defense",
+    "decrease": "speed"
+  },
+  {
+    "id": 23,
+    "name": "quiet",
+    "increase": "special_attack",
+    "decrease": "speed"
+  },
+  {
+    "id": 24,
+    "name": "sassy",
+    "increase": "special_defense",
+    "decrease": "speed"
+  },
+  {
+    "id": 25,
+    "name": "serious",
+    "increase": null,
+    "decrease": null
+  }
+]
