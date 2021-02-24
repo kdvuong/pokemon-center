@@ -60,3 +60,9 @@ export enum DamageClass {
 export enum OAuthType {
   GOOGLE = "google",
 }
+
+export enum Gender {
+  GENDERLESS = "genderless",
+  MALE = "male",
+  FEMALE = "female",
+}
