@@ -1,7 +1,7 @@
 import ButtonBase from "@material-ui/core/ButtonBase";
 import React, { FunctionComponent, ReactElement, useState } from "react";
 import styled from "styled-components";
-import EditModal from "./EditModal";
+import Modal from "../common/components/Modal";
 
 const Container = styled.div`
   display: flex;
@@ -52,7 +52,7 @@ interface IProps {
 
 const EditableField: FunctionComponent<IProps> = ({ name, value, modalOption }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { onClose, ...restModalOption } = modalOption;
+  const { onClose, actionOption, title, renderBody } = modalOption;
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -74,12 +74,14 @@ const EditableField: FunctionComponent<IProps> = ({ name, value, modalOption }) 
         <span>{value}</span>
       </TextWrapper>
       <EditButton onClick={handleOpen}>Edit</EditButton>
-      <EditModal
+      <Modal
         open={isOpen}
         onClose={handleClose}
-        onSuccess={handleSuccess}
-        {...restModalOption}
-      />
+        title={title}
+        actionOption={actionOption ? { ...actionOption, onSuccess: handleSuccess } : undefined}
+      >
+        {renderBody()}
+      </Modal>
     </Container>
   );
 };
