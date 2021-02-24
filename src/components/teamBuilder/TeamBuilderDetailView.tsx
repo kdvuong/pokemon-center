@@ -1,19 +1,13 @@
-import Card from "components/common/components/Card";
 import { withParamId } from "decorators/withParamId";
 import { useTeam } from "hooks/TeamHook";
-import React, { FunctionComponent, useCallback, useEffect, useState, MouseEvent } from "react";
+import React, { FunctionComponent, useCallback, useEffect, useState } from "react";
 import { CreatePokemonDto, TeamPokemon } from "shared/interfaces";
 import styled from "styled-components";
 import AddPokemonDrawer from "./AddPokemonDrawer";
 import isEqual from "lodash-es/isEqual";
-import DeleteIcon from "@material-ui/icons/Delete";
-import { IconButton } from "@material-ui/core";
+import PokemonCard from "./PokemonCard";
 
 const TeamContainer = styled.div``;
-
-const CardContent = styled.div`
-  flex: 1;
-`;
 
 interface IProps {
   id: string;
@@ -31,7 +25,6 @@ const TeamBuilderDetailView: FunctionComponent<IProps> = ({ id }) => {
       const { pokemons, name } = team;
       setPokemons(pokemons);
       setName(name);
-      console.log(team);
     });
   }, [getTeamById, id]);
 
@@ -78,19 +71,24 @@ const TeamBuilderDetailView: FunctionComponent<IProps> = ({ id }) => {
     [pokemons, updatePokemon]
   );
 
-  const handlePokemonClick = useCallback((pokemon: TeamPokemon) => {
-    setCurrentPokemon({ ...pokemon });
-    handleOpenDrawer();
-  }, []);
+  const handlePokemonClick = useCallback(
+    (pokemonId: string) => {
+      const pokemon = pokemons.find((p) => p.id === pokemonId);
+      if (pokemon) {
+        setCurrentPokemon({ ...pokemon });
+        handleOpenDrawer();
+      }
+    },
+    [pokemons]
+  );
 
   const handleDeletePokemon = useCallback(
-    async (event: MouseEvent<HTMLButtonElement>, pokemon: TeamPokemon) => {
-      event.stopPropagation();
+    async (pokemonId: string) => {
       const oldTeam = [...pokemons];
       try {
         const newTeam = [...pokemons];
-        setPokemons(newTeam.filter((p) => p.id !== pokemon.id));
-        await deletePokemon(pokemon.id);
+        setPokemons(newTeam.filter((p) => p.id !== pokemonId));
+        await deletePokemon(pokemonId);
       } catch (err) {
         console.log(err.message);
         setPokemons(oldTeam);
@@ -104,14 +102,12 @@ const TeamBuilderDetailView: FunctionComponent<IProps> = ({ id }) => {
       <h1>{name}</h1>
       <TeamContainer>
         {pokemons.map((pokemon) => (
-          <Card onClick={() => handlePokemonClick(pokemon)} key={pokemon.id}>
-            <CardContent>
-              <span>{pokemon.nickname}</span>
-            </CardContent>
-            <IconButton onClick={(event) => handleDeletePokemon(event, pokemon)}>
-              <DeleteIcon />
-            </IconButton>
-          </Card>
+          <PokemonCard
+            pokemon={pokemon}
+            onClick={handlePokemonClick}
+            onDelete={handleDeletePokemon}
+            key={pokemon.id}
+          />
         ))}
         {pokemons.length < 6 && <button onClick={handleOpenDrawer}>Add pokemon</button>}
       </TeamContainer>
