@@ -1,5 +1,5 @@
-import { authContext } from "contexts/AuthContext";
-import React, { useContext } from "react";
+import { useAuth } from "hooks/AuthHook";
+import React from "react";
 import styled from "styled-components";
 import AccountCard from "./AccountCard";
 
@@ -8,7 +8,7 @@ const Section = styled.div`
 `;
 
 const SettingsView = () => {
-  const { isAuthenticated } = useContext(authContext);
+  const { isAuthenticated } = useAuth();
 
   return (
     <div className="container">

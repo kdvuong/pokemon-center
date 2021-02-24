@@ -1,5 +1,4 @@
-import { authContext } from "contexts/AuthContext";
-import React, { FormEvent, FunctionComponent, useCallback, useContext, useState } from "react";
+import React, { FormEvent, FunctionComponent, useCallback, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
 import {
@@ -13,6 +12,7 @@ import {
   Divider,
   BackToApp,
 } from "./style";
+import { useAuth } from "hooks/AuthHook";
 
 interface IProps {}
 
@@ -23,7 +23,7 @@ function isGoogleResponse(
 }
 
 const Login: FunctionComponent<IProps> = () => {
-  const { isAuthenticated, login, googleLogin } = useContext(authContext);
+  const { isAuthenticated, login, googleLogin } = useAuth();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isEmailError, setIsEmailError] = useState<boolean>(false);
