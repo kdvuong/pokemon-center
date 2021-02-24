@@ -38,7 +38,6 @@ export const NATUREDEX_LINK: DrawerLink = {
 export const TEAMBUILDER_LINK: DrawerLink = {
   path: paths.TEAM_BUILDER,
   name: "Team Builder",
-  wip: true,
 };
 
 export const SETTINGS_LINK: DrawerLink = {

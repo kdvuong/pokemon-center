@@ -10,13 +10,15 @@ const AbilityListView = lazy(() => import("components/common/components/InDevelo
 const TypeListView = lazy(() => import("components/common/components/InDevelopmentView"));
 const NatureListView = lazy(() => import("components/common/components/InDevelopmentView"));
 // detail views
-const PokemonDetailView = lazy(() => import("components/pokemon/detail/PokemonDetailViewWrapper"));
+const PokemonDetailView = lazy(() => import("components/pokemon/detail/PokemonDetailView"));
 const MoveDetailView = lazy(() => import("components/common/components/InDevelopmentView"));
 const AbilityDetailView = lazy(() => import("components/common/components/InDevelopmentView"));
 const TypeDetailView = lazy(() => import("components/common/components/InDevelopmentView"));
 const NatureDetailView = lazy(() => import("components/common/components/InDevelopmentView"));
 
-const TeamBuilderView = lazy(() => import("components/common/components/InDevelopmentView"));
+const TeamBuilderView = lazy(() => import("components/teamBuilder/TeamBuilderView"));
+const TeamBuilderDetailView = lazy(() => import("components/teamBuilder/TeamBuilderDetailView"));
+
 const SettingsView = lazy(() => import("components/settings/SettingsView"));
 
 export const views = {
@@ -33,5 +35,6 @@ export const views = {
   TypeDetailView,
   NatureDetailView,
   TeamBuilderView,
+  TeamBuilderDetailView,
   SettingsView,
 };

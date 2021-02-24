@@ -11,6 +11,7 @@ import { typeService } from "services/TypeService";
 
 interface IPokemonApi {
   getAllPokemonSummaries: () => PokemonSummary[];
+  getAllPokemons: () => Promise<Pokemon[]>;
   getPokemonById: (id: number) => Promise<Pokemon>;
   getPokemonSummaryById: (id: number) => PokemonSummary | null;
   getAbilitiesByIds: (ids: number[]) => Promise<Ability[]>;
@@ -34,6 +35,10 @@ export default function usePokemonApi(): IPokemonApi {
   const getPokemonSummaryById = useCallback((id: number): PokemonSummary | null => {
     return pokemonSummaries.find((pokemon) => pokemon.id === id) ?? null;
   }, []);
+
+  const getAllPokemons = useDeepCallback((): Promise<Pokemon[]> => {
+    return pokemonDbApi.getAll();
+  }, [pokemonDbApi]);
 
   const getPokemonById = useDeepCallback(
     (id: number): Promise<Pokemon> => {
@@ -76,6 +81,7 @@ export default function usePokemonApi(): IPokemonApi {
 
   return {
     getAllPokemonSummaries,
+    getAllPokemons,
     getPokemonById,
     getPokemonSummaryById,
     getAbilitiesByIds,
