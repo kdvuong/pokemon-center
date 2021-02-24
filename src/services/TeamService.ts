@@ -13,6 +13,7 @@ interface TeamService {
     updatePokemonDto: Partial<CreatePokemonDto>
   ) => Promise<TeamPokemon>;
   deleteTeam: (teamId: string) => Promise<boolean>;
+  deletePokemon: (pokemonId: string) => Promise<boolean>;
 }
 
 export const teamService: TeamService = class {
@@ -68,6 +69,15 @@ export const teamService: TeamService = class {
     try {
       const res = await axios.get(`/teams/${teamId}`);
       return toTeam(res.data);
+    } catch (err) {
+      throw ErrorFactory.get(err);
+    }
+  }
+
+  public static async deletePokemon(pokemonId: string) {
+    try {
+      await axios.delete(`/pokemons/${pokemonId}`);
+      return true;
     } catch (err) {
       throw ErrorFactory.get(err);
     }

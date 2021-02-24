@@ -13,6 +13,7 @@ interface ITeam {
     currentPokemon: TeamPokemon,
     updatePokemonDto: Partial<CreatePokemonDto>
   ) => Promise<TeamPokemon>;
+  deletePokemon: (pokemonId: string) => Promise<boolean>;
 }
 
 export const useTeam = (): ITeam => {
@@ -47,6 +48,10 @@ export const useTeam = (): ITeam => {
     []
   );
 
+  const deletePokemon = useCallback((pokemonId: string) => {
+    return teamService.deletePokemon(pokemonId);
+  }, []);
+
   return {
     getTeams,
     getTeamById,
@@ -54,5 +59,6 @@ export const useTeam = (): ITeam => {
     deleteTeam,
     addPokemon,
     updatePokemon,
+    deletePokemon,
   };
 };
