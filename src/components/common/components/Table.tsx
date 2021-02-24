@@ -1,32 +1,45 @@
-import React, { useEffect, useCallback, useState, FunctionComponent, useMemo } from "react";
+import React, { useEffect, useCallback, useState, useMemo, CSSProperties } from "react";
 import styled from "styled-components";
 import orderBy from "lodash-es/orderBy";
 import { ColumnModel, DataObject, SortModel } from "shared/interfaces";
 import { SortDirection } from "shared/enums";
+import { FixedSizeList, ListChildComponentProps } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
 
-const StyledHeaderCell = styled.th`
-  position: sticky;
+const Cell = styled.div`
+  flex: 1;
+  text-align: center;
+  margin: auto;
 `;
 
-const StyledTable = styled.table`
+const Row = styled.div`
+  display: flex;
+`;
+
+const StyledTable = styled.div`
+  display: flex;
+  flex-direction: column;
+  border-spacing: 0;
+  /* border: 1px solid black; */
   width: 100%;
-  thead tr:nth-child(1) th {
-    background: #fafafa;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
+  height: 100%;
 `;
 
-interface IProps {
-  data: DataObject[];
-  columns: ColumnModel[];
+const TableBody = styled.div`
+  height: 100%;
+`;
+
+interface IProps<T> {
+  data: T[];
+  columns: ColumnModel<T>[];
   sortModel?: SortModel;
+  renderRow?: (rowData: T, index: number, key: string, style: CSSProperties) => JSX.Element;
+  rowHeight?: number;
 }
 
-const Table: FunctionComponent<IProps> = (props) => {
-  const { data, columns, sortModel } = props;
-  const [sortedData, setSortedData] = useState<DataObject[]>(data);
+function Table<T extends DataObject>(props: IProps<T>) {
+  const { data, columns, sortModel, renderRow, rowHeight } = props;
+  const [sortedData, setSortedData] = useState<T[]>(data);
   const [sortCategory, setSortCategory] = useState<string>(
     sortModel?.field ?? columns[0].fieldName
   );
@@ -35,15 +48,15 @@ const Table: FunctionComponent<IProps> = (props) => {
   );
 
   useEffect(() => {
-    // we use switch block because we don't want to be strongly coupled with the field names of move.
     let newSortedData = data;
     const targetColumn = columns.find((c) => c.fieldName === sortCategory);
 
     if (data.length > 0 && targetColumn) {
+      const { customSort } = targetColumn;
       newSortedData = orderBy(
         data,
-        [targetColumn.sortFunction ?? targetColumn.fieldName],
-        [sortDirection]
+        customSort ? [customSort.sortFunction, targetColumn.fieldName] : [targetColumn.fieldName],
+        customSort ? [customSort.sortDirection, sortDirection] : [sortDirection]
       );
     }
 
@@ -64,33 +77,67 @@ const Table: FunctionComponent<IProps> = (props) => {
   );
 
   const Header = useMemo(() => {
-    return columns.map((column) => (
-      <StyledHeaderCell
-        key={column.name}
-        onClick={column.sortable ? () => toggleSort(column.fieldName) : undefined}
-      >
-        {column.name}
-      </StyledHeaderCell>
-    ));
+    return (
+      <Row>
+        {columns.map((column) => (
+          <Cell
+            key={column.name}
+            onClick={column.sortable ? () => toggleSort(column.fieldName) : undefined}
+          >
+            {column.name}
+          </Cell>
+        ))}
+      </Row>
+    );
   }, [columns, toggleSort]);
+
+  const RenderRow = useCallback(
+    (props: ListChildComponentProps) => {
+      const { index, style } = props;
+      const rowData = sortedData[index];
+      if (!rowData) {
+        return null;
+      }
+      const rowCells = columns.map((column) => {
+        return <Cell key={column.fieldName}>{rowData[column.fieldName]}</Cell>;
+      });
+      const rowKey = rowData.toString() + index;
+      return (
+        renderRow?.(rowData, index, rowKey, style) ?? (
+          <Row key={rowKey} style={{ ...style }}>
+            {rowCells}
+          </Row>
+        )
+      );
+    },
+    [columns, renderRow, sortedData]
+  );
 
   return (
     <StyledTable>
-      <thead>
-        <tr>{Header}</tr>
-      </thead>
-      <tbody>
-        {sortedData.length > 0 &&
-          sortedData.map((datum, index) => (
-            <tr key={datum.toString() + index}>
-              {columns.map((column) => {
-                return <td key={column.fieldName}>{datum[column.fieldName]}</td>;
-              })}
-            </tr>
-          ))}
-      </tbody>
+      {Header}
+      {sortedData.length > 0 && (
+        <TableBody>
+          <AutoSizer>
+            {({ height, width }) => {
+              return (
+                <FixedSizeList
+                  height={height}
+                  itemCount={data.length}
+                  itemSize={rowHeight ?? 35}
+                  width={width}
+                >
+                  {RenderRow}
+                </FixedSizeList>
+              );
+            }}
+          </AutoSizer>
+        </TableBody>
+      )}
+
+      {/* <tbody>{sortedData.length > 0 && sortedData.map(Row)}</tbody> */}
     </StyledTable>
   );
-};
+}
 
 export default Table;
