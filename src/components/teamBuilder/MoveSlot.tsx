@@ -24,7 +24,7 @@ const MoveSlotWrapper = styled.div<{ slotNumber: number; active: boolean }>`
   box-shadow: 0 0px 1.9px rgba(0, 0, 0, 0.012), 0 0px 4.6px rgba(0, 0, 0, 0.01),
     0 0px 8.6px rgba(0, 0, 0, 0.009), 0 0px 15.4px rgba(0, 0, 0, 0.012),
     0 0px 28.8px rgba(0, 0, 0, 0.026), 0 0px 69px rgba(0, 0, 0, 0.08);
-  transition: all 100ms linear;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   font-family: "Nunito Sans";
   text-transform: capitalize;
   cursor: pointer;

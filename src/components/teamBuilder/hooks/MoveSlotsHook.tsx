@@ -36,7 +36,7 @@ export function useMoveSlots(
 
   useEffect(() => {
     if (selectedPokemon) {
-      if (currentPokemon?.pokemon_id === selectedPokemon.id.toString()) {
+      if (currentPokemon?.pokemon_id === selectedPokemon.id) {
         getMovesByIds(currentPokemon.moves.filter((m) => m !== -1)).then((moves) => {
           // remapping moves to maintain correct order
           const currentMoves = currentPokemon.moves.map(

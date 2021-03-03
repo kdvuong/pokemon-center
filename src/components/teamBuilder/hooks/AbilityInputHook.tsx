@@ -19,7 +19,7 @@ export function useAbilityInput(
   useEffect(() => {
     if (selectedPokemon) {
       let ability;
-      if (currentPokemon?.pokemon_id === selectedPokemon.id.toString()) {
+      if (currentPokemon?.pokemon_id === selectedPokemon.id) {
         ability = selectedPokemon.abilities.find((a) => currentPokemon.ability_id === a.id) ?? null;
         setSelectedAbility(ability);
       } else {

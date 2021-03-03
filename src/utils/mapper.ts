@@ -1,3 +1,4 @@
+import { Generation } from "shared/enums";
 import {
   Ability,
   PokemonAbility,
@@ -74,6 +75,7 @@ export function toPokemonAbility(
       description: "",
       effect: "",
       short_effect: "",
+      generation: Generation.GEN_1,
     };
     return { ...ability, ...match };
   });

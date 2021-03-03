@@ -1,12 +1,47 @@
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
+import ClearIcon from "@material-ui/icons/Clear";
 import Card from "components/common/components/Card";
-import React, { FunctionComponent, useCallback, MouseEvent } from "react";
+import TypeIcon from "components/common/components/TypeIcon";
+import PokemonImage from "components/pokemon/list/components/PokemonImage";
+import usePokemonApi from "hooks/PokemonApiHook";
+import React, { FunctionComponent, useCallback, MouseEvent, useMemo } from "react";
 import { TeamPokemon } from "shared/interfaces";
 import styled from "styled-components";
 
 const CardContent = styled.div`
+  display: flex;
   flex: 1;
+  align-items: center;
+`;
+
+const TypeContainer = styled.div`
+  display: flex;
+  margin-top: 1rem;
+`;
+
+const Level = styled.span`
+  margin-right: 0.5rem;
+`;
+
+const Info = styled.div`
+  margin-left: 0.5rem;
+`;
+
+const TypeIconWrapper = styled.div`
+  margin-right: 0.5rem;
+`;
+
+const TextInfo = styled.div`
+  font-weight: bold;
+`;
+
+const TopRightClearButton = styled(ClearIcon)`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: rgba(0, 0, 0, 0.3);
+  &:hover {
+    color: rgba(0, 0, 0, 1);
+  }
 `;
 
 interface IProps {
@@ -16,12 +51,18 @@ interface IProps {
 }
 
 const PokemonCard: FunctionComponent<IProps> = ({ pokemon, onClick, onDelete }) => {
+  const { getPokemonSummaryById } = usePokemonApi();
+  const pokemonData = useMemo(() => getPokemonSummaryById(pokemon.pokemon_id), [
+    getPokemonSummaryById,
+    pokemon.pokemon_id,
+  ]);
+
   const handleClick = useCallback(() => {
     onClick(pokemon.id);
   }, [onClick, pokemon.id]);
 
   const handleDelete = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
+    (event: MouseEvent<SVGSVGElement>) => {
       event.stopPropagation();
       onDelete(pokemon.id);
     },
@@ -29,13 +70,24 @@ const PokemonCard: FunctionComponent<IProps> = ({ pokemon, onClick, onDelete }) 
   );
 
   return (
-    <Card onClick={handleClick}>
+    <Card onClick={handleClick} hover>
       <CardContent>
-        <span>{pokemon.nickname}</span>
+        <PokemonImage id={pokemon.pokemon_id} />
+        <Info>
+          <TextInfo>
+            <Level>Lv.{pokemon.level}</Level>
+            <span>{pokemon.nickname}</span>
+          </TextInfo>
+          <TypeContainer>
+            {pokemonData?.types.map((t) => (
+              <TypeIconWrapper>
+                <TypeIcon type={t} size={14} expanded />
+              </TypeIconWrapper>
+            ))}
+          </TypeContainer>
+        </Info>
       </CardContent>
-      <IconButton onClick={handleDelete}>
-        <DeleteIcon />
-      </IconButton>
+      <TopRightClearButton onClick={handleDelete} />
     </Card>
   );
 };

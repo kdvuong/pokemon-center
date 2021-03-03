@@ -124,7 +124,7 @@ export function useStatsTable(
 
   useEffect(() => {
     if (currentPokemon && selectedPokemon) {
-      if (currentPokemon.pokemon_id !== selectedPokemon.id.toString()) {
+      if (currentPokemon.pokemon_id !== selectedPokemon.id) {
         return;
       }
       const {

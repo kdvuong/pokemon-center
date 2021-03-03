@@ -6,8 +6,56 @@ import styled from "styled-components";
 import AddPokemonDrawer from "./AddPokemonDrawer";
 import isEqual from "lodash-es/isEqual";
 import PokemonCard from "./PokemonCard";
+import { Divider } from "@material-ui/core";
 
-const TeamContainer = styled.div``;
+const ViewContainer = styled.div``;
+
+const TeamContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const PokemonCardContainer = styled.div<{ index: number }>`
+  flex: 0 0 50%;
+  & > div {
+    ${(props) => (props.index % 2 === 0 ? "margin-right: 0.5rem;" : "margin-left: 0.5rem;")}
+  }
+  @media (max-width: 1100px) {
+    flex: 0 0 100%;
+    & > div {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+`;
+
+const TeamCount = styled.div`
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  & > div {
+    display: flex;
+    span {
+      margin-left: 0.5rem;
+      font-weight: bold;
+    }
+  }
+  & > span {
+    flex: 1;
+    text-align: end;
+  }
+  i {
+    color: #dd2020;
+    font-size: 20px;
+  }
+`;
+
+const AddButtonContainer = styled.div`
+  flex: 1;
+  justify-content: center;
+  margin: 1rem;
+  display: flex;
+`;
 
 interface IProps {
   id: string;
@@ -98,19 +146,33 @@ const TeamBuilderDetailView: FunctionComponent<IProps> = ({ id }) => {
   );
 
   return (
-    <div className="container">
+    <ViewContainer className="container">
       <h1>{name}</h1>
+      <TeamCount>
+        <div>
+          <i className="icon-pokeball" />
+          <span>Pokemons</span>
+        </div>
+        <span>{`${pokemons.length}/6`}</span>
+      </TeamCount>
+      <Divider />
       <TeamContainer>
-        {pokemons.map((pokemon) => (
-          <PokemonCard
-            pokemon={pokemon}
-            onClick={handlePokemonClick}
-            onDelete={handleDeletePokemon}
-            key={pokemon.id}
-          />
+        {pokemons.map((pokemon, index) => (
+          <PokemonCardContainer index={index}>
+            <PokemonCard
+              pokemon={pokemon}
+              onClick={handlePokemonClick}
+              onDelete={handleDeletePokemon}
+              key={pokemon.id}
+            />
+          </PokemonCardContainer>
         ))}
-        {pokemons.length < 6 && <button onClick={handleOpenDrawer}>Add pokemon</button>}
       </TeamContainer>
+      {pokemons.length < 6 && (
+        <AddButtonContainer>
+          <button onClick={handleOpenDrawer}>Add pokemon</button>
+        </AddButtonContainer>
+      )}
       <AddPokemonDrawer
         currentPokemon={currentPokemon}
         open={openDrawer}
@@ -118,7 +180,7 @@ const TeamBuilderDetailView: FunctionComponent<IProps> = ({ id }) => {
         onAddPokemon={handleAddPokemon}
         onUpdatePokemon={handleUpdatePokemon}
       />
-    </div>
+    </ViewContainer>
   );
 };
 

@@ -14,19 +14,16 @@ export const POKEDEX_LINK: DrawerLink = {
 export const MOVEDEX_LINK: DrawerLink = {
   path: paths.MOVE_LIST,
   name: "Move Dex",
-  wip: true,
 };
 
 export const ABILITYDEX_LINK: DrawerLink = {
   path: paths.ABILITY_LIST,
   name: "Ability Dex",
-  wip: true,
 };
 
 export const TYPEDEX_LINK: DrawerLink = {
   path: paths.TYPE_LIST,
   name: "Type Dex",
-  wip: true,
 };
 
 export const NATUREDEX_LINK: DrawerLink = {

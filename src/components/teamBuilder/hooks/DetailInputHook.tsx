@@ -43,7 +43,7 @@ export function useDetailInput(
         availableGender.push(Gender.FEMALE);
       }
 
-      if (currentPokemon?.pokemon_id === selectedPokemon.id.toString()) {
+      if (currentPokemon?.pokemon_id === selectedPokemon.id) {
         setLevel(currentPokemon.level);
         setIsShiny(currentPokemon.shiny);
         setGender(currentPokemon.gender as Gender);

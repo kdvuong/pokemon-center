@@ -6,8 +6,8 @@ import { SortDirection } from "shared/enums";
 import { FixedSizeList, ListChildComponentProps } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
-const Cell = styled.div`
-  flex: 1;
+const Cell = styled.div<{ isMain?: boolean }>`
+  flex: ${(props) => (props.isMain ? 2 : 1)};
   text-align: center;
   margin: auto;
 `;
@@ -35,10 +35,11 @@ interface IProps<T> {
   sortModel?: SortModel;
   renderRow?: (rowData: T, index: number, key: string, style: CSSProperties) => JSX.Element;
   rowHeight?: number;
+  mainColumn?: string;
 }
 
 function Table<T extends DataObject>(props: IProps<T>) {
-  const { data, columns, sortModel, renderRow, rowHeight } = props;
+  const { data, columns, sortModel, renderRow, rowHeight, mainColumn } = props;
   const [sortedData, setSortedData] = useState<T[]>(data);
   const [sortCategory, setSortCategory] = useState<string>(
     sortModel?.field ?? columns[0].fieldName
@@ -83,13 +84,14 @@ function Table<T extends DataObject>(props: IProps<T>) {
           <Cell
             key={column.name}
             onClick={column.sortable ? () => toggleSort(column.fieldName) : undefined}
+            isMain={column.name === mainColumn}
           >
             {column.name}
           </Cell>
         ))}
       </Row>
     );
-  }, [columns, toggleSort]);
+  }, [columns, mainColumn, toggleSort]);
 
   const RenderRow = useCallback(
     (props: ListChildComponentProps) => {
@@ -99,7 +101,11 @@ function Table<T extends DataObject>(props: IProps<T>) {
         return null;
       }
       const rowCells = columns.map((column) => {
-        return <Cell key={column.fieldName}>{rowData[column.fieldName]}</Cell>;
+        return (
+          <Cell key={column.fieldName} isMain={column.name === mainColumn}>
+            {rowData[column.fieldName]}
+          </Cell>
+        );
       });
       const rowKey = rowData.toString() + index;
       return (
@@ -110,7 +116,7 @@ function Table<T extends DataObject>(props: IProps<T>) {
         )
       );
     },
-    [columns, renderRow, sortedData]
+    [columns, mainColumn, renderRow, sortedData]
   );
 
   return (

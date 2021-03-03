@@ -27,7 +27,7 @@ const TeamCard: FunctionComponent<IProps> = ({ team, onDelete }) => {
 
   return (
     <Link to={paths.TEAM_BUILDER_DETAIL.replace(":id", team.id)}>
-      <Card>
+      <Card hover>
         <Content>
           <span>{team.name}</span>
         </Content>

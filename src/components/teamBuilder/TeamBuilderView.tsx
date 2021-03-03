@@ -25,11 +25,6 @@ const TeamBuilderView: FunctionComponent<IProps> = () => {
     setIsOpen(false);
   };
 
-  const handleGetTeams = useCallback(async () => {
-    const teams = await getTeams();
-    console.log(teams);
-  }, [getTeams]);
-
   const handleCreateTeamSuccess = useCallback(
     (newTeam: Team) => {
       setTeams([...teams, newTeam]);
@@ -57,7 +52,6 @@ const TeamBuilderView: FunctionComponent<IProps> = () => {
         <TeamCard team={team} key={team.id} onDelete={handleDelete} />
       ))}
 
-      <button onClick={handleGetTeams}>get teams</button>
       <button onClick={handleOpen}>create team</button>
       <CreateTeamModal
         open={isOpen}

@@ -104,9 +104,8 @@ const AddPokemonDrawer: FunctionComponent<IProps> = ({
   useEffect(() => {
     if (open) {
       if (currentPokemon) {
-        const id = parseInt(currentPokemon.pokemon_id);
         // TODO: handle error
-        getPokemonById(id).then((pokemon) => {
+        getPokemonById(currentPokemon.pokemon_id).then((pokemon) => {
           setSelectedPokemon(pokemon);
           setPokemonNameSearch(pokemon.name);
         });
@@ -134,7 +133,7 @@ const AddPokemonDrawer: FunctionComponent<IProps> = ({
   const handleAddPokemon = useDeepCallback(async () => {
     if (selectedPokemon && gender && selectedAbility) {
       await onAddPokemon({
-        pokemon_id: selectedPokemon.id.toString(),
+        pokemon_id: selectedPokemon.id,
         nickname: selectedPokemon.name,
         shiny: isShiny,
         level: level,
@@ -172,7 +171,7 @@ const AddPokemonDrawer: FunctionComponent<IProps> = ({
   const handleUpdatePokemon = useCallback(async () => {
     if (selectedPokemon && gender && selectedAbility && currentPokemon) {
       await onUpdatePokemon(currentPokemon, {
-        pokemon_id: selectedPokemon.id.toString(),
+        pokemon_id: selectedPokemon.id,
         nickname: selectedPokemon.name,
         shiny: isShiny,
         level: level,

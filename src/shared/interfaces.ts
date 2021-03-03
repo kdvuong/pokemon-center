@@ -80,6 +80,7 @@ export interface Ability {
   description: string;
   effect: string;
   short_effect: string;
+  generation: Generation;
 }
 
 export interface PokemonAbility extends Ability {
@@ -183,7 +184,7 @@ export interface FormattedUsername {
 }
 
 export interface CreatePokemonDto {
-  pokemon_id: string;
+  pokemon_id: number;
   nickname: string;
   shiny: boolean;
   level: number;

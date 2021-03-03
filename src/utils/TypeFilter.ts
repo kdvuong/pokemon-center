@@ -26,6 +26,29 @@ export function getTypeName(type: Type): string {
   });
 }
 
+export function getTypeId(type: Type): number {
+  return $enum.mapValue(type).with({
+    [Type.NORMAL]: 1,
+    [Type.FIGHTING]: 2,
+    [Type.FLYING]: 3,
+    [Type.POISON]: 4,
+    [Type.GROUND]: 5,
+    [Type.ROCK]: 6,
+    [Type.BUG]: 7,
+    [Type.GHOST]: 8,
+    [Type.STEEL]: 9,
+    [Type.FIRE]: 10,
+    [Type.WATER]: 11,
+    [Type.GRASS]: 12,
+    [Type.ELECTRIC]: 13,
+    [Type.PSYCHIC]: 14,
+    [Type.ICE]: 15,
+    [Type.DRAGON]: 16,
+    [Type.DARK]: 17,
+    [Type.FAIRY]: 18,
+  });
+}
+
 export function getTypeIcon(type: Type): string {
   return $enum.mapValue(type).with({
     [Type.NORMAL]: icons.NormalIcon,
