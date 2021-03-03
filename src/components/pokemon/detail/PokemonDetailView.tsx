@@ -1,3 +1,4 @@
+import { toInt, withParamId } from "decorators/withParamId";
 import React, { FunctionComponent, useCallback, useState } from "react";
 import styled from "styled-components";
 import ProfileBanner from "./components/banner/ProfileBanner";
@@ -37,4 +38,4 @@ const PokemonDetailView: FunctionComponent<IProps> = (props) => {
   );
 };
 
-export default PokemonDetailView;
+export default withParamId(PokemonDetailView, toInt);

@@ -6,11 +6,14 @@ import "./icons.css";
 import App from "./App";
 import { Config, register } from "./serviceWorkerRegistration";
 import { BrowserRouter } from "react-router-dom";
+import { AuthStore } from "stores/AuthStore";
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
-      <App />
+      <AuthStore.Container>
+        <App />
+      </AuthStore.Container>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

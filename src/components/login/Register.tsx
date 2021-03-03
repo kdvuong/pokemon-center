@@ -1,5 +1,4 @@
-import { authContext } from "contexts/AuthContext";
-import React, { FormEvent, FunctionComponent, useCallback, useContext, useState } from "react";
+import React, { FormEvent, FunctionComponent, useCallback, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from "react-google-login";
 import { Link } from "react-router-dom";
@@ -14,6 +13,7 @@ import {
   SubTextContainer,
   Title,
 } from "./style";
+import { useAuth } from "hooks/AuthHook";
 
 interface IProps {}
 
@@ -24,7 +24,7 @@ function isGoogleResponse(
 }
 
 const Register: FunctionComponent<IProps> = () => {
-  const { isAuthenticated, register, googleLogin } = useContext(authContext);
+  const { isAuthenticated, register, googleLogin } = useAuth();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");

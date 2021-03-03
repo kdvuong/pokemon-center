@@ -30,7 +30,7 @@ export const baseMoveColumns: ColumnModel[] = [
 ];
 
 const MoveTable: FunctionComponent<IProps> = ({ moves }) => {
-  return <Table data={moves} columns={baseMoveColumns} />;
+  return <Table data={moves} columns={baseMoveColumns} mainColumn="Move" rowHeight={50} />;
 };
 
 export default MoveTable;

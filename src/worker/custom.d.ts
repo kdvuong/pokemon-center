@@ -9,8 +9,8 @@ declare module "comlink-loader!*" {
     filter(
       data: PokemonSummary[],
       searchValue: string,
-      genFilter: Generation | null,
-      typeFilter: Type | null
+      genFilter?: Generation | null,
+      typeFilter?: Type | null
     ): Promise<PokemonSummary[]>;
   }
 

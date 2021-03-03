@@ -2,12 +2,17 @@ import React, { FunctionComponent } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 
+interface StyleProps {
+  width?: number;
+}
+
 const useStyles = makeStyles({
-  root: {
+  fullRoot: {
     borderRadius: "20px 20px 0 0",
   },
   list: {
-    width: 250,
+    width: (props: StyleProps) => props.width ?? 250,
+    height: "100%",
   },
   fullList: {
     width: "auto",
@@ -24,11 +29,12 @@ type DrawerSide = "top" | "left" | "bottom" | "right";
 interface IProps {
   side: DrawerSide;
   open: boolean;
+  width?: number;
   onClose: () => void;
 }
 
-const TemporaryDrawer: FunctionComponent<IProps> = ({ side, open, children, onClose }) => {
-  const classes = useStyles();
+const TemporaryDrawer: FunctionComponent<IProps> = ({ side, open, width, children, onClose }) => {
+  const classes = useStyles({ width });
 
   const sideList = () => (
     <div className={classes.list} role="presentation">
@@ -56,7 +62,7 @@ const TemporaryDrawer: FunctionComponent<IProps> = ({ side, open, children, onCl
       open={open}
       onClose={onClose}
       classes={{
-        paper: classes.root,
+        paper: side === "top" || side === "bottom" ? classes.fullRoot : undefined,
       }}
     >
       {displayList()}

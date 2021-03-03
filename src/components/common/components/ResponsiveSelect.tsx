@@ -1,35 +1,17 @@
-import React, { useState, useRef, useCallback, FunctionComponent, MouseEvent } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  FunctionComponent,
+  MouseEvent,
+  useMemo,
+} from "react";
 import styled from "styled-components";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import { useMediaQuery } from "react-responsive";
-import ArrowDropDown from "@material-ui/icons/ArrowDropDown";
 import Popover from "@material-ui/core/Popover";
 import Drawer from "./TemporaryDrawer";
 import { FilterProps, FilterHasShortendName } from "shared/interfaces";
 import { FilterButton } from "./FilterButton";
-
-const StyledButton = styled(ButtonBase)`
-  border-radius: 10px !important;
-  color: #203e55;
-  font-weight: bold;
-  transition: all 50ms ease-in-out;
-`;
-
-const ButtonContent = styled.div`
-  display: flex;
-  align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-
-  span {
-    padding-left: 10px;
-  }
-`;
-
-const Arrow = styled(({ active, ...props }) => <ArrowDropDown {...props} />)`
-  transform: ${(props) => (props.active ? "rotate(-180deg)" : "rotate(0)")};
-  transition: all 200ms ease-in-out;
-`;
 
 const PopoverContainer = styled.div`
   display: flex;
@@ -55,22 +37,53 @@ const ItemsContainer = styled.div`
   overflow-y: scroll;
 `;
 
+const AnchorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+`;
+
+const Label = styled.span`
+  text-align: center;
+  color: #6e7a8a;
+`;
+
 function instanceOfFilterHasShortendName(object: any): object is FilterHasShortendName<any> {
   return "getShortenedValueName" in object;
 }
 
-const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem, onChange }) => {
+export interface AnchorProps {
+  active: boolean;
+  onClick: () => void;
+  onRef: (el: HTMLButtonElement) => void;
+  currentName: string;
+}
+
+interface IProps extends FilterProps {
+  renderAnchor: (props: AnchorProps) => JSX.Element;
+  label?: string;
+}
+
+const ResponsiveSelect: FunctionComponent<IProps> = ({
+  filter,
+  currentItem,
+  onChange,
+  renderAnchor,
+  label,
+}) => {
   const [showItems, setShowItems] = useState(false);
   const anchorEl = useRef<HTMLButtonElement | null>(null);
 
   const isSmallScreen = useMediaQuery({ query: "(max-width: 659px)" });
 
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      setShowItems(!showItems);
-    },
-    [showItems]
-  );
+  const handleAnchorRef = (el: HTMLButtonElement) => {
+    anchorEl.current = el;
+  };
+
+  const handleClick = useCallback(() => {
+    setShowItems(!showItems);
+  }, [showItems]);
 
   const handleClose = useCallback(() => {
     setShowItems(false);
@@ -96,14 +109,23 @@ const ResponsiveSelect: FunctionComponent<FilterProps> = ({ filter, currentItem,
   const openPopover = showItems && !isSmallScreen;
   const openDrawer = showItems && isSmallScreen;
 
+  const Anchor = useMemo(
+    () =>
+      renderAnchor({
+        active: showItems,
+        onClick: handleClick,
+        onRef: handleAnchorRef,
+        currentName: getCurrentItemName(),
+      }),
+    [getCurrentItemName, handleClick, renderAnchor, showItems]
+  );
+
   return (
     <div>
-      <StyledButton onClick={handleClick} ref={anchorEl}>
-        <ButtonContent>
-          <span>{getCurrentItemName()}</span>
-          <Arrow active={showItems} />
-        </ButtonContent>
-      </StyledButton>
+      <AnchorContainer>
+        {Anchor}
+        {label && <Label>{label}</Label>}
+      </AnchorContainer>
       <Popover
         id={openPopover ? "simple-popover" : undefined}
         open={openPopover}

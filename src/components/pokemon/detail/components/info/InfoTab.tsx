@@ -6,6 +6,7 @@ import InfoBox from "./InfoBox";
 import { Pokemon, PokemonAbility } from "shared/interfaces";
 import usePokemonApi from "hooks/PokemonApiHook";
 import useDeepCompareEffect from "use-deep-compare-effect";
+import { toPokemonAbility } from "utils/mapper";
 
 interface IProps {
   pokemon: Pokemon;
@@ -18,15 +19,7 @@ const InfoTab: FunctionComponent<IProps> = ({ pokemon }) => {
   useDeepCompareEffect(() => {
     const abilityIds = pokemon.abilities.map((ability) => ability.id);
     getAbilitiesByIds(abilityIds).then((res) => {
-      const pokemonAbilities: PokemonAbility[] = pokemon.abilities.map((ability) => {
-        const match = res.find((a) => a.id === ability.id) ?? {
-          ...ability,
-          description: "",
-          effect: "",
-          short_effect: "",
-        };
-        return { ...ability, ...match };
-      });
+      const pokemonAbilities = toPokemonAbility(pokemon.abilities, res);
       setAbilities(pokemonAbilities);
     });
   }, [pokemon]);

@@ -1,11 +1,11 @@
-import { authContext } from "contexts/AuthContext";
-import React, { Fragment, FunctionComponent, useContext, useMemo } from "react";
+import React, { Fragment, FunctionComponent, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { paths } from "router/paths";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import styled from "styled-components";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import { accountContext } from "contexts/AccountContext";
+import { useAuth } from "hooks/AuthHook";
+import { useAccount } from "hooks/AccountHook";
 
 const Header = styled.div`
   display: flex;
@@ -61,8 +61,8 @@ const SecondaryButton = styled(({ navigate, ...props }) => <ButtonBase {...props
 `;
 
 const UserControl: FunctionComponent = () => {
-  const { isAuthenticated, logout } = useContext(authContext);
-  const { username } = useContext(accountContext);
+  const { isAuthenticated, logout } = useAuth();
+  const { username } = useAccount();
   const LoginLogout = useMemo(
     () =>
       isAuthenticated ? (

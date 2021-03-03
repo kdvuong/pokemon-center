@@ -1,13 +1,13 @@
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Fade from "@material-ui/core/Fade";
 import MuiModal from "@material-ui/core/Modal";
-import React, { Fragment, FunctionComponent, ReactElement, useCallback, useState } from "react";
+import React, { Fragment, ReactNode, useCallback, useState } from "react";
 import styled from "styled-components";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import Zoom from "@material-ui/core/Zoom";
 import Backdrop from "@material-ui/core/Backdrop";
 
-const Modal = styled(MuiModal)`
+const ModalWrapper = styled(MuiModal)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +16,9 @@ const Modal = styled(MuiModal)`
 const ModalBody = styled.div`
   display: flex;
   background-color: white;
-  width: 350px;
+  min-width: 350px;
   min-height: 200px;
+  max-height: calc(100% - 100px);
   margin: 1rem;
   flex-direction: column;
   border-radius: 5px;
@@ -62,14 +63,14 @@ const FadeLoading = styled.div`
   position: absolute;
 `;
 
-interface IProps {
+interface IProps<T> {
   title: string;
   open: boolean;
   onClose: () => void;
-  onSuccess: () => void;
-  renderBody: () => ReactElement;
+  children?: ReactNode;
   actionOption?: {
-    onClick: () => Promise<void>;
+    onClick: () => Promise<T>;
+    onSuccess: (res: T) => void;
     text: string;
   };
 }
@@ -80,14 +81,13 @@ enum Query {
   SUCCESS,
 }
 
-const EditModal: FunctionComponent<IProps> = ({
+const Modal = <T extends Object | void>({
   title,
   open,
   onClose,
-  onSuccess,
-  renderBody,
   actionOption,
-}) => {
+  children,
+}: IProps<T>) => {
   const [query, setQuery] = useState<Query>(Query.IDLE);
 
   const handleClose = useCallback(() => {
@@ -100,23 +100,23 @@ const EditModal: FunctionComponent<IProps> = ({
     if (actionOption) {
       setQuery(Query.PROGRESS);
       try {
-        await actionOption.onClick();
+        const res = await actionOption.onClick();
         setQuery(Query.SUCCESS);
         setTimeout(() => {
-          onSuccess();
+          actionOption.onSuccess(res);
         }, 500);
       } catch (err) {
         setQuery(Query.IDLE);
       }
     }
-  }, [actionOption, onSuccess]);
+  }, [actionOption]);
 
   const handleExit = () => {
     setQuery(Query.IDLE);
   };
 
   return (
-    <Modal
+    <ModalWrapper
       open={open}
       onClose={handleClose}
       closeAfterTransition
@@ -137,7 +137,7 @@ const EditModal: FunctionComponent<IProps> = ({
                 <FadeContent>
                   <Content>
                     <Title>{title}</Title>
-                    {renderBody()}
+                    {children}
                   </Content>
                   <Footer>
                     <button onClick={handleClose}>Cancel</button>
@@ -154,8 +154,8 @@ const EditModal: FunctionComponent<IProps> = ({
           )}
         </ModalBody>
       </Zoom>
-    </Modal>
+    </ModalWrapper>
   );
 };
 
-export default EditModal;
+export default Modal;
