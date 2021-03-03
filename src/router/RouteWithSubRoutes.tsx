@@ -1,9 +1,9 @@
-import { authContext } from "contexts/AuthContext";
-import React, { Suspense, useContext } from "react";
+import { useAuth } from "hooks/AuthHook";
+import React, { Suspense } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { IRoute } from "./routes";
 const RouteWithSubRoutes = (route: IRoute) => {
-  const { isAuthenticated } = useContext(authContext);
+  const { isAuthenticated } = useAuth();
 
   return (
     <Suspense fallback={route.fallback}>

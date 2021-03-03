@@ -2,7 +2,7 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 const config: AxiosRequestConfig = {
   baseURL: process.env.REACT_APP_BACKEND_URL ?? "http://localhost:3001/",
-  timeout: process.env.NODE_ENV === "production" ? 10000 : 5000,
+  timeout: parseInt(process.env.REACT_APP_NETWORK_TIMEOUT ?? "60000"),
   withCredentials: true,
   headers: {
     Accept: "application/json",

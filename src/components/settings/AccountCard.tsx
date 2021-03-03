@@ -1,7 +1,7 @@
-import React, { FunctionComponent, useContext } from "react";
-import { accountContext } from "contexts/AccountContext";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import UserField from "./UserField";
+import { useAccount } from "hooks/AccountHook";
 
 const Card = styled.div`
   padding: 1rem;
@@ -28,7 +28,7 @@ const AccountInfoCard = styled.div`
 `;
 
 const AccountCard: FunctionComponent = () => {
-  const { getFormattedUsername } = useContext(accountContext);
+  const { getFormattedUsername } = useAccount();
   const { name, tag } = getFormattedUsername();
 
   return (

@@ -42,7 +42,7 @@ const Sprite = styled.span`
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   transform: scale(2);
-  transition: all 200ms linear;
+  transition: transform 200ms linear;
   margin-right: 0;
 `;
 

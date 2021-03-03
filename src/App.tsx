@@ -1,24 +1,24 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import useSyncPokemonData from "hooks/SyncPokemonDataHook";
 import Shell from "components/shell/Shell";
 import { Route, Switch } from "react-router-dom";
 import { useAuth } from "hooks/AuthHook";
-import { authContext } from "contexts/AuthContext";
 import { setInterval, clearInterval } from "worker-timers";
 import Login from "components/login/Login";
 import Register from "components/login/Register";
-import { useAccount } from "hooks/AccountHook";
-import { accountContext } from "contexts/AccountContext";
 
 const App: FunctionComponent = () => {
-  const auth = useAuth();
-  const { renewToken, isAuthenticated } = auth;
-  const account = useAccount(isAuthenticated);
+  const { renewToken, isAuthenticated } = useAuth();
   const { sync } = useSyncPokemonData();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     sync();
-    renewToken().catch((err) => {});
+    renewToken()
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,16 +33,14 @@ const App: FunctionComponent = () => {
     };
   }, [renewToken, isAuthenticated]);
 
-  return (
-    <authContext.Provider value={auth}>
-      <accountContext.Provider value={account}>
-        <Switch>
-          <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} />
-          <Route path="/" component={Shell} />
-        </Switch>
-      </accountContext.Provider>
-    </authContext.Provider>
+  return isLoading ? (
+    <div>loading...</div>
+  ) : (
+    <Switch>
+      <Route path="/login" exact component={Login} />
+      <Route path="/register" exact component={Register} />
+      <Route path="/" component={Shell} />
+    </Switch>
   );
 };
 

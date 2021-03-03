@@ -6,8 +6,8 @@ import { PokemonSummary } from "shared/interfaces";
 export function filter(
   data: PokemonSummary[],
   searchValue: string,
-  genFilter: Generation | null,
-  typeFilter: Type | null
+  genFilter?: Generation | null,
+  typeFilter?: Type | null
 ): PokemonSummary[] {
   // Process the data without stalling the UI
   if (!searchValue && !genFilter && !typeFilter) {

@@ -107,9 +107,16 @@ export const routes: IRoute[] = [
     path: paths.TEAM_BUILDER,
     component: views.TeamBuilderView,
     exact: true,
-    private: false,
+    private: true,
     fallback: <div> Loading... </div>,
     appBarTitle: "Team Builder",
+  },
+  {
+    path: paths.TEAM_BUILDER_DETAIL,
+    component: views.TeamBuilderDetailView,
+    exact: true,
+    private: true,
+    fallback: <div> Loading... </div>,
   },
   {
     path: paths.SETTINGS,

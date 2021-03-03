@@ -1,13 +1,5 @@
-import { accountContext } from "contexts/AccountContext";
-import React, {
-  FormEvent,
-  Fragment,
-  ReactElement,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useAccount } from "hooks/AccountHook";
+import React, { FormEvent, Fragment, ReactElement, useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Label = styled.label`
@@ -68,7 +60,7 @@ interface IChangeUsernameModalHook {
 }
 
 const useChangeUsernameModalHook = (): IChangeUsernameModalHook => {
-  const { updateUsername, getFormattedUsername } = useContext(accountContext);
+  const { updateUsername, getFormattedUsername } = useAccount();
 
   const { name: currentName, tag: currentTag } = getFormattedUsername();
 

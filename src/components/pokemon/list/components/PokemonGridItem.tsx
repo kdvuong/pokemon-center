@@ -2,21 +2,9 @@ import React, { FunctionComponent } from "react";
 import { PokemonSummary } from "shared/interfaces";
 import { Link } from "react-router-dom";
 import { GridChildComponentProps } from "react-window";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import PokemonInfo from "./PokemonInfo";
 import PokemonImage from "./PokemonImage";
-
-const gradientAnimation = keyframes`
-  0% {
-    border-color: #1e90ff;
-  }
-  50% {
-    border-color: #81daff;
-  }
-  100% {
-    border-color: #1e90ff;
-  }
-`;
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -28,11 +16,6 @@ const StyledButton = styled.button`
   border-radius: 7px;
   background-color: transparent;
   vertical-align: middle;
-  &:hover {
-    animation: ${gradientAnimation} 1s infinite !important;
-    box-shadow: 0px 0px 10px rgba(96, 173, 225, 0.7);
-  }
-  border: 4px solid transparent;
 `;
 
 const StyledLink = styled(Link)`
@@ -85,7 +68,7 @@ const PokemonGridItem: FunctionComponent<GridItemProps<PokemonSummary>> = (props
         width: getWidth(style.width as number),
       }}
     >
-      <StyledButton>
+      <StyledButton className="gradient-hover">
         <PokemonInfo id={pokemon.id} name={pokemon.name} types={pokemon.types} />
         <PokemonImage id={pokemon.id} />
       </StyledButton>

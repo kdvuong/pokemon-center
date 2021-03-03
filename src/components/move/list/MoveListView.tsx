@@ -8,6 +8,12 @@ import { FilterProps, Move } from "shared/interfaces";
 import { DamageClassFilter } from "utils/DamageClassFilter";
 import { GenerationFilter } from "utils/GenerationFilter";
 import { TypeFilter } from "utils/TypeFilter";
+import MoveTable from "components/pokemon/detail/components/moves/MoveTable";
+import styled from "styled-components";
+
+const TableContainer = styled.div`
+  flex: 1;
+`;
 
 const MoveListView = () => {
   const { getAllMoves } = usePokemonApi();
@@ -82,15 +88,13 @@ const MoveListView = () => {
       <SearchBar
         name="moves"
         count={filteredMoves.length}
-        placeholder={"Search by name or effect"}
+        placeholder={"Search by name"}
         onChange={handleSearchInputChange}
       />
       <FilterBar filters={[typeFilterProps, generationFilterProps, damageClassFilterProps]} />
-      <div style={{ height: "100%", overflowY: "scroll" }}>
-        {filteredMoves.map((move) => {
-          return <div>{move.name}</div>;
-        })}
-      </div>
+      <TableContainer>
+        <MoveTable moves={filteredMoves} />
+      </TableContainer>
     </Fragment>
   );
 };

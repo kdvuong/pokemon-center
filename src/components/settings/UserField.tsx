@@ -1,10 +1,10 @@
-import { accountContext } from "contexts/AccountContext";
-import React, { useContext } from "react";
+import { useAccount } from "hooks/AccountHook";
+import React from "react";
 import useChangeUsernameModalHook from "./ChangeUsernameModalBodyHook";
 import EditableField from "./EditableField";
 
 const UserField = () => {
-  const { getFormattedUsername } = useContext(accountContext);
+  const { getFormattedUsername } = useAccount();
   const { renderBody, onSubmit, reset } = useChangeUsernameModalHook();
   const { name, tag } = getFormattedUsername();
   return (

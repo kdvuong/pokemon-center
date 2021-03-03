@@ -35,7 +35,7 @@ interface IProps {
 
 const TypeIcon: FunctionComponent<IProps> = ({ type, size, expanded = false }) => {
   return (
-    <Background type={type} size={size * 2} expanded={expanded}>
+    <Background type={type} size={size * 2} expanded={expanded} tabIndex={-1}>
       <Image src={getTypeIcon(type)} alt={`${type}-icon`} size={size} expanded={expanded} />
       {expanded && <TypeName>{type}</TypeName>}
     </Background>
